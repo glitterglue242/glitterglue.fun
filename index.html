@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
-<title>glitterglue</title>
+<title>Profile Card</title>
 
 <style>
 body {
@@ -17,7 +17,7 @@ body {
   position: fixed;
   width: 100%;
   height: 100%;
-  background: url("https://i.pinimg.com/originals/66/ab/cd/66abcd769e19419d8221e9fb6dde0494.gif");
+  background: url("https://wallpapercave.com/wp/wp12406494.jpg");
   background-size: cover;
   background-position: center;
   z-index: -2;
@@ -112,24 +112,20 @@ body::before {
   transform: scale(1.2);
 }
 
-/* 🧊 cube trail */
-.trail-box {
+/* ✨ Mouse trail */
+.trail-dot {
   position: absolute;
-  width: 10px;
-  height: 10px;
+  width: 6px;
+  height: 6px;
   background: white;
-  border-radius: 2px;
+  border-radius: 50%;
   pointer-events: none;
-  opacity: 0.8;
-  transform: translate(-50%, -50%);
-  transition: opacity 0.2s ease, transform 0.2s ease;
+  animation: fade 0.5s linear forwards;
 }
 
-/* 👀 viewer text */
-.views {
-  margin-top: 10px;
-  font-size: 14px;
-  opacity: 0.8;
+@keyframes fade {
+  0%{opacity:.8;transform:scale(1);}
+  100%{opacity:0;transform:scale(2);}
 }
 </style>
 </head>
@@ -146,11 +142,6 @@ body::before {
   <p>@glittersdeath</p>
 
   <p>i like jazz, indie and rock</p>
-
-  <!-- 👀 VIEWER COUNT -->
-  <div class="views">
-    👀 Live Viewers: <span id="viewCount">...</span>
-  </div>
 
   <!-- 🎧 PLAYER -->
   <p>studying music at leeds university</p>
@@ -191,7 +182,6 @@ body::before {
 const audio = document.getElementById("audio");
 const playBtn = document.getElementById("playBtn");
 
-/* 🎵 music */
 function togglePlay(){
   if(audio.paused){
     audio.play();
@@ -199,43 +189,6 @@ function togglePlay(){
     audio.pause();
   }
 }
-
-/* 🧊 cube trail */
-const cubes = [];
-const MAX = 25;
-
-document.addEventListener("mousemove", (e) => {
-  const cube = document.createElement("div");
-  cube.className = "trail-box";
-
-  cube.style.left = (e.pageX - 5) + "px";
-  cube.style.top = (e.pageY - 5) + "px";
-
-  document.body.appendChild(cube);
-  cubes.push(cube);
-
-  if(cubes.length > MAX){
-    cubes.shift().remove();
-  }
-
-  setTimeout(() => {
-    cube.style.opacity = "0";
-    cube.style.transform = "scale(0.3)";
-  }, 50);
-
-  setTimeout(() => cube.remove(), 300);
-});
-
-/* 👀 CountAPI */
-fetch("https://api.countapi.xyz/hit/glitterglue/profile")
-.then(res => res.json())
-.then(data => {
-  document.getElementById("viewCount").innerText = data.value;
-})
-.catch(() => {
-  document.getElementById("viewCount").innerText = "0";
-});
-</script>
 
 </body>
 </html>
