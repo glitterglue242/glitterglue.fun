@@ -1,45 +1,194 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <title>Profile Card</title>
-  <link rel="stylesheet" href="style.css">
+<meta charset="UTF-8">
+<title>Profile Card</title>
+
+<style>
+body {
+  margin: 0;
+  font-family: Arial, sans-serif;
+  overflow: hidden;
+  color: white;
+}
+
+/* 🎞️ Background */
+.bg {
+  position: fixed;
+  width: 100%;
+  height: 100%;
+  background: url("https://i.pinimg.com/originals/66/ab/cd/66abcd769e19419d8221e9fb6dde0494.gif");
+  background-size: cover;
+  background-position: center;
+  z-index: -2;
+}
+
+/* dark overlay */
+body::before {
+  content: "";
+  position: fixed;
+  width: 100%;
+  height: 100%;
+  background: rgba(0,0,0,0.45);
+  z-index: -1;
+}
+
+/* 📦 Card */
+.card {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%,-50%);
+  width: 320px;
+  padding: 20px;
+  text-align: center;
+  background: rgba(255,255,255,0.1);
+  backdrop-filter: blur(10px);
+  border-radius: 15px;
+}
+
+/* 🖼️ Avatar */
+.avatar {
+  width: 100px;
+  height: 100px;
+  border-radius: 50%;
+}
+
+/* 🎧 Play button */
+.play-button {
+  width: 60px;
+  height: 60px;
+  cursor: pointer;
+  transition: 0.2s;
+  border-radius: 12px;
+}
+.play-button:hover {
+  transform: scale(1.15);
+}
+
+/* 🎚️ Visualizer */
+.visualizer {
+  display: flex;
+  justify-content: center;
+  align-items: flex-end;
+  gap: 3px;
+  height: 20px;
+  margin-top: 10px;
+}
+
+.visualizer span {
+  width: 3px;
+  height: 5px;
+  background: white;
+  animation: bounce 1s infinite ease-in-out;
+}
+
+.visualizer span:nth-child(2){animation-delay:.1s;}
+.visualizer span:nth-child(3){animation-delay:.2s;}
+.visualizer span:nth-child(4){animation-delay:.3s;}
+.visualizer span:nth-child(5){animation-delay:.4s;}
+
+@keyframes bounce {
+  0%,100%{height:5px;opacity:.4;}
+  50%{height:20px;opacity:1;}
+}
+
+/* 🔗 Icons */
+.icons {
+  display: flex;
+  justify-content: center;
+  gap: 15px;
+  margin-top: 15px;
+}
+
+.icons img {
+  width: 40px;
+  height: 40px;
+  border-radius: 10px;
+  transition: 0.2s;
+}
+
+.icons img:hover {
+  transform: scale(1.2);
+}
+
+/* ✨ Mouse trail */
+.trail-dot {
+  position: absolute;
+  width: 6px;
+  height: 6px;
+  background: white;
+  border-radius: 50%;
+  pointer-events: none;
+  animation: fade 0.5s linear forwards;
+}
+
+@keyframes fade {
+  0%{opacity:.8;transform:scale(1);}
+  100%{opacity:0;transform:scale(2);}
+}
+</style>
 </head>
 
 <body>
 
-<!-- Rain background -->
-<div class="rain"></div>
+<div class="bg"></div>
 
-<!-- Main Card -->
 <div class="card">
-  <img src="https://via.placeholder.com/100" class="avatar">
+
+  <img class="avatar" src="https://i.pinimg.com/736x/4d/c3/27/4dc32773bf3f17b97a04eaf2c071b5e4.jpg">
 
   <h1>glitterglue</h1>
-  <p class="username">@glittersdeath</p>
+  <p>@glittersdeath</p>
 
-  <p class="bio">i like jazz, indie and rock</p>
+  <p>i like jazz, indie and rock</p>
 
-  <div class="tags">
-    <span>music prodigy trust</span>
-    <span>learning drums atm</span>
+  <!-- 🎧 PLAYER -->
+  <p>studying music at leeds university</p>
+
+  <img 
+    id="playBtn"
+    class="play-button"
+    src="https://i.pinimg.com/736x/63/19/86/6319864fd9988a4b08ef57c8cdf6b0b9.jpg"
+    onclick="togglePlay()"
+  >
+
+  <audio id="audio" src="caravan.mp3"></audio>
+
+  <div class="visualizer">
+    <span></span><span></span><span></span><span></span><span></span>
   </div>
 
-  <!-- Music Player -->
-  <div class="player">
-    <p>demo #6 (it's nice to know you)</p>
-    <button onclick="togglePlay()">▶ Play / Pause</button>
-    <audio id="audio" src="Caravan.WMP11.AssocFile.MP3"></audio>
-  </div>
-
-  <!-- Icons -->
+  <!-- 🔗 ICONS -->
   <div class="icons">
-    <span>🎮</span>
-    <span>💻</span>
-    <span>🕶️</span>
+
+    <a href="https://www.youtube.com/@glittersdeath" target="_blank">
+      <img src="https://i.pinimg.com/736x/b0/55/81/b05581a725d2dcf8cd26072d8210d433.jpg">
+    </a>
+
+    <a href="https://www.instagram.com/glittersdeath/" target="_blank">
+      <img src="https://i.pinimg.com/736x/dc/44/3f/dc443ffa6e921c949e48a7bae957108e.jpg">
+    </a>
+
+    <a href="https://www.roblox.com/users/685179066/profile" target="_blank">
+      <img src="https://i.pinimg.com/736x/8c/5c/ad/8c5cad9f00b6babd03b9593f2a482b1e.jpg">
+    </a>
+
   </div>
+
 </div>
 
-<script src="script.js"></script>
+<script>
+const audio = document.getElementById("audio");
+const playBtn = document.getElementById("playBtn");
+
+function togglePlay(){
+  if(audio.paused){
+    audio.play();
+  } else {
+    audio.pause();
+  }
+}
+
 </body>
 </html>
