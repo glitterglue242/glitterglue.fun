@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
-<title>Profile Card</title>
+<title>glitterglue</title>
 
 <style>
 body {
@@ -112,20 +112,24 @@ body::before {
   transform: scale(1.2);
 }
 
-/* ✨ Mouse trail */
-.trail-dot {
+/* 🧊 cube trail */
+.trail-box {
   position: absolute;
-  width: 6px;
-  height: 6px;
+  width: 10px;
+  height: 10px;
   background: white;
-  border-radius: 50%;
+  border-radius: 2px;
   pointer-events: none;
-  animation: fade 0.5s linear forwards;
+  opacity: 0.8;
+  transform: translate(-50%, -50%);
+  transition: opacity 0.2s ease, transform 0.2s ease;
 }
 
-@keyframes fade {
-  0%{opacity:.8;transform:scale(1);}
-  100%{opacity:0;transform:scale(2);}
+/* 👀 viewer text */
+.views {
+  margin-top: 10px;
+  font-size: 14px;
+  opacity: 0.8;
 }
 </style>
 </head>
@@ -142,6 +146,11 @@ body::before {
   <p>@glittersdeath</p>
 
   <p>i like jazz, indie and rock</p>
+
+  <!-- 👀 VIEWER COUNT -->
+  <div class="views">
+    👀 Live Viewers: <span id="viewCount">...</span>
+  </div>
 
   <!-- 🎧 PLAYER -->
   <p>studying music at leeds university</p>
@@ -182,6 +191,7 @@ body::before {
 const audio = document.getElementById("audio");
 const playBtn = document.getElementById("playBtn");
 
+/* 🎵 music */
 function togglePlay(){
   if(audio.paused){
     audio.play();
@@ -189,6 +199,43 @@ function togglePlay(){
     audio.pause();
   }
 }
+
+/* 🧊 cube trail */
+const cubes = [];
+const MAX = 25;
+
+document.addEventListener("mousemove", (e) => {
+  const cube = document.createElement("div");
+  cube.className = "trail-box";
+
+  cube.style.left = (e.pageX - 5) + "px";
+  cube.style.top = (e.pageY - 5) + "px";
+
+  document.body.appendChild(cube);
+  cubes.push(cube);
+
+  if(cubes.length > MAX){
+    cubes.shift().remove();
+  }
+
+  setTimeout(() => {
+    cube.style.opacity = "0";
+    cube.style.transform = "scale(0.3)";
+  }, 50);
+
+  setTimeout(() => cube.remove(), 300);
+});
+
+/* 👀 CountAPI */
+fetch("https://api.countapi.xyz/hit/glitterglue/profile")
+.then(res => res.json())
+.then(data => {
+  document.getElementById("viewCount").innerText = data.value;
+})
+.catch(() => {
+  document.getElementById("viewCount").innerText = "0";
+});
+</script>
 
 </body>
 </html>
