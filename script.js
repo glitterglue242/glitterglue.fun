@@ -55,4 +55,23 @@ document.addEventListener("mousemove", (e) => {
   }, 40);
 
   setTimeout(() => cube.remove(), 300);
+
+function updateTime() {
+  const now = new Date();
+
+  const time = now.toLocaleTimeString([], {
+    hour: '2-digit',
+    minute: '2-digit',
+    second: '2-digit'
+  });
+
+  const date = now.toLocaleDateString();
+
+  document.getElementById("lastUpdated").innerText =
+    "Last updated: " + date + " " + time;
+}
+
+// run immediately + update every second
+updateTime();
+setInterval(updateTime, 1000);
 });
