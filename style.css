@@ -1,10 +1,13 @@
+/* =========================
+   🌐 BASE
+========================= */
 body {
   margin: 0;
   font-family: Arial, sans-serif;
   overflow: hidden;
 }
 
-/* 🎞️ GIF background */
+/* 🎞️ BACKGROUND */
 .bg {
   position: fixed;
   top: 0;
@@ -12,13 +15,13 @@ body {
   width: 100%;
   height: 100%;
   background: url("https://media.tenor.com/Y7XJj6wQ0pUAAAAC/rain-window-coffee.gif");
-background-size: cover;
-background-position: center;
-background-repeat: no-repeat;
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
   z-index: -2;
 }
 
-/* dark overlay for readability */
+/* dark overlay */
 body::before {
   content: "";
   position: fixed;
@@ -28,7 +31,9 @@ body::before {
   z-index: -1;
 }
 
-/* 🌟 Center card */
+/* =========================
+   📦 CARD
+========================= */
 .card {
   position: absolute;
   top: 50%;
@@ -51,7 +56,9 @@ body::before {
   border-radius: 50%;
 }
 
-/* 🎮 Social icons */
+/* =========================
+   🔗 SOCIAL ICONS
+========================= */
 .icons {
   display: flex;
   justify-content: center;
@@ -71,36 +78,13 @@ body::before {
   transform: scale(1.2);
 }
 
-/* ✨ Mouse trail dot */
-.trail-dot {
-  position: absolute;
-  width: 6px;
-  height: 6px;
-  background: white;
-  border-radius: 50%;
-  pointer-events: none;
-  opacity: 0.8;
-  transform: translate(-50%, -50%);
-  animation: fadeOut 0.5s linear forwards;
-}
-
-@keyframes fadeOut {
-  0% {
-    opacity: 0.8;
-    transform: translate(-50%, -50%) scale(1);
-  }
-  100% {
-    opacity: 0;
-    transform: translate(-50%, -50%) scale(2);
-  }
-}
-
-/* 🎧 Player layout upgrade */
+/* =========================
+   🎧 PLAYER
+========================= */
 .player {
   margin-top: 15px;
 }
 
-/* 🎵 Play button image */
 .play-button {
   width: 60px;
   height: 60px;
@@ -114,7 +98,7 @@ body::before {
   filter: brightness(1.2);
 }
 
-/* 🎚️ fake visualizer bars */
+/* 🎚️ visualizer */
 .visualizer {
   display: flex;
   justify-content: center;
@@ -140,11 +124,19 @@ body::before {
   0%, 100% { height: 5px; opacity: 0.4; }
   50% { height: 20px; opacity: 1; }
 }
+
+/* =========================
+   👀 VIEW COUNT
+========================= */
 .views {
   margin-top: 10px;
   font-size: 14px;
   opacity: 0.8;
 }
+
+/* =========================
+   🧊 CURSOR TRAIL
+========================= */
 .trail-box {
   position: absolute;
   width: 10px;
@@ -155,14 +147,34 @@ body::before {
   opacity: 0.8;
   transform: translate(-50%, -50%);
   transition: opacity 0.2s ease, transform 0.2s ease;
- 
-  #lastUpdated {
+}
+
+/* =========================
+   🕒 LAST UPDATED (POLISHED)
+========================= */
+#lastUpdated {
   position: fixed;
   bottom: 10px;
   right: 15px;
   font-size: 12px;
-  opacity: 0.7;
+  opacity: 0.75;
   color: white;
   font-family: Arial, sans-serif;
+  
+  /* ✨ glow effect */
+  text-shadow: 0 0 6px rgba(255,255,255,0.5);
+  
+  /* smooth fade in */
+  animation: fadeIn 1s ease;
 }
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(5px);
+  }
+  to {
+    opacity: 0.75;
+    transform: translateY(0);
+  }
 }
