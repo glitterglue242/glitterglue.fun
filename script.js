@@ -2,9 +2,9 @@ const audio = document.getElementById("audio");
 const playBtn = document.getElementById("playBtn");
 
 const playIcon = "https://i.pinimg.com/736x/63/19/86/6319864fd9988a4b08ef57c8cdf6b0b9.jpg";
-const pauseIcon = "https://i.pinimg.com/736x/63/19/86/6319864fd9988a4b08ef57c8cdf6b0b9.jpg"; 
-// (same image since you only gave one — I can upgrade later)
+const pauseIcon = "https://i.pinimg.com/736x/63/19/86/6319864fd9988a4b08ef57c8cdf6b0b9.jpg";
 
+/* 🎵 PLAY / PAUSE */
 function togglePlay() {
   if (audio.paused) {
     audio.play();
@@ -13,7 +13,7 @@ function togglePlay() {
   }
 }
 
-/* optional: visual feedback */
+/* ✨ button feedback */
 audio.onplay = () => {
   playBtn.style.transform = "scale(1.1)";
 };
@@ -22,6 +22,7 @@ audio.onpause = () => {
   playBtn.style.transform = "scale(1)";
 };
 
+/* 🧊 TRAIL (behind cursor) */
 let lastX = 0;
 let lastY = 0;
 
@@ -35,7 +36,6 @@ document.addEventListener("mousemove", (e) => {
   lastX = e.pageX;
   lastY = e.pageY;
 
-  // position cube slightly BEHIND cursor movement
   const cube = document.createElement("div");
   cube.className = "trail-box";
 
@@ -55,7 +55,9 @@ document.addEventListener("mousemove", (e) => {
   }, 40);
 
   setTimeout(() => cube.remove(), 300);
+});
 
+/* 🕒 UPDATED TIME (clean version) */
 function updateTime() {
   const now = new Date();
 
@@ -65,13 +67,10 @@ function updateTime() {
     second: '2-digit'
   });
 
-  const date = now.toLocaleDateString();
-
   document.getElementById("lastUpdated").innerText =
-    "Last updated: " + date + " " + time;
+    "🕒 Updated " + time;
 }
 
-// run immediately + update every second
+// run once + loop
 updateTime();
 setInterval(updateTime, 1000);
-});
