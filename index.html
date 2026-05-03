@@ -7,14 +7,11 @@
 <link rel="icon" href="https://images.rawpixel.com/image_png_800/cHJpdmF0ZS9sci9pbWFnZXMvd2Vic2l0ZS8yMDI0LTA0L3JtMTgyMi1ib251cy0wOTZfMS5wbmc.png">
 
 <style>
-@import url('https://googleapis.com');
-
 body {
   margin: 0;
-  font-family: 'Comic Neue', Arial, sans-serif;
+  font-family: Arial, sans-serif;
   overflow: hidden;
-  color: #ff00ff;
-  cursor: url('https://cursors-4u.net'), auto;
+  color: white;
 }
 
 /* background */
@@ -26,7 +23,6 @@ body {
   height: 100%;
   object-fit: cover;
   z-index: -2;
-  filter: contrast(150%) hue-rotate(45deg);
 }
 
 body::before {
@@ -34,15 +30,8 @@ body::before {
   position: fixed;
   width: 100%;
   height: 100%;
-  background: repeating-linear-gradient(
-    0deg,
-    rgba(0, 0, 0, 0.15) 0px,
-    rgba(0, 0, 0, 0.15) 1px,
-    transparent 1px,
-    transparent 2px
-  );
+  background: rgba(0,0,0,0.45);
   z-index: -1;
-  pointer-events: none;
 }
 
 /* card */
@@ -54,27 +43,24 @@ body::before {
   width: 320px;
   padding: 20px;
   text-align: center;
-  background: rgba(255, 255, 255, 0.1);
-  backdrop-filter: blur(5px);
-  border: 4px ridge #00ffff;
-  border-radius: 0;
-  box-shadow: 10px 10px 0px #ff00ff;
+  background: rgba(255,255,255,0.1);
+  backdrop-filter: blur(10px);
+  border-radius: 15px;
 }
 
 /* avatar */
 .avatar {
   width: 110px;
   height: 110px;
-  border-radius: 0;
-  border: 3px solid #00ffff;
-  outline: 3px solid #ff00ff;
+  border-radius: 50%;
 }
 
 /* spotify embed */
 .spotify-player {
   margin-top: 15px;
-  border: 2px dashed #ff00ff;
+  border-radius: 12px;
   overflow: hidden;
+  box-shadow: 0 0 20px rgba(0,0,0,0.4);
 }
 
 /* icons */
@@ -87,21 +73,18 @@ body::before {
 .icons img {
   width: 40px;
   height: 40px;
-  filter: drop-shadow(3px 3px 0px #00ffff);
-  transition: 0.1s;
+  border-radius: 10px;
+  transition: 0.2s;
 }
 .icons img:hover {
-  transform: rotate(15deg) scale(1.5);
+  transform: scale(1.2);
 }
+
 
 /* views */
 .views {
   margin-top: 10px;
-  font-family: 'Courier New', Courier, monospace;
-  background: #000;
-  color: #0f0;
-  padding: 2px;
-  display: inline-block;
+  opacity: 0.8;
 }
 
 /* last updated */
@@ -109,57 +92,31 @@ body::before {
   position: fixed;
   bottom: 10px;
   right: 15px;
-  font-size: 14px;
-  color: #ffff00;
-  background: #000;
-  text-transform: uppercase;
-}
-
-/* ✨ mystery additions ✨ */
-.blink {
-  animation: blinker 0.6s linear infinite;
-}
-@keyframes blinker {
-  50% { opacity: 0; }
-}
-
-.trail-box {
-  position: absolute;
-  width: 20px;
-  height: 20px;
-  background-image: url('https://ibb.co');
-  background-size: contain;
-  pointer-events: none;
-  z-index: 9999;
-}
-
-marquee {
-  position: fixed;
-  top: 0;
-  background: #ff00ff;
-  color: white;
-  font-weight: bold;
+  font-size: 12px;
+  opacity: 0.75;
+  text-shadow: 0 0 6px rgba(255,255,255,0.5);
 }
 </style>
 </head>
 
 <body>
 
-<marquee scrollamount="10">WELCOME TO MY WORLD -- Xx_glitterglue_xX -- MUSIC IS LIFE -- ☠️☠️☠️</marquee>
-
 <img class="bg" src="https://i.pinimg.com/736x/f5/09/99/f50999905406cd8a17d5c46dfd9a9243.jpg">
 
 <div class="card">
+
   <img class="avatar" src="https://i.pinimg.com/736x/d9/c9/50/d9c95014054055c012894d3c80cf75c1.jpg">
 
-  <h1 class="blink">glitterglue</h1>
-  <p style="color: #00ffff;">@glittersdeath</p>
+  <h1>glitterglue</h1>
+  <p>@glittersdeath</p>
 
-  <div class="views">Hits: <span id="viewCount">...</span></div>
+  <div class="views">Page Views: <span id="viewCount">...</span></div>
 
-  <p>Studying music at Uni of Leeds</p>
-  <p>~ 🥁 drums are my passion 🥁 ~</p>
+  <p>Studying music at University Of Leeds</p>
 
+  <p>drums are my passion</p>
+
+  <!-- 🎧 Spotify player -->
   <div class="spotify-player">
     <iframe 
       src="https://open.spotify.com/embed/playlist/6vyFB24xfEsWqNZ1Aw3c47"
@@ -171,36 +128,64 @@ marquee {
     </iframe>
   </div>
 
+  <!-- icons -->
   <div class="icons">
-    <a href="https://www.youtube.com/@glittersdeath"><img src="https://ibb.co"></a>
-    <a href="https://open.spotify.com"><img src="https://ibb.co"></a>
-    <a href="https://www.roblox.com"><img src="https://ibb.co"></a>
+    <a href="https://www.youtube.com/@glittersdeath"><img src="https://i.pinimg.com/736x/b0/55/81/b05581a725d2dcf8cd26072d8210d433.jpg"></a>
+    <a href="https://open.spotify.com"><img src="https://i.pinimg.com/736x/da/a7/5e/daa75e31fc19e574a2360123db08258a.jpg"></a>
+    <a href="https://www.roblox.com"><img src="https://i.pinimg.com/736x/8c/5c/ad/8c5cad9f00b6babd03b9593f2a482b1e.jpg"></a>
   </div>
+
 </div>
 
 <div id="lastUpdated"></div>
 
 <script>
-/* 🧊 sparkly trail */
+/* 🧊 trail */
+let lastX = 0;
+let lastY = 0;
+
 document.addEventListener("mousemove", (e) => {
-  const star = document.createElement("div");
-  star.className = "trail-box";
-  star.style.left = e.pageX + "px";
-  star.style.top = e.pageY + "px";
-  document.body.appendChild(star);
+  const dx = e.pageX - lastX;
+  const dy = e.pageY - lastY;
+
+  lastX = e.pageX;
+  lastY = e.pageY;
+
+  const cube = document.createElement("div");
+  cube.className = "trail-box";
+
+  cube.style.left = (e.pageX - dx * 0.6) + "px";
+  cube.style.top = (e.pageY - dy * 0.6) + "px";
+
+  document.body.appendChild(cube);
 
   setTimeout(() => {
-    star.style.opacity = "0";
-    star.style.transform = "translateY(20px) rotate(180deg)";
-  }, 100);
-  setTimeout(() => star.remove(), 500);
+    cube.style.opacity = "0";
+    cube.style.transform = "scale(0.3)";
+  }, 40);
+
+  setTimeout(() => cube.remove(), 300);
 });
 
 /* 👀 views */
-document.getElementById("viewCount").innerText = Math.floor(Math.random() * 999999);
+fetch("https://api.countapi.xyz/hit/glitterglue/profile")
+.then(r => r.json())
+.then(d => document.getElementById("viewCount").innerText = d.value)
+.catch(() => document.getElementById("viewCount").innerText = "0");
 
 /* 🕒 last updated */
-document.getElementById("lastUpdated").innerText = "L4ST UPD4T3D: " + new Date().toLocaleDateString();
+const buildTime = new Date(document.lastModified);
+
+const formatted = buildTime.toLocaleString([], {
+  hour: '2-digit',
+  minute: '2-digit',
+  day: '2-digit',
+  month: '2-digit',
+  year: 'numeric'
+});
+
+document.getElementById("lastUpdated").innerText =
+  "Updated " + formatted;
 </script>
 
 </body>
