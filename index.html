@@ -1,41 +1,194 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
-<title>Redirect to YouTube</title>
+<meta charset="UTF-8">
+<title>glitterglue.fun</title>
+
+<link rel="icon" href="https://images.rawpixel.com/image_png_800/cHJpdmF0ZS9sci9pbWFnZXMvd2Vic2l0ZS8yMDI0LTA0L3JtMTgyMi1ib251cy0wOTZfMS5wbmc.png">
+
 <style>
 body {
-display: flex;
-justify-content: center;
-align-items: center;
-height: 100vh;
-margin: 0;
-font-family: Arial, sans-serif;
+  margin: 0;
+  font-family: Arial, sans-serif;
+  overflow: hidden;
+  color: white;
 }
-.message-container {
-text-align: center;
+
+/* background */
+.bg {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  z-index: -2;
+}
+
+body::before {
+  content: "";
+  position: fixed;
+  width: 100%;
+  height: 100%;
+  background: rgba(0,0,0,0.45);
+  z-index: -1;
+}
+
+/* card */
+.card {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%,-50%);
+  width: 320px;
+  padding: 20px;
+  text-align: center;
+  background: rgba(255,255,255,0.1);
+  backdrop-filter: blur(10px);
+  border-radius: 15px;
+}
+
+/* avatar */
+.avatar {
+  width: 110px;
+  height: 110px;
+  border-radius: 50%;
+}
+
+/* spotify embed */
+.spotify-player {
+  margin-top: 15px;
+  border-radius: 12px;
+  overflow: hidden;
+  box-shadow: 0 0 20px rgba(0,0,0,0.4);
+}
+
+/* icons */
+.icons {
+  display: flex;
+  justify-content: center;
+  gap: 15px;
+  margin-top: 15px;
+}
+.icons img {
+  width: 40px;
+  height: 40px;
+  border-radius: 10px;
+  transition: 0.2s;
+}
+.icons img:hover {
+  transform: scale(1.2);
+}
+
+
+/* views */
+.views {
+  margin-top: 10px;
+  opacity: 0.8;
+}
+
+/* last updated */
+#lastUpdated {
+  position: fixed;
+  bottom: 10px;
+  right: 15px;
+  font-size: 12px;
+  opacity: 0.75;
+  text-shadow: 0 0 6px rgba(255,255,255,0.5);
 }
 </style>
-<script>
-// Function to display the message and redirect to the specified YouTube link
-function redirectToYouTube() {
-var messageContainer = document.getElementById("message-container");
-messageContainer.innerHTML = "<h2>please send this on to others, I love you dear, so much. I have been hiding my feelings for all this time, so it's great to let it go... </h2>";
-setTimeout(function () {
-// Display the additional message for 1 second longer (4000 milliseconds)
-messageContainer.innerHTML = "<h2>outlook.office.com/mail/. GET READY, SEND THIS ON TO OTHERS!<h2>";
-setTimeout(function () {
-window.location.href = "https://www.youtube.com/watch?v=mS8cCmAg0HY";
-}, 300);
-}, 4000); // Changed the duration to 4000 milliseconds
-}
-</script>
 </head>
+
 <body>
-<div class="message-container" id="message-container">
-<h1>Redirecting to YouTube...</h1>
+
+<img class="bg" src="https://i.pinimg.com/736x/f5/09/99/f50999905406cd8a17d5c46dfd9a9243.jpg">
+
+<div class="card">
+
+  <img class="avatar" src="https://i.pinimg.com/736x/d9/c9/50/d9c95014054055c012894d3c80cf75c1.jpg">
+
+  <h1>glitterglue</h1>
+  <p>@glittersdeath</p>
+
+  <div class="views">Page Views: <span id="viewCount">...</span></div>
+
+  <p>Studying music at University Of Leeds</p>
+
+  <p>drums are my passion</p>
+
+  <!-- 🎧 Spotify player -->
+  <div class="spotify-player">
+    <iframe 
+      src="https://open.spotify.com/embed/playlist/6vyFB24xfEsWqNZ1Aw3c47"
+      width="100%" 
+      height="152" 
+      frameborder="0" 
+      allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture"
+      loading="lazy">
+    </iframe>
+  </div>
+
+  <!-- icons -->
+  <div class="icons">
+    <a href="https://www.youtube.com/@glittersdeath"><img src="https://i.pinimg.com/736x/b0/55/81/b05581a725d2dcf8cd26072d8210d433.jpg"></a>
+    <a href="https://open.spotify.com"><img src="https://i.pinimg.com/736x/da/a7/5e/daa75e31fc19e574a2360123db08258a.jpg"></a>
+    <a href="https://www.roblox.com/users/685179066/profile"><img src="https://i.pinimg.com/736x/8c/5c/ad/8c5cad9f00b6babd03b9593f2a482b1e.jpg"></a>
+  </div>
+
 </div>
+
+<div id="lastUpdated"></div>
+
 <script>
-redirectToYouTube(); // Automatically start the redirection process
+/* 🧊 trail */
+let lastX = 0;
+let lastY = 0;
+
+document.addEventListener("mousemove", (e) => {
+  const dx = e.pageX - lastX;
+  const dy = e.pageY - lastY;
+
+  lastX = e.pageX;
+  lastY = e.pageY;
+
+  const cube = document.createElement("div");
+  cube.className = "trail-box";
+
+  cube.style.left = (e.pageX - dx * 0.6) + "px";
+  cube.style.top = (e.pageY - dy * 0.6) + "px";
+
+  document.body.appendChild(cube);
+
+  setTimeout(() => {
+    cube.style.opacity = "0";
+    cube.style.transform = "scale(0.3)";
+  }, 40);
+
+  setTimeout(() => cube.remove(), 300);
+});
+
+/* 👀 views */
+fetch("https://api.countapi.xyz/hit/glitterglue/profile")
+.then(r => r.json())
+.then(d => document.getElementById("viewCount").innerText = d.value)
+.catch(() => document.getElementById("viewCount").innerText = "0");
+
+/* 🕒 last updated */
+const buildTime = new Date(document.lastModified);
+
+const formatted = buildTime.toLocaleString([], {
+  hour: '2-digit',
+  minute: '2-digit',
+  day: '2-digit',
+  month: '2-digit',
+  year: 'numeric'
+});
+
+document.getElementById("lastUpdated").innerText =
+  "Updated " + formatted;
 </script>
+
 </body>
 </html>
+
+
