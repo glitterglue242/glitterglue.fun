@@ -176,5 +176,10 @@ body::before {
   to {
     opacity: 0.75;
     transform: translateY(0);
+     .spotify-player {
+  margin-top: 15px;
+  border-radius: 12px;
+  overflow: hidden;
+}
   }
 }
