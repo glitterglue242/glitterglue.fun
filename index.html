@@ -14,7 +14,7 @@ body {
   color: white;
 }
 
-/* 🎞️ REAL background (fixed) */
+/* background */
 .bg {
   position: fixed;
   top: 0;
@@ -25,7 +25,6 @@ body {
   z-index: -2;
 }
 
-/* overlay */
 body::before {
   content: "";
   position: fixed;
@@ -35,7 +34,7 @@ body::before {
   z-index: -1;
 }
 
-/* 📦 card */
+/* card */
 .card {
   position: absolute;
   top: 50%;
@@ -56,16 +55,12 @@ body::before {
   border-radius: 50%;
 }
 
-/* play button */
-.play-button {
-  width: 60px;
-  height: 60px;
-  cursor: pointer;
+/* spotify embed */
+.spotify-player {
+  margin-top: 15px;
   border-radius: 12px;
-  transition: 0.2s;
-}
-.play-button:hover {
-  transform: scale(1.15);
+  overflow: hidden;
+  box-shadow: 0 0 20px rgba(0,0,0,0.4);
 }
 
 /* icons */
@@ -104,7 +99,7 @@ body::before {
   opacity: 0.8;
 }
 
-/* 🕒 last updated (REAL, static) */
+/* last updated */
 #lastUpdated {
   position: fixed;
   bottom: 10px;
@@ -118,7 +113,6 @@ body::before {
 
 <body>
 
-<!-- ✅ FIXED background -->
 <img class="bg" src="https://i.redd.it/uwwte8wps4h91.gif">
 
 <div class="card">
@@ -132,12 +126,17 @@ body::before {
 
   <p>studying music at leeds university</p>
 
-  <!-- 🎧 player -->
-  <img id="playBtn"
-    class="play-button"
-    src="https://i.pinimg.com/736x/63/19/86/6319864fd9988a4b08ef57c8cdf6b0b9.jpg">
-
-  <audio id="audio" src="caravan.mp3"></audio>
+  <!-- 🎧 Spotify player -->
+  <div class="spotify-player">
+    <iframe 
+      src="https://open.spotify.com/embed/playlist/6vyFB24xfEsWqNZ1Aw3c47"
+      width="100%" 
+      height="152" 
+      frameborder="0" 
+      allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture"
+      loading="lazy">
+    </iframe>
+  </div>
 
   <!-- icons -->
   <div class="icons">
@@ -151,21 +150,7 @@ body::before {
 <div id="lastUpdated"></div>
 
 <script>
-const audio = document.getElementById("audio");
-const playBtn = document.getElementById("playBtn");
-
-/* 🎵 play toggle */
-playBtn.onclick = () => {
-  if (audio.paused) {
-    audio.play();
-    playBtn.style.transform = "scale(1.1)";
-  } else {
-    audio.pause();
-    playBtn.style.transform = "scale(1)";
-  }
-};
-
-/* 🧊 trail (behind cursor) */
+/* 🧊 trail */
 let lastX = 0;
 let lastY = 0;
 
@@ -198,7 +183,7 @@ fetch("https://api.countapi.xyz/hit/glitterglue/profile")
 .then(d => document.getElementById("viewCount").innerText = d.value)
 .catch(() => document.getElementById("viewCount").innerText = "0");
 
-/* 🕒 REAL LAST UPDATED (NOT LIVE CLOCK) */
+/* 🕒 last updated */
 const buildTime = new Date(document.lastModified);
 
 const formatted = buildTime.toLocaleString([], {
