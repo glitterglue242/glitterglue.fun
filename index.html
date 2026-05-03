@@ -3,7 +3,8 @@
 <head>
 <meta charset="UTF-8">
 <title>glitterglue.fun</title>
-<link rel="icon" type="image/x-icon" href="https://i.pinimg.com/1200x/2d/50/1f/2d501f380446dc75bd0b05fc8e3fa030.jpg">
+
+<link rel="icon" href="https://images.rawpixel.com/image_png_800/cHJpdmF0ZS9sci9pbWFnZXMvd2Vic2l0ZS8yMDI0LTA0L3JtMTgyMi1ib251cy0wOTZfMS5wbmc.png">
 
 <style>
 body {
@@ -13,17 +14,18 @@ body {
   color: white;
 }
 
-/* 🎞️ background */
+/* 🎞️ REAL background (fixed) */
 .bg {
   position: fixed;
+  top: 0;
+  left: 0;
   width: 100%;
   height: 100%;
-  background: url("https://media.tenor.com/Y7XJj6wQ0pUAAAAC/rain-window-coffee.gif");
-  background-size: cover;
-  background-position: center;
+  object-fit: cover;
   z-index: -2;
 }
 
+/* overlay */
 body::before {
   content: "";
   position: fixed;
@@ -39,7 +41,7 @@ body::before {
   top: 50%;
   left: 50%;
   transform: translate(-50%,-50%);
-  width: 340px;
+  width: 320px;
   padding: 20px;
   text-align: center;
   background: rgba(255,255,255,0.1);
@@ -47,22 +49,14 @@ body::before {
   border-radius: 15px;
 }
 
-/* 💿 avatar */
+/* avatar */
 .avatar {
   width: 110px;
   height: 110px;
   border-radius: 50%;
 }
 
-.playing {
-  animation: spin 4s linear infinite;
-}
-
-@keyframes spin {
-  100% { transform: rotate(360deg); }
-}
-
-/* 🎧 button */
+/* play button */
 .play-button {
   width: 60px;
   height: 60px;
@@ -74,44 +68,7 @@ body::before {
   transform: scale(1.15);
 }
 
-/* 🎚️ progress */
-.progress-container {
-  width: 100%;
-  height: 6px;
-  background: rgba(255,255,255,0.2);
-  border-radius: 5px;
-  margin-top: 10px;
-  cursor: pointer;
-}
-
-.progress {
-  height: 100%;
-  width: 0%;
-  background: white;
-  border-radius: 5px;
-}
-
-/* ⏱ time */
-.time {
-  font-size: 12px;
-  opacity: 0.8;
-  margin-top: 5px;
-}
-
-/* 🔴 live */
-.live {
-  font-size: 12px;
-  margin-top: 8px;
-}
-.live span {
-  color: red;
-  animation: pulse 1s infinite;
-}
-@keyframes pulse {
-  50% { opacity: 0.3; }
-}
-
-/* 🔗 icons */
+/* icons */
 .icons {
   display: flex;
   justify-content: center;
@@ -128,7 +85,7 @@ body::before {
   transform: scale(1.2);
 }
 
-/* 🧊 cube trail */
+/* trail */
 .trail-box {
   position: absolute;
   width: 10px;
@@ -141,60 +98,52 @@ body::before {
   transition: 0.2s;
 }
 
-/* 👀 views */
+/* views */
 .views {
-  font-size: 14px;
+  margin-top: 10px;
   opacity: 0.8;
-  margin-top: 5px;
 }
 
-/* 🕒 last updated */
+/* 🕒 last updated (REAL, static) */
 #lastUpdated {
   position: fixed;
   bottom: 10px;
   right: 15px;
   font-size: 12px;
-  opacity: 0.7;
+  opacity: 0.75;
+  text-shadow: 0 0 6px rgba(255,255,255,0.5);
 }
 </style>
 </head>
 
 <body>
 
-<div class="bg"></div>
+<!-- ✅ FIXED background -->
+<img class="bg" src="https://i.pinimg.com/originals/66/ab/cd/66abcd769e19419d8221e9fb6dde0494.gif">
 
 <div class="card">
 
-  <img class="avatar" id="avatar"
-    src="https://i.pinimg.com/736x/4d/c3/27/4dc32773bf3f17b97a04eaf2c071b5e4.jpg">
+  <img class="avatar" src="https://i.pinimg.com/736x/4d/c3/27/4dc32773bf3f17b97a04eaf2c071b5e4.jpg">
 
   <h1>glitterglue</h1>
   <p>@glittersdeath</p>
 
   <div class="views">👀 Live Views: <span id="viewCount">...</span></div>
-  <div class="live">🔴 <span>LIVE</span> vibe</div>
 
   <p>studying music at leeds university</p>
 
+  <!-- 🎧 player -->
   <img id="playBtn"
     class="play-button"
-    src="https://i.pinimg.com/736x/63/19/86/6319864fd9988a4b08ef57c8cdf6b0b9.jpg"
-    onclick="togglePlay()">
+    src="https://i.pinimg.com/736x/63/19/86/6319864fd9988a4b08ef57c8cdf6b0b9.jpg">
 
   <audio id="audio" src="caravan.mp3"></audio>
 
-  <div class="progress-container" onclick="seek(event)">
-    <div class="progress" id="progress"></div>
-  </div>
-
-  <div class="time">
-    <span id="current">0:00</span> / <span id="duration">0:00</span>
-  </div>
-
+  <!-- icons -->
   <div class="icons">
     <a href="https://www.youtube.com/@glittersdeath"><img src="https://i.pinimg.com/736x/b0/55/81/b05581a725d2dcf8cd26072d8210d433.jpg"></a>
-    <a href="https://open.spotify.com/user/31foe3sdswd2eaz2wk3s3npjbhse?si=23d4cfe2798440d3"><img src="https://i.pinimg.com/736x/da/a7/5e/daa75e31fc19e574a2360123db08258a.jpg"></a>
-    <a href="https://www.roblox.com/users/685179066/profile"><img src="https://i.pinimg.com/736x/8c/5c/ad/8c5cad9f00b6babd03b9593f2a482b1e.jpg"></a>
+    <a href="https://open.spotify.com"><img src="https://i.pinimg.com/736x/da/a7/5e/daa75e31fc19e574a2360123db08258a.jpg"></a>
+    <a href="https://www.roblox.com"><img src="https://i.pinimg.com/736x/8c/5c/ad/8c5cad9f00b6babd03b9593f2a482b1e.jpg"></a>
   </div>
 
 </div>
@@ -203,82 +152,65 @@ body::before {
 
 <script>
 const audio = document.getElementById("audio");
-const avatar = document.getElementById("avatar");
-const progress = document.getElementById("progress");
-const current = document.getElementById("current");
-const duration = document.getElementById("duration");
+const playBtn = document.getElementById("playBtn");
 
-/* 🎵 music */
-function togglePlay(){
-  if(audio.paused){
+/* 🎵 play toggle */
+playBtn.onclick = () => {
+  if (audio.paused) {
     audio.play();
-    avatar.classList.add("playing");
+    playBtn.style.transform = "scale(1.1)";
   } else {
     audio.pause();
-    avatar.classList.remove("playing");
+    playBtn.style.transform = "scale(1)";
   }
-}
+};
 
-/* 🎚 progress */
-audio.addEventListener("timeupdate", () => {
-  const percent = (audio.currentTime / audio.duration) * 100;
-  progress.style.width = percent + "%";
-  current.textContent = format(audio.currentTime);
-});
+/* 🧊 trail (behind cursor) */
+let lastX = 0;
+let lastY = 0;
 
-audio.addEventListener("loadedmetadata", () => {
-  duration.textContent = format(audio.duration);
-});
+document.addEventListener("mousemove", (e) => {
+  const dx = e.pageX - lastX;
+  const dy = e.pageY - lastY;
 
-function format(s){
-  const m = Math.floor(s / 60);
-  const sec = Math.floor(s % 60);
-  return `${m}:${sec < 10 ? "0" : ""}${sec}`;
-}
+  lastX = e.pageX;
+  lastY = e.pageY;
 
-function seek(e){
-  const rect = e.currentTarget.getBoundingClientRect();
-  const percent = (e.clientX - rect.left) / rect.width;
-  audio.currentTime = percent * audio.duration;
-}
+  const cube = document.createElement("div");
+  cube.className = "trail-box";
 
-/* 🧊 trail */
-document.addEventListener("mousemove", e => {
-  const box = document.createElement("div");
-  box.className = "trail-box";
-  box.style.left = e.pageX + "px";
-  box.style.top = e.pageY + "px";
-  document.body.appendChild(box);
+  cube.style.left = (e.pageX - dx * 0.6) + "px";
+  cube.style.top = (e.pageY - dy * 0.6) + "px";
+
+  document.body.appendChild(cube);
 
   setTimeout(() => {
-    box.style.opacity = "0";
-    box.style.transform = "scale(0.3)";
-  }, 50);
+    cube.style.opacity = "0";
+    cube.style.transform = "scale(0.3)";
+  }, 40);
 
-  setTimeout(() => box.remove(), 300);
+  setTimeout(() => cube.remove(), 300);
 });
 
-/* 👀 CountAPI */
+/* 👀 views */
 fetch("https://api.countapi.xyz/hit/glitterglue/profile")
 .then(r => r.json())
 .then(d => document.getElementById("viewCount").innerText = d.value)
 .catch(() => document.getElementById("viewCount").innerText = "0");
 
-/* 🕒 UPDATED TIME */
-function updateTime() {
-  const now = new Date();
-  const time = now.toLocaleTimeString([], {
-    hour: '2-digit',
-    minute: '2-digit',
-    second: '2-digit'
-  });
+/* 🕒 REAL LAST UPDATED (NOT LIVE CLOCK) */
+const buildTime = new Date(document.lastModified);
 
-  document.getElementById("lastUpdated").innerText =
-    "🕒 Updated " + time;
-}
+const formatted = buildTime.toLocaleString([], {
+  hour: '2-digit',
+  minute: '2-digit',
+  day: '2-digit',
+  month: '2-digit',
+  year: 'numeric'
+});
 
-updateTime();
-setInterval(updateTime, 1000);
+document.getElementById("lastUpdated").innerText =
+  "🕒 Updated " + formatted;
 </script>
 
 </body>
