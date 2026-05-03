@@ -3,8 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <title>glitterglue.fun</title>
-    <link rel="icon" type="image/x-icon" href="https://images.rawpixel.com/image_png_800/cHJpdmF0ZS9sci9pbWFnZXMvd2Vic2l0ZS8yMDI0LTA0L3JtMTgyMi1ib251cy0wOTZfMS5wbmc.png">
-</head>
+<link rel="icon" type="image/x-icon" href="https://images.rawpixel.com/image_png_800/cHJpdmF0ZS9sci9pbWFnZXMvd2Vic2l0ZS8yMDI0LTA0L3JtMTgyMi1ib251cy0wOTZfMS5wbmc.png">
 
 <style>
 body {
@@ -48,12 +47,11 @@ body::before {
   border-radius: 15px;
 }
 
-/* 💿 avatar disc */
+/* 💿 avatar */
 .avatar {
   width: 110px;
   height: 110px;
   border-radius: 50%;
-  transition: transform 0.3s linear;
 }
 
 .playing {
@@ -104,7 +102,6 @@ body::before {
 .live {
   font-size: 12px;
   margin-top: 8px;
-  opacity: 0.9;
 }
 .live span {
   color: red;
@@ -150,6 +147,15 @@ body::before {
   opacity: 0.8;
   margin-top: 5px;
 }
+
+/* 🕒 last updated */
+#lastUpdated {
+  position: fixed;
+  bottom: 10px;
+  right: 15px;
+  font-size: 12px;
+  opacity: 0.7;
+}
 </style>
 </head>
 
@@ -166,12 +172,10 @@ body::before {
   <p>@glittersdeath</p>
 
   <div class="views">👀 Live Views: <span id="viewCount">...</span></div>
-
   <div class="live">🔴 <span>LIVE</span> vibe</div>
 
   <p>studying music at leeds university</p>
 
-  <!-- 🎧 player -->
   <img id="playBtn"
     class="play-button"
     src="https://i.pinimg.com/736x/63/19/86/6319864fd9988a4b08ef57c8cdf6b0b9.jpg"
@@ -179,7 +183,6 @@ body::before {
 
   <audio id="audio" src="caravan.mp3"></audio>
 
-  <!-- progress -->
   <div class="progress-container" onclick="seek(event)">
     <div class="progress" id="progress"></div>
   </div>
@@ -188,7 +191,6 @@ body::before {
     <span id="current">0:00</span> / <span id="duration">0:00</span>
   </div>
 
-  <!-- icons -->
   <div class="icons">
     <a href="https://www.youtube.com/@glittersdeath"><img src="https://i.pinimg.com/736x/b0/55/81/b05581a725d2dcf8cd26072d8210d433.jpg"></a>
     <a href="https://open.spotify.com/user/31foe3sdswd2eaz2wk3s3npjbhse?si=23d4cfe2798440d3"><img src="https://i.pinimg.com/736x/da/a7/5e/daa75e31fc19e574a2360123db08258a.jpg"></a>
@@ -197,6 +199,8 @@ body::before {
 
 </div>
 
+<div id="lastUpdated"></div>
+
 <script>
 const audio = document.getElementById("audio");
 const avatar = document.getElementById("avatar");
@@ -204,6 +208,7 @@ const progress = document.getElementById("progress");
 const current = document.getElementById("current");
 const duration = document.getElementById("duration");
 
+/* 🎵 music */
 function togglePlay(){
   if(audio.paused){
     audio.play();
@@ -214,11 +219,10 @@ function togglePlay(){
   }
 }
 
-/* progress bar */
+/* 🎚 progress */
 audio.addEventListener("timeupdate", () => {
   const percent = (audio.currentTime / audio.duration) * 100;
   progress.style.width = percent + "%";
-
   current.textContent = format(audio.currentTime);
 });
 
@@ -238,7 +242,7 @@ function seek(e){
   audio.currentTime = percent * audio.duration;
 }
 
-/* cube trail */
+/* 🧊 trail */
 document.addEventListener("mousemove", e => {
   const box = document.createElement("div");
   box.className = "trail-box";
@@ -254,14 +258,28 @@ document.addEventListener("mousemove", e => {
   setTimeout(() => box.remove(), 300);
 });
 
-/* countapi */
+/* 👀 CountAPI */
 fetch("https://api.countapi.xyz/hit/glitterglue/profile")
 .then(r => r.json())
 .then(d => document.getElementById("viewCount").innerText = d.value)
 .catch(() => document.getElementById("viewCount").innerText = "0");
+
+/* 🕒 UPDATED TIME */
+function updateTime() {
+  const now = new Date();
+  const time = now.toLocaleTimeString([], {
+    hour: '2-digit',
+    minute: '2-digit',
+    second: '2-digit'
+  });
+
+  document.getElementById("lastUpdated").innerText =
+    "🕒 Updated " + time;
+}
+
+updateTime();
+setInterval(updateTime, 1000);
 </script>
 
-
-<div id="lastUpdated"></div>
 </body>
 </html>
