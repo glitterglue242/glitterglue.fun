@@ -1,267 +1,194 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>glitterglue.fun</title>
-    <style>
-        @import url('https://fonts.googleapis.com/css2?family=Press+Start+2P&family=VT323&display=swap');
+<meta charset="UTF-8">
+<title>glitterglue.fun</title>
 
-        :root {
-            --pink: #ff00ff;
-            --cyan: #00ffff;
-        }
+<link rel="icon" href="https://images.rawpixel.com/image_png_800/cHJpdmF0ZS9sci9pbWFnZXMvd2Vic2l0ZS8yMDI0LTA0L3JtMTgyMi1ib251cy0wOTZfMS5wbmc.png">
 
-        * { margin: 0; padding: 0; box-sizing: border-box; }
+<style>
+body {
+  margin: 0;
+  font-family: Arial, sans-serif;
+  overflow: hidden;
+  color: white;
+}
 
-        body {
-            background: #0a0a0f;
-            color: #e0e0e0;
-            font-family: 'VT323', monospace;
-            min-height: 100vh;
-            overflow: hidden;
-            position: relative;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-        }
+/* background */
+.bg {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  z-index: -2;
+}
 
-        .rain {
-            position: absolute;
-            top: 0; left: 0;
-            width: 100%; height: 100%;
-            pointer-events: none;
-            z-index: 1;
-        }
+body::before {
+  content: "";
+  position: fixed;
+  width: 100%;
+  height: 100%;
+  background: rgba(0,0,0,0.45);
+  z-index: -1;
+}
 
-        .drop {
-            position: absolute;
-            width: 2px;
-            height: 60px;
-            background: linear-gradient(transparent, rgba(150, 220, 255, 0.7));
-            animation: fall linear infinite;
-        }
+/* card */
+.card {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%,-50%);
+  width: 320px;
+  padding: 20px;
+  text-align: center;
+  background: rgba(255,255,255,0.1);
+  backdrop-filter: blur(10px);
+  border-radius: 15px;
+}
 
-        @keyframes fall {
-            to { transform: translateY(100vh); }
-        }
+/* avatar */
+.avatar {
+  width: 110px;
+  height: 110px;
+  border-radius: 50%;
+}
 
-        .card {
-            background: rgba(15, 15, 28, 0.96);
-            border: 2px solid #444;
-            border-radius: 12px;
-            width: 440px;
-            max-width: 94vw;
-            padding: 2.5rem 2rem;
-            text-align: center;
-            box-shadow: 0 0 60px rgba(255, 0, 255, 0.25);
-            position: relative;
-            z-index: 2;
-        }
+/* spotify embed */
+.spotify-player {
+  margin-top: 15px;
+  border-radius: 12px;
+  overflow: hidden;
+  box-shadow: 0 0 20px rgba(0,0,0,0.4);
+}
 
-        .avatar {
-            width: 140px; height: 140px;
-            border-radius: 50%;
-            border: 4px solid var(--pink);
-            overflow: hidden;
-            margin: 0 auto 1rem;
-            box-shadow: 0 0 30px rgba(255, 0, 255, 0.6);
-        }
+/* icons */
+.icons {
+  display: flex;
+  justify-content: center;
+  gap: 15px;
+  margin-top: 15px;
+}
+.icons img {
+  width: 40px;
+  height: 40px;
+  border-radius: 10px;
+  transition: 0.2s;
+}
+.icons img:hover {
+  transform: scale(1.2);
+}
 
-        .avatar img { width: 100%; height: 100%; object-fit: cover; }
 
-        h1 {
-            font-family: 'Press Start 2P', cursive;
-            font-size: 2.4rem;
-            color: var(--pink);
-            text-shadow: 0 0 15px var(--pink);
-        }
+/* views */
+.views {
+  margin-top: 10px;
+  opacity: 0.8;
+}
 
-        .handle { color: var(--cyan); font-size: 1.45rem; margin: 0.4rem 0 1.2rem; }
-
-        .bio {
-            font-size: 1.35rem;
-            line-height: 1.4;
-            color: #bbb;
-            margin-bottom: 1.8rem;
-        }
-
-        .now-playing {
-            background: #1a1a2e;
-            border: 1px solid #555;
-            border-radius: 8px;
-            padding: 1rem;
-            margin: 1.5rem 0;
-        }
-
-        .song-title { font-size: 1.5rem; margin-bottom: 0.3rem; }
-        .artist { color: var(--cyan); }
-
-        .player-container {
-            margin: 1rem 0;
-            border-radius: 8px;
-            overflow: hidden;
-            box-shadow: 0 0 15px rgba(0,0,0,0.5);
-        }
-
-        .song-list {
-            margin-top: 1.5rem;
-        }
-
-        .song-item {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            padding: 1rem;
-            background: rgba(30, 30, 50, 0.7);
-            margin-bottom: 0.6rem;
-            border-radius: 6px;
-            cursor: pointer;
-            transition: 0.2s;
-        }
-
-        .song-item:hover {
-            background: rgba(255, 0, 255, 0.2);
-            transform: translateX(6px);
-        }
-
-        .song-item.playing {
-            background: rgba(0, 255, 255, 0.15);
-            border-left: 5px solid var(--cyan);
-        }
-
-        footer {
-            margin-top: 2rem;
-            color: #555;
-            font-size: 1.1rem;
-        }
-    </style>
+/* last updated */
+#lastUpdated {
+  position: fixed;
+  bottom: 10px;
+  right: 15px;
+  font-size: 12px;
+  opacity: 0.75;
+  text-shadow: 0 0 6px rgba(255,255,255,0.5);
+}
+</style>
 </head>
+
 <body>
 
-    <div class="rain" id="rain"></div>
+<img class="bg" src="https://i.pinimg.com/736x/f5/09/99/f50999905406cd8a17d5c46dfd9a9243.jpg">
 
-    <div class="card">
-        <div class="avatar">
-            <img src="avatar.jpg" alt="glitterglue">
-        </div>
-        
-        <h1>glitterglue</h1>
-        <div class="handle">@glitterglue.fun</div>
-        
-        <p class="bio">
-            glitter gremlin • professional yapper<br>
-            currently rotting with headphones on
-        </p>
+<div class="card">
 
-        <!-- Now Playing -->
-        <div class="now-playing" id="now-playing">
-            <div style="margin-bottom:8px; color:#888;">♪ NOW PLAYING</div>
-            <div class="song-title" id="current-title">earrings</div>
-            <div class="artist" id="current-artist">Malcolm Todd</div>
-            
-            <div class="player-container" id="player-container">
-                <!-- YouTube embed will go here via JS -->
-            </div>
-        </div>
+  <img class="avatar" src="https://i.pinimg.com/736x/d9/c9/50/d9c95014054055c012894d3c80cf75c1.jpg">
 
-        <!-- Song List -->
-        <div class="song-list" id="song-list"></div>
+  <h1>glitterglue</h1>
+  <p>@glittersdeath</p>
 
-        <footer>glitterglue.fun</footer>
-    </div>
+  <div class="views">Page Views: <span id="viewCount">...</span></div>
 
-    <script>
-        const songs = [
-            {
-                title: "earrings",
-                artist: "Malcolm Todd",
-                youtube: "https://www.youtube.com/embed/yDSQB-zNJE4"   // lyrics video
-            },
-            {
-                title: "YKWIM?",
-                artist: "Yot Club",
-                youtube: "https://www.youtube.com/embed/DtsUOWVB9Dg"
-            },
-            {
-                title: "Show Me How",
-                artist: "Men I Trust",
-                youtube: "https://www.youtube.com/embed/3n5wH5q5q5Q"   // replace if better link found
-            },
-            {
-                title: "Don't Stop 'Til You Get Enough",
-                artist: "Michael Jackson",
-                youtube: "https://www.youtube.com/embed/yJQ2v3f7z0A"
-            },
-            {
-                title: "IFHY",
-                artist: "Tyler, The Creator ft. Pharrell",
-                youtube: "https://www.youtube.com/embed/3n5wH5q5q5Q"   // placeholder — replace with real link
-            }
-        ];
+  <p>Studying music at University Of Leeds</p>
 
-        let currentIndex = 0;
+  <p>drums are my passion</p>
 
-        function renderSongs() {
-            const container = document.getElementById('song-list');
-            container.innerHTML = '';
+  <!-- 🎧 Spotify player -->
+  <div class="spotify-player">
+    <iframe 
+      src="https://open.spotify.com/embed/playlist/6vyFB24xfEsWqNZ1Aw3c47"
+      width="100%" 
+      height="152" 
+      frameborder="0" 
+      allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture"
+      loading="lazy">
+    </iframe>
+  </div>
 
-            songs.forEach((song, i) => {
-                const div = document.createElement('div');
-                div.className = `song-item ${i === currentIndex ? 'playing' : ''}`;
-                div.innerHTML = `
-                    <div>
-                        <strong>${song.title}</strong><br>
-                        <span style="color:#999">${song.artist}</span>
-                    </div>
-                    <span style="font-size:1.8rem; color:var(--pink)">▶</span>
-                `;
-                div.onclick = () => playSong(i);
-                container.appendChild(div);
-            });
-        }
+  <!-- icons -->
+  <div class="icons">
+    <a href="https://www.youtube.com/@glittersdeath"><img src="https://i.pinimg.com/736x/b0/55/81/b05581a725d2dcf8cd26072d8210d433.jpg"></a>
+    <a href="https://open.spotify.com"><img src="https://i.pinimg.com/736x/da/a7/5e/daa75e31fc19e574a2360123db08258a.jpg"></a>
+    <a href="https://www.roblox.com/users/685179066/profile"><img src="https://i.pinimg.com/736x/8c/5c/ad/8c5cad9f00b6babd03b9593f2a482b1e.jpg"></a>
+  </div>
 
-        function playSong(index) {
-            currentIndex = index;
-            const song = songs[index];
+</div>
 
-            document.getElementById('current-title').textContent = song.title;
-            document.getElementById('current-artist').textContent = song.artist;
+<div id="lastUpdated"></div>
 
-            const playerHTML = `
-                <iframe width="100%" height="120" 
-                    src="${song.youtube}" 
-                    title="YouTube video player" 
-                    frameborder="0" 
-                    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" 
-                    allowfullscreen>
-                </iframe>
-            `;
-            document.getElementById('player-container').innerHTML = playerHTML;
+<script>
+/* 🧊 trail */
+let lastX = 0;
+let lastY = 0;
 
-            renderSongs();
-        }
+document.addEventListener("mousemove", (e) => {
+  const dx = e.pageX - lastX;
+  const dy = e.pageY - lastY;
 
-        // Rain effect
-        function createRain() {
-            const rain = document.getElementById('rain');
-            for (let i = 0; i < 90; i++) {
-                const drop = document.createElement('div');
-                drop.className = 'drop';
-                drop.style.left = Math.random() * 100 + 'vw';
-                drop.style.animationDuration = (Math.random() * 0.5 + 0.4) + 's';
-                drop.style.animationDelay = Math.random() * 3 + 's';
-                drop.style.opacity = Math.random() * 0.5 + 0.5;
-                rain.appendChild(drop);
-            }
-        }
+  lastX = e.pageX;
+  lastY = e.pageY;
 
-        // Init
-        window.onload = () => {
-            createRain();
-            renderSongs();
-            playSong(0); // start with first song
-        };
-    </script>
+  const cube = document.createElement("div");
+  cube.className = "trail-box";
+
+  cube.style.left = (e.pageX - dx * 0.6) + "px";
+  cube.style.top = (e.pageY - dy * 0.6) + "px";
+
+  document.body.appendChild(cube);
+
+  setTimeout(() => {
+    cube.style.opacity = "0";
+    cube.style.transform = "scale(0.3)";
+  }, 40);
+
+  setTimeout(() => cube.remove(), 300);
+});
+
+/* 👀 views */
+fetch("https://api.countapi.xyz/hit/glitterglue/profile")
+.then(r => r.json())
+.then(d => document.getElementById("viewCount").innerText = d.value)
+.catch(() => document.getElementById("viewCount").innerText = "0");
+
+/* 🕒 last updated */
+const buildTime = new Date(document.lastModified);
+
+const formatted = buildTime.toLocaleString([], {
+  hour: '2-digit',
+  minute: '2-digit',
+  day: '2-digit',
+  month: '2-digit',
+  year: 'numeric'
+});
+
+document.getElementById("lastUpdated").innerText =
+  "Updated " + formatted;
+</script>
+
 </body>
 </html>
+
+
