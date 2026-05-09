@@ -1,185 +1,119 @@
-/* =========================
-   🌐 BASE
-========================= */
-body {
-  margin: 0;
-  font-family: Arial, sans-serif;
-  overflow: hidden;
-}
+<script>
+// ================== MUSIC PLAYER ==================
+const audio = document.getElementById("audio");
+const playBtn = document.getElementById("playBtn");
+const prevBtn = document.getElementById("prev");
+const nextBtn = document.getElementById("next");
+const coverEl = document.getElementById("cover");
+const titleEl = document.getElementById("title");
+const artistEl = document.getElementById("artist");
+const progress = document.getElementById("progress");
+const progressContainer = document.getElementById("progressContainer");
 
-/* 🎞️ BACKGROUND */
-.bg {
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  background: url("https://i.pinimg.com/736x/f5/09/99/f50999905406cd8a17d5c46dfd9a9243.jpg");
-  background-size: cover;
-  background-position: center;
-  background-repeat: no-repeat;
-  z-index: -2;
-}
+let currentTrack = 0;
 
-/* dark overlay */
-body::before {
-  content: "";
-  position: fixed;
-  width: 100%;
-  height: 100%;
-  background: rgba(0,0,0,0.45);
-  z-index: -1;
-}
+const tracks = [
+  { title: "Earrings", artist: "Malcom Todd", src: "songs/earringsmalcom.mp3", cover: "covers/Earringscoverart.jpg" },
+  { title: "YKWIM?", artist: "Yot Club", src: "songs/ykwim.mp3", cover: "covers/youknowmetoowell.jpg" },
+  { title: "Show Me How", artist: "Men I Trust", src: "songs/showmehow.mp3", cover: "covers/showmehowistheonlythingkeepingmearound.jpg" },
+  { title: "Don't Stop 'Til You Get Enough", artist: "Michael Jackson", src: "songs/dontstopaddictedtothemichael.mp3", cover: "covers/dontstopaddictedtothemichael.jpg" },
+  { title: "IFHY", artist: "Tyler, The Creator ft. Pharrell", src: "songs/ifuckinghateyou.mp3", cover: "covers/ifuckinghatepompey.jpg" },
+  { title: "Main Lobby Sounds", artist: "glitterglue, topzvr, soulox", src: "songs/SCP Game thing.mp3", cover: "covers/SCP Retro(1).png" }
+];
 
-/* =========================
-   📦 CARD
-========================= */
-.card {
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
+function loadTrack(index) {
+  const track = tracks[index];
+  audio.src = track.src;
+  titleEl.textContent = track.title;
+  artistEl.textContent = track.artist;
+  coverEl.src = track.cover;
   
-  width: 300px;
-  padding: 20px;
-  text-align: center;
-
-  background: rgba(255,255,255,0.1);
-  backdrop-filter: blur(10px);
-  border-radius: 15px;
-  color: white;
+  // Reset progress
+  progress.style.width = "0%";
 }
 
-.avatar {
-  width: 100px;
-  height: 100px;
-  border-radius: 50%;
-}
-
-/* =========================
-   🔗 SOCIAL ICONS
-========================= */
-.icons {
-  display: flex;
-  justify-content: center;
-  gap: 15px;
-  margin-top: 15px;
-}
-
-.icons img {
-  width: 40px;
-  height: 40px;
-  border-radius: 10px;
-  transition: transform 0.2s ease;
-  cursor: pointer;
-}
-
-.icons img:hover {
-  transform: scale(1.2);
-}
-
-/* =========================
-   🎧 PLAYER
-========================= */
-.player {
-  margin-top: 15px;
-}
-
-.play-button {
-  width: 60px;
-  height: 60px;
-  cursor: pointer;
-  transition: transform 0.2s ease, filter 0.2s ease;
-  border-radius: 12px;
-}
-
-.play-button:hover {
-  transform: scale(1.15);
-  filter: brightness(1.2);
-}
-
-/* 🎚️ visualizer */
-.visualizer {
-  display: flex;
-  justify-content: center;
-  align-items: flex-end;
-  gap: 3px;
-  height: 20px;
-  margin-top: 10px;
-}
-
-.visualizer span {
-  width: 3px;
-  height: 5px;
-  background: white;
-  animation: bounce 1s infinite ease-in-out;
-}
-
-.visualizer span:nth-child(2) { animation-delay: 0.1s; }
-.visualizer span:nth-child(3) { animation-delay: 0.2s; }
-.visualizer span:nth-child(4) { animation-delay: 0.3s; }
-.visualizer span:nth-child(5) { animation-delay: 0.4s; }
-
-@keyframes bounce {
-  0%, 100% { height: 5px; opacity: 0.4; }
-  50% { height: 20px; opacity: 1; }
-}
-
-/* =========================
-   👀 VIEW COUNT
-========================= */
-.views {
-  margin-top: 10px;
-  font-size: 14px;
-  opacity: 0.8;
-}
-
-/* =========================
-   🧊 CURSOR TRAIL
-========================= */
-.trail-box {
-  position: absolute;
-  width: 10px;
-  height: 10px;
-  background: white;
-  border-radius: 2px;
-  pointer-events: none;
-  opacity: 0.8;
-  transform: translate(-50%, -50%);
-  transition: opacity 0.2s ease, transform 0.2s ease;
-}
-
-/* =========================
-   🕒 LAST UPDATED (POLISHED)
-========================= */
-#lastUpdated {
-  position: fixed;
-  bottom: 10px;
-  right: 15px;
-  font-size: 12px;
-  opacity: 0.75;
-  color: white;
-  font-family: Arial, sans-serif;
-  
-  /* ✨ glow effect */
-  text-shadow: 0 0 6px rgba(255,255,255,0.5);
-  
-  /* smooth fade in */
-  animation: fadeIn 1s ease;
-}
-
-@keyframes fadeIn {
-  from {
-    opacity: 0;
-    transform: translateY(5px);
-  }
-  to {
-    opacity: 0.75;
-    transform: translateY(0);
-     .spotify-player {
-  margin-top: 15px;
-  border-radius: 12px;
-  overflow: hidden;
-}
+function togglePlay() {
+  if (audio.paused) {
+    audio.play();
+    playBtn.textContent = "❚❚";
+    playBtn.style.transform = "scale(1.1)";
+  } else {
+    audio.pause();
+    playBtn.textContent = "▶";
+    playBtn.style.transform = "scale(1)";
   }
 }
+
+function nextTrack() {
+  currentTrack = (currentTrack + 1) % tracks.length;
+  loadTrack(currentTrack);
+  audio.play();
+  playBtn.textContent = "❚❚";
+  playBtn.style.transform = "scale(1.1)";
+}
+
+function prevTrack() {
+  currentTrack = (currentTrack - 1 + tracks.length) % tracks.length;
+  loadTrack(currentTrack);
+  audio.play();
+  playBtn.textContent = "❚❚";
+  playBtn.style.transform = "scale(1.1)";
+}
+
+// Progress Bar
+audio.addEventListener("timeupdate", () => {
+  if (audio.duration) {
+    const progressPercent = (audio.currentTime / audio.duration) * 100;
+    progress.style.width = progressPercent + "%";
+  }
+});
+
+progressContainer.addEventListener("click", (e) => {
+  const rect = progressContainer.getBoundingClientRect();
+  const clickPosition = (e.clientX - rect.left) / rect.width;
+  audio.currentTime = clickPosition * audio.duration;
+});
+
+audio.addEventListener("ended", nextTrack);
+
+// Button Events
+playBtn.onclick = togglePlay;
+nextBtn.onclick = nextTrack;
+prevBtn.onclick = prevTrack;
+
+// Initialize first track
+loadTrack(0);
+
+// ================== YOUR ORIGINAL EFFECTS ==================
+let lastX = 0;
+let lastY = 0;
+document.addEventListener("mousemove", (e) => {
+  const dx = e.pageX - lastX;
+  const dy = e.pageY - lastY;
+  lastX = e.pageX;
+  lastY = e.pageY;
+
+  const cube = document.createElement("div");
+  cube.className = "trail-box";
+  cube.style.left = (e.pageX - dx * 0.6) + "px";
+  cube.style.top = (e.pageY - dy * 0.6) + "px";
+  document.body.appendChild(cube);
+
+  setTimeout(() => {
+    cube.style.opacity = "0";
+    cube.style.transform = "scale(0.3)";
+  }, 40);
+  setTimeout(() => cube.remove(), 300);
+});
+
+// Last Updated
+const buildTime = new Date(document.lastModified);
+const formatted = buildTime.toLocaleString([], {
+  hour: '2-digit',
+  minute: '2-digit',
+  day: '2-digit',
+  month: '2-digit',
+  year: 'numeric'
+});
+document.getElementById("lastUpdated").innerText = "Updated " + formatted;
+</script>
