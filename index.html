@@ -5,277 +5,263 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>glitterglue.fun</title>
     <style>
-        @import url('https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap');
-        
+        @import url('https://fonts.googleapis.com/css2?family=Press+Start+2P&family=VT323&display=swap');
+
         :root {
-            --neon-pink: #ff00ff;
-            --neon-cyan: #00ffff;
+            --pink: #ff00ff;
+            --cyan: #00ffff;
         }
 
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
+        * { margin: 0; padding: 0; box-sizing: border-box; }
 
         body {
-            background: #0a001f;
-            color: #fff;
-            font-family: 'Press Start 2P', system-ui;
-            line-height: 1.6;
-            overflow-x: hidden;
+            background: #0a0a0f;
+            color: #e0e0e0;
+            font-family: 'VT323', monospace;
             min-height: 100vh;
+            overflow: hidden;
+            position: relative;
+            display: flex;
+            align-items: center;
+            justify-content: center;
         }
 
-        .scanline {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: linear-gradient(to bottom, transparent 50%, rgba(255,255,255,0.03) 50%);
-            background-size: 100% 4px;
+        .rain {
+            position: absolute;
+            top: 0; left: 0;
+            width: 100%; height: 100%;
             pointer-events: none;
-            animation: scan 8s linear infinite;
             z-index: 1;
         }
 
-        @keyframes scan {
-            0% { transform: translateY(-100%); }
-            100% { transform: translateY(100%); }
+        .drop {
+            position: absolute;
+            width: 2px;
+            height: 60px;
+            background: linear-gradient(transparent, rgba(150, 220, 255, 0.7));
+            animation: fall linear infinite;
         }
 
-        .container {
-            max-width: 820px;
-            margin: 0 auto;
-            padding: 2rem 1rem;
+        @keyframes fall {
+            to { transform: translateY(100vh); }
+        }
+
+        .card {
+            background: rgba(15, 15, 28, 0.96);
+            border: 2px solid #444;
+            border-radius: 12px;
+            width: 440px;
+            max-width: 94vw;
+            padding: 2.5rem 2rem;
+            text-align: center;
+            box-shadow: 0 0 60px rgba(255, 0, 255, 0.25);
             position: relative;
             z-index: 2;
         }
 
-        header {
-            text-align: center;
-            margin-bottom: 3rem;
-        }
-
-        .glitch {
-            font-size: 4.5rem;
-            font-weight: 700;
-            text-transform: uppercase;
-            color: var(--neon-pink);
-            text-shadow: 
-                0 0 10px var(--neon-pink),
-                0 0 20px var(--neon-pink),
-                0 0 40px var(--neon-cyan),
-                3px 3px 0 #000,
-                -3px -3px 0 #000;
-            animation: glitch 1.5s infinite;
-            display: inline-block;
-        }
-
-        @keyframes glitch {
-            0% { transform: translate(0); }
-            20% { transform: translate(-3px, 3px); }
-            40% { transform: translate(3px, -3px); }
-            60% { transform: translate(-2px, 2px); }
-            80% { transform: translate(2px, -2px); }
-            100% { transform: translate(0); }
-        }
-
-        .subtitle {
-            color: var(--neon-cyan);
-            font-size: 1.2rem;
-            margin-top: 0.8rem;
-            text-shadow: 0 0 15px var(--neon-cyan);
-            letter-spacing: 4px;
-        }
-
         .avatar {
-            width: 190px;
-            height: 190px;
+            width: 140px; height: 140px;
             border-radius: 50%;
-            border: 6px solid var(--neon-pink);
-            box-shadow: 
-                0 0 40px var(--neon-pink),
-                0 0 80px rgba(255, 0, 255, 0.5);
-            margin: 0 auto 2rem;
+            border: 4px solid var(--pink);
             overflow: hidden;
-            background: #1a0033;
+            margin: 0 auto 1rem;
+            box-shadow: 0 0 30px rgba(255, 0, 255, 0.6);
         }
 
-        .avatar img {
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-            display: block;
+        .avatar img { width: 100%; height: 100%; object-fit: cover; }
+
+        h1 {
+            font-family: 'Press Start 2P', cursive;
+            font-size: 2.4rem;
+            color: var(--pink);
+            text-shadow: 0 0 15px var(--pink);
         }
+
+        .handle { color: var(--cyan); font-size: 1.45rem; margin: 0.4rem 0 1.2rem; }
 
         .bio {
-            text-align: center;
-            max-width: 620px;
-            margin: 0 auto 3.5rem;
-            color: #ddd;
-            font-size: 1.05rem;
-            text-shadow: 0 0 10px rgba(255,0,255,0.3);
+            font-size: 1.35rem;
+            line-height: 1.4;
+            color: #bbb;
+            margin-bottom: 1.8rem;
         }
 
-        .links {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-            gap: 1.2rem;
-            margin-bottom: 4rem;
+        .now-playing {
+            background: #1a1a2e;
+            border: 1px solid #555;
+            border-radius: 8px;
+            padding: 1rem;
+            margin: 1.5rem 0;
         }
 
-        .link-card {
-            background: rgba(20, 0, 40, 0.8);
-            border: 3px solid var(--neon-cyan);
-            padding: 1.4rem 1.6rem;
-            text-decoration: none;
-            color: white;
-            transition: all 0.3s ease;
-            box-shadow: 0 0 20px rgba(0, 255, 255, 0.2);
-            position: relative;
+        .song-title { font-size: 1.5rem; margin-bottom: 0.3rem; }
+        .artist { color: var(--cyan); }
+
+        .player-container {
+            margin: 1rem 0;
+            border-radius: 8px;
             overflow: hidden;
+            box-shadow: 0 0 15px rgba(0,0,0,0.5);
         }
 
-        .link-card::before {
-            content: '';
-            position: absolute;
-            top: -50%;
-            left: -50%;
-            width: 40%;
-            height: 200%;
-            background: linear-gradient(120deg, transparent, rgba(255,255,255,0.35), transparent);
-            transform: skewX(-25deg);
-            animation: shine 4s infinite;
+        .song-list {
+            margin-top: 1.5rem;
         }
 
-        @keyframes shine {
-            0% { transform: translateX(-150%) skewX(-25deg); }
-            100% { transform: translateX(300%) skewX(-25deg); }
+        .song-item {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 1rem;
+            background: rgba(30, 30, 50, 0.7);
+            margin-bottom: 0.6rem;
+            border-radius: 6px;
+            cursor: pointer;
+            transition: 0.2s;
         }
 
-        .link-card:hover {
-            transform: translateY(-8px) scale(1.03);
-            border-color: var(--neon-pink);
-            box-shadow: 0 0 45px var(--neon-pink);
+        .song-item:hover {
+            background: rgba(255, 0, 255, 0.2);
+            transform: translateX(6px);
         }
 
-        .link-card h3 {
-            color: var(--neon-pink);
-            margin-bottom: 0.5rem;
-            font-size: 1.15rem;
+        .song-item.playing {
+            background: rgba(0, 255, 255, 0.15);
+            border-left: 5px solid var(--cyan);
         }
 
         footer {
-            text-align: center;
-            padding: 2.5rem 0;
-            color: #666;
-            font-size: 0.8rem;
-            border-top: 1px dashed #333;
-        }
-
-        .sparkle {
-            position: absolute;
-            color: #fff;
-            font-size: 1.3rem;
-            animation: sparkleAnim 3s linear infinite;
-            text-shadow: 0 0 12px gold;
-            pointer-events: none;
-            z-index: 10;
-        }
-
-        @keyframes sparkleAnim {
-            0% { opacity: 0; transform: scale(0.5); }
-            50% { opacity: 1; }
-            100% { opacity: 0; transform: scale(1.6) translateY(-120px); }
+            margin-top: 2rem;
+            color: #555;
+            font-size: 1.1rem;
         }
     </style>
 </head>
 <body>
-    <div class="scanline"></div>
-    
-    <div class="container">
-        <header>
-            <div class="avatar" id="avatar">
-                <img src="avatar.jpg" alt="glitterglue">
-            </div>
-            <h1 class="glitch">glitterglue</h1>
-            <p class="subtitle">glitterglue.fun</p>
-        </header>
 
+    <div class="rain" id="rain"></div>
+
+    <div class="card">
+        <div class="avatar">
+            <img src="avatar.jpg" alt="glitterglue">
+        </div>
+        
+        <h1>glitterglue</h1>
+        <div class="handle">@glitterglue.fun</div>
+        
         <p class="bio">
-            professional yapper • glitter gremlin • chaos enjoyer<br>
-            i turn caffeine into bad decisions and hot glue into art
+            glitter gremlin • professional yapper<br>
+            currently rotting with headphones on
         </p>
 
-        <div class="links">
-            <a href="https://www.youtube.com/@glittersdeath" target="_blank" class="link-card">
-                <h3>→ YOUTUBE</h3>
-                <p>@glittersdeath</p>
-            </a>
+        <!-- Now Playing -->
+        <div class="now-playing" id="now-playing">
+            <div style="margin-bottom:8px; color:#888;">♪ NOW PLAYING</div>
+            <div class="song-title" id="current-title">earrings</div>
+            <div class="artist" id="current-artist">Malcolm Todd</div>
             
-            <a href="https://www.roblox.com/users/685179066/profile" target="_blank" class="link-card">
-                <h3>→ ROBLOX</h3>
-                <p>glitterglue</p>
-            </a>
-            
-            <a href="https://open.spotify.com/artist/5M45ri6PzJk2DOdXEEbfnl" target="_blank" class="link-card">
-                <h3>→ SPOTIFY</h3>
-                <p>glitterglue</p>
-            </a>
-            
-            <a href="#" onclick="throwGlitter()" class="link-card">
-                <h3>→ THROW GLITTER AT ME</h3>
-                <p>confetti cannon activated ✨</p>
-            </a>
+            <div class="player-container" id="player-container">
+                <!-- YouTube embed will go here via JS -->
+            </div>
         </div>
 
-        <footer>
-            <p>made with pure chaos &amp; sparkles • glitterglue.fun</p>
-            <p style="margin-top: 1rem; font-size: 0.75rem;">
-                guns.lol inspired • hosted on github pages
-            </p>
-        </footer>
+        <!-- Song List -->
+        <div class="song-list" id="song-list"></div>
+
+        <footer>glitterglue.fun</footer>
     </div>
 
     <script>
-        function throwGlitter() {
-            const colors = ['#ff00ff', '#00ffff', '#ffff00', '#ff00aa', '#00ffaa', '#ff69b4'];
-            
+        const songs = [
+            {
+                title: "earrings",
+                artist: "Malcolm Todd",
+                youtube: "https://www.youtube.com/embed/yDSQB-zNJE4"   // lyrics video
+            },
+            {
+                title: "YKWIM?",
+                artist: "Yot Club",
+                youtube: "https://www.youtube.com/embed/DtsUOWVB9Dg"
+            },
+            {
+                title: "Show Me How",
+                artist: "Men I Trust",
+                youtube: "https://www.youtube.com/embed/3n5wH5q5q5Q"   // replace if better link found
+            },
+            {
+                title: "Don't Stop 'Til You Get Enough",
+                artist: "Michael Jackson",
+                youtube: "https://www.youtube.com/embed/yJQ2v3f7z0A"
+            },
+            {
+                title: "IFHY",
+                artist: "Tyler, The Creator ft. Pharrell",
+                youtube: "https://www.youtube.com/embed/3n5wH5q5q5Q"   // placeholder — replace with real link
+            }
+        ];
+
+        let currentIndex = 0;
+
+        function renderSongs() {
+            const container = document.getElementById('song-list');
+            container.innerHTML = '';
+
+            songs.forEach((song, i) => {
+                const div = document.createElement('div');
+                div.className = `song-item ${i === currentIndex ? 'playing' : ''}`;
+                div.innerHTML = `
+                    <div>
+                        <strong>${song.title}</strong><br>
+                        <span style="color:#999">${song.artist}</span>
+                    </div>
+                    <span style="font-size:1.8rem; color:var(--pink)">▶</span>
+                `;
+                div.onclick = () => playSong(i);
+                container.appendChild(div);
+            });
+        }
+
+        function playSong(index) {
+            currentIndex = index;
+            const song = songs[index];
+
+            document.getElementById('current-title').textContent = song.title;
+            document.getElementById('current-artist').textContent = song.artist;
+
+            const playerHTML = `
+                <iframe width="100%" height="120" 
+                    src="${song.youtube}" 
+                    title="YouTube video player" 
+                    frameborder="0" 
+                    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" 
+                    allowfullscreen>
+                </iframe>
+            `;
+            document.getElementById('player-container').innerHTML = playerHTML;
+
+            renderSongs();
+        }
+
+        // Rain effect
+        function createRain() {
+            const rain = document.getElementById('rain');
             for (let i = 0; i < 90; i++) {
-                setTimeout(() => {
-                    const sparkle = document.createElement('div');
-                    sparkle.className = 'sparkle';
-                    sparkle.textContent = ['✨','★','💖','🦄','🌈'][Math.floor(Math.random()*5)];
-                    sparkle.style.left = Math.random() * 100 + 'vw';
-                    sparkle.style.top = Math.random() * 70 + 'vh';
-                    sparkle.style.color = colors[Math.floor(Math.random() * colors.length)];
-                    sparkle.style.fontSize = (Math.random() * 1.6 + 1.3) + 'rem';
-                    sparkle.style.animationDuration = (Math.random() * 2.8 + 2.2) + 's';
-                    document.body.appendChild(sparkle);
-                    setTimeout(() => sparkle.remove(), 6000);
-                }, i * 7);
+                const drop = document.createElement('div');
+                drop.className = 'drop';
+                drop.style.left = Math.random() * 100 + 'vw';
+                drop.style.animationDuration = (Math.random() * 0.5 + 0.4) + 's';
+                drop.style.animationDelay = Math.random() * 3 + 's';
+                drop.style.opacity = Math.random() * 0.5 + 0.5;
+                rain.appendChild(drop);
             }
         }
 
-        document.getElementById('avatar').addEventListener('click', throwGlitter);
-
-        setInterval(() => {
-            if (Math.random() > 0.7) {
-                const sparkle = document.createElement('div');
-                sparkle.className = 'sparkle';
-                sparkle.textContent = '✦';
-                sparkle.style.left = Math.random() * 100 + 'vw';
-                sparkle.style.top = Math.random() * 100 + 'vh';
-                sparkle.style.animationDuration = '2.8s';
-                sparkle.style.opacity = '0.6';
-                document.body.appendChild(sparkle);
-                setTimeout(() => sparkle.remove(), 3500);
-            }
-        }, 400);
-
-        window.onload = () => setTimeout(throwGlitter, 700);
+        // Init
+        window.onload = () => {
+            createRain();
+            renderSongs();
+            playSong(0); // start with first song
+        };
     </script>
 </body>
 </html>
