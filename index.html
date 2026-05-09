@@ -10,7 +10,6 @@
         :root {
             --neon-pink: #ff00ff;
             --neon-cyan: #00ffff;
-            --neon-purple: #9d00ff;
         }
 
         * {
@@ -26,10 +25,6 @@
             line-height: 1.6;
             overflow-x: hidden;
             min-height: 100vh;
-            background-image: 
-                linear-gradient(rgba(255,0,255,0.03) 1px, transparent 1px),
-                linear-gradient(90deg, rgba(0,255,255,0.03) 1px, transparent 1px);
-            background-size: 40px 40px;
         }
 
         .scanline {
@@ -41,7 +36,7 @@
             background: linear-gradient(to bottom, transparent 50%, rgba(255,255,255,0.03) 50%);
             background-size: 100% 4px;
             pointer-events: none;
-            animation: scan 6s linear infinite;
+            animation: scan 8s linear infinite;
             z-index: 1;
         }
 
@@ -96,18 +91,23 @@
         }
 
         .avatar {
-            width: 180px;
-            height: 180px;
+            width: 190px;
+            height: 190px;
             border-radius: 50%;
             border: 6px solid var(--neon-pink);
-            box-shadow: 0 0 40px var(--neon-pink), 0 0 70px rgba(157, 0, 255, 0.5);
+            box-shadow: 
+                0 0 40px var(--neon-pink),
+                0 0 80px rgba(255, 0, 255, 0.5);
             margin: 0 auto 2rem;
-            background: linear-gradient(45deg, #ff00ff, #00ffff);
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 4.5rem;
-            color: white;
+            overflow: hidden;
+            background: #1a0033;
+        }
+
+        .avatar img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            display: block;
         }
 
         .bio {
@@ -127,7 +127,7 @@
         }
 
         .link-card {
-            background: rgba(20, 0, 40, 0.75);
+            background: rgba(20, 0, 40, 0.8);
             border: 3px solid var(--neon-cyan);
             padding: 1.4rem 1.6rem;
             text-decoration: none;
@@ -197,14 +197,16 @@
     
     <div class="container">
         <header>
-            <div class="avatar" id="avatar">✨</div>
+            <div class="avatar" id="avatar">
+                <img src="avatar.jpg" alt="glitterglue">
+            </div>
             <h1 class="glitch">glitterglue</h1>
             <p class="subtitle">glitterglue.fun</p>
         </header>
 
         <p class="bio">
-            studying music • glitter gremlin • drums are my passion<br>
-             i got like 5 real ones so yh
+            professional yapper • glitter gremlin • chaos enjoyer<br>
+            i turn caffeine into bad decisions and hot glue into art
         </p>
 
         <div class="links">
@@ -245,7 +247,7 @@
                 setTimeout(() => {
                     const sparkle = document.createElement('div');
                     sparkle.className = 'sparkle';
-                    sparkle.textContent = ['✨','★','💖','🦄','🌈',' glitter'][Math.floor(Math.random()*6)];
+                    sparkle.textContent = ['✨','★','💖','🦄','🌈'][Math.floor(Math.random()*5)];
                     sparkle.style.left = Math.random() * 100 + 'vw';
                     sparkle.style.top = Math.random() * 70 + 'vh';
                     sparkle.style.color = colors[Math.floor(Math.random() * colors.length)];
@@ -257,28 +259,23 @@
             }
         }
 
-        // Click avatar = glitter
         document.getElementById('avatar').addEventListener('click', throwGlitter);
 
-        // Random background sparkles
         setInterval(() => {
-            if (Math.random() > 0.65) {
+            if (Math.random() > 0.7) {
                 const sparkle = document.createElement('div');
                 sparkle.className = 'sparkle';
                 sparkle.textContent = '✦';
                 sparkle.style.left = Math.random() * 100 + 'vw';
                 sparkle.style.top = Math.random() * 100 + 'vh';
                 sparkle.style.animationDuration = '2.8s';
-                sparkle.style.opacity = '0.7';
+                sparkle.style.opacity = '0.6';
                 document.body.appendChild(sparkle);
                 setTimeout(() => sparkle.remove(), 3500);
             }
-        }, 350);
+        }, 400);
 
-        // Welcome burst
-        window.onload = () => {
-            setTimeout(throwGlitter, 700);
-        };
+        window.onload = () => setTimeout(throwGlitter, 700);
     </script>
 </body>
 </html>
