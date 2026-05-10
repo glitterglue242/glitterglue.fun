@@ -3,19 +3,18 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>glitterglue</title>
-    <!-- CSS is kept inside the <style> tags below -->
+    <!-- The title will be controlled by JavaScript below -->
+    <title id="page-title">...</title>
     <style>
         * { margin: 0; padding: 0; box-sizing: border-box; }
         
         body { 
-            background: #080808; /* Deep dark background */
+            background: #080808; 
             font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
             display: flex; justify-content: center; align-items: center; min-height: 100vh;
             overflow: hidden;
         }
 
-        /* Glassmorphism Container */
         .card {
             background: rgba(255, 255, 255, 0.02);
             backdrop-filter: blur(15px);
@@ -37,10 +36,8 @@
         }
 
         .pronouns { font-size: 11px; text-transform: uppercase; letter-spacing: 2px; opacity: 0.4; display: block; margin-bottom: 8px; }
-        
         h1 { font-size: 22px; font-weight: 700; margin-bottom: 10px; }
 
-        /* Typewriter Effect Container */
         .bio-container { height: 20px; margin-bottom: 10px; }
         #typewriter {
             font-family: 'Courier New', monospace;
@@ -50,7 +47,6 @@
 
         .location { font-size: 13px; opacity: 0.5; margin-bottom: 30px; display: block; }
 
-        /* Buttons */
         .links-wrapper { display: flex; flex-direction: column; gap: 12px; }
         .link {
             display: block; width: 100%; padding: 14px;
@@ -84,27 +80,40 @@
         
         <div class="links-wrapper">
             <a href="https://www.roblox.com/users/685179066/profile" target="_blank" class="link">Roblox</a>
-            <a href="https://www.youtube.com/@glittersdeathK" target="_blank" class="link">YouTube</a>
+            <a href="https://www.youtube.com/@glittersdeath" target="_blank" class="link">YouTube</a>
             <a href="https://open.spotify.com/artist/5M45ri6PzJk2DOdXEEbfnl?si=GN5BYmPVRBuPpkjZ_Yn6mA" target="_blank" class="link">Spotify</a>
         </div>
     </div>
 
-    <!-- JS is kept inside the <script> tags below -->
     <script>
-        const text = "drums are my honest passion";
-        let index = 0;
-        const speed = 100; // Typing speed in ms
+        const bioText = "drums are my honest passion";
+        const titleText = "glitterglue";
+        let bioIndex = 0;
+        let titleIndex = 0;
+        const speed = 100;
 
-        function typeWriter() {
-            if (index < text.length) {
-                document.getElementById("typewriter").innerHTML += text.charAt(index);
-                index++;
-                setTimeout(typeWriter, speed);
+        // Typewriter for the Browser Title
+        function typeTitle() {
+            if (titleIndex < titleText.length) {
+                document.title = titleText.substring(0, titleIndex + 1);
+                titleIndex++;
+                setTimeout(typeTitle, speed);
+            } else {
+                // Start bio typing once title is finished
+                typeBio();
             }
         }
 
-        // Start typing when the page loads
-        window.onload = typeWriter;
+        // Typewriter for the Bio Section
+        function typeBio() {
+            if (bioIndex < bioText.length) {
+                document.getElementById("typewriter").innerHTML += bioText.charAt(bioIndex);
+                bioIndex++;
+                setTimeout(typeBio, speed);
+            }
+        }
+
+        window.onload = typeTitle;
     </script>
 
 </body>
