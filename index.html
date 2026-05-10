@@ -12,6 +12,29 @@
             font-family: 'Inter', sans-serif;
             display: flex; justify-content: center; align-items: center; min-height: 100vh;
             color: white;
+            overflow: hidden; /* Prevents scrollbars from the video */
+        }
+
+        /* Video Background Styling */
+        #bg-video {
+            position: fixed;
+            right: 0;
+            bottom: 0;
+            min-width: 100%;
+            min-height: 100%;
+            z-index: -2;
+            object-fit: cover;
+        }
+
+        /* Dark overlay to make text pop */
+        .overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.5); /* Adjust 0.5 to make it darker or lighter */
+            z-index: -1;
         }
 
         .card {
@@ -72,6 +95,12 @@
 </head>
 <body>
 
+    <!-- Video Background -->
+    <video autoplay muted loop playsinline id="bg-video">
+        <source src="https://githubusercontent.com" type="video/mp4">
+    </video>
+    <div class="overlay"></div>
+
     <div class="card">
         <img src="https://yt3.ggpht.com/RlXtGW_jaaxK0JFhWGta9j7tbI9iyEMvWJa88M6KesejTpUzgY0tkvLIHSvKMbYw_b8RszCzNWY=s108-c-k-c0x00ffffff-no-rj" class="pfp">
         
@@ -85,15 +114,12 @@
         <span class="location">Studying at Leeds Conservatory</span>
         
         <div class="social-icons">
-            <!-- Roblox Glass Icon -->
             <a href="https://www.roblox.com/users/685179066/profile" target="_blank" class="icon-link">
                 <svg viewBox="0 0 24 24"><path d="M5.188 0L0 18.812L18.812 24L24 5.188L5.188 0ZM14.945 14.887L9.055 13.313L10.629 7.422L16.519 8.996L14.945 14.887Z"/></svg>
             </a>
-            <!-- YouTube Glass Icon -->
             <a href="https://www.youtube.com/@glittersdeath" target="_blank" class="icon-link">
                 <svg viewBox="0 0 24 24"><path d="M23.498 6.186a3.016 3.016 0 0 0-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.017 3.017 0 0 0 .502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 0 0 2.122 2.136c1.871.505 9.376.505 9.376.505s7.505 0 9.377-.505a3.015 3.015 0 0 0 2.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814zM9.545 15.568V8.432L15.818 12l-6.273 3.568z"/></svg>
             </a>
-            <!-- Spotify Glass Icon -->
             <a href="https://open.spotify.com/artist/5M45ri6PzJk2DOdXEEbfnl?si=0stJbA1eShyaJzKAQj0dYg" target="_blank" class="icon-link">
                 <svg viewBox="0 0 24 24"><path d="M12 0C5.373 0 0 5.373 0 12s5.373 12 12 12 12-5.373 12-12S18.627 0 12 0zm5.508 17.302c-.216.354-.674.464-1.028.248-2.859-1.748-6.458-2.143-10.702-1.173-.406.093-.811-.162-.904-.568-.093-.406.162-.811.568-.904 4.636-1.06 8.604-.614 11.818 1.348.354.216.464.674.248 1.028zm1.472-3.256c-.272.442-.846.582-1.288.31-3.272-2.012-8.258-2.592-12.128-1.417-.496.15-1.022-.128-1.172-.624-.15-.496.128-1.022.624-1.172 4.416-1.34 9.914-.686 13.654 1.614.442.272.582.846.31 1.289zm.126-3.418c-3.926-2.332-10.392-2.548-14.153-1.406-.6.182-1.235-.158-1.417-.758-.182-.6.158-1.235.758-1.417 4.316-1.31 11.45-1.054 15.968 1.628.54.32.716 1.018.396 1.558-.32.54-1.018.716-1.552.395z"/></svg>
             </a>
