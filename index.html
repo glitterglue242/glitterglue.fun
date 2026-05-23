@@ -3,144 +3,144 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title id="page-title">...</title>
+    <title>glitterglue | bio</title>
     <style>
-        * { margin: 0; padding: 0; box-sizing: border-box; }
-       
+        /* Base Styling */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
         body {
-            background: #080808;
-            font-family: 'Inter', sans-serif;
-            display: flex; justify-content: center; align-items: center; min-height: 100vh;
-            color: white;
-            overflow: hidden;
+            /* Deep midnight purple gradient */
+            background: radial-gradient(circle at center, #140724 0%, #030107 100%);
+            color: #ffffff;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            padding: 20px;
         }
-        #bg-video {
-            position: fixed;
-            right: 0;
-            bottom: 0;
-            min-width: 100%;
-            min-height: 100%;
-            z-index: -2;
-            object-fit: cover;
-        }
-        .overlay {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: rgba(0, 0, 0, 0.5);
-            z-index: -1;
-        }
+
+        /* Glassmorphism Profile Container */
         .card {
             background: rgba(255, 255, 255, 0.02);
-            backdrop-filter: blur(25px);
-            -webkit-backdrop-filter: blur(25px);
-            border: 1px solid rgba(255, 255, 255, 0.05);
-            padding: 50px 30px;
-            border-radius: 28px;
-            width: 90%;
-            max-width: 400px;
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            border: 1px solid rgba(255, 255, 255, 0.06);
+            border-radius: 20px;
+            padding: 35px 25px;
+            width: 100%;
+            max-width: 380px;
             text-align: center;
-            box-shadow: 0 25px 50px rgba(0,0,0,0.6);
+            box-shadow: 0 12px 40px rgba(0, 0, 0, 0.6);
         }
+
+        /* Profile Picture Styling */
+        .pfp-wrapper {
+            position: relative;
+            display: inline-block;
+            margin-bottom: 15px;
+        }
+
         .pfp {
-            width: 85px; height: 85px; border-radius: 50%;
-            margin-bottom: 12px; border: 1.5px solid rgba(255,255,255,0.15);
+            width: 105px;
+            height: 105px;
+            border-radius: 50%;
             object-fit: cover;
+            background-color: #ffffff; /* White background to pop the black and white drawing */
+            border: 2px solid #a855f7; /* Purple glow accent */
+            box-shadow: 0 0 15px rgba(168, 85, 247, 0.4);
         }
-        .pronouns { font-size: 10px; text-transform: uppercase; letter-spacing: 2.5px; opacity: 0.35; display: block; margin-bottom: 5px; }
-        h1 { font-size: 26px; font-weight: 800; margin-bottom: 12px; letter-spacing: -0.8px; }
-        .bio-container { height: 20px; margin-bottom: 8px; }
-        #typewriter { font-family: 'Courier New', monospace; font-size: 14px; color: #ddd; }
-        .location { 
-            font-size: 13px; 
-            opacity: 0.3; 
-            margin-bottom: 12px; 
-            display: block; 
-            font-weight: 300; 
+
+        /* Profile Tags */
+        .name {
+            font-size: 24px;
+            font-weight: 700;
+            letter-spacing: -0.3px;
+            margin-bottom: 6px;
         }
-        .social-icons {
-            display: flex; justify-content: center; gap: 30px;
-            border-top: 1px solid rgba(255, 255, 255, 0.05);
-            padding-top: 35px;
-            margin-top: 20px;
+
+        .meta-tags {
+            display: flex;
+            justify-content: center;
+            gap: 8px;
+            margin-bottom: 25px;
         }
-        .icon-link {
-            width: 45px; height: 45px;
-            background: rgba(255, 255, 255, 0.05);
-            border: 1px solid rgba(255, 255, 255, 0.1);
+
+        .tag {
+            background: rgba(168, 85, 247, 0.12);
+            border: 1px solid rgba(168, 85, 247, 0.25);
+            color: #d8b4fe;
+            padding: 4px 10px;
             border-radius: 12px;
-            display: flex; align-items: center; justify-content: center;
-            transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
-            color: rgba(255, 255, 255, 0.5);
-            text-decoration: none;
+            font-size: 11px;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
         }
-        .icon-link svg { width: 22px; height: 22px; fill: currentColor; }
-        .icon-link:hover {
-            background: rgba(255, 255, 255, 0.15);
-            border-color: rgba(255, 255, 255, 0.5);
-            color: #fff;
-            transform: translateY(-6px);
-            box-shadow: 0 10px 20px rgba(0,0,0,0.4), 0 0 15px rgba(255,255,255,0.1);
+
+        /* Bio Box Items */
+        .bio-box {
+            display: flex;
+            flex-direction: column;
+            gap: 14px;
+            text-align: left;
+        }
+
+        .bio-line {
+            background: rgba(255, 255, 255, 0.02);
+            border: 1px solid rgba(255, 255, 255, 0.04);
+            border-radius: 10px;
+            padding: 14px;
+            font-size: 13.5px;
+            line-height: 1.5;
+            color: #e4e4e7;
+            transition: transform 0.2s, border-color 0.2s;
+        }
+
+        /* Interactive Hover Layout */
+        .bio-line:hover {
+            transform: scale(1.02);
+            border-color: rgba(168, 85, 247, 0.4);
+            background: rgba(168, 85, 247, 0.02);
+        }
+
+        .highlight {
+            color: #a855f7;
+            font-weight: 600;
         }
     </style>
 </head>
 <body>
-    <!-- Video Background -->
-    <video autoplay muted loop playsinline id="bg-video">
-        <source src="https://githubusercontent.com" type="video/mp4">
-    </video>
-    <div class="overlay"></div>
 
     <div class="card">
-        <img src="https://yt3.ggpht.com/RlXtGW_jaaxK0JFhWGta9j7tbI9iyEMvWJa88M6KesejTpUzgY0tkvLIHSvKMbYw_b8RszCzNWY=s108-c-k-c0x00ffffff-no-rj" class="pfp">
-       
-        <span class="pronouns">he/him</span>
-        <h1>@glittersdeath</h1>
-       
-        <div class="bio-container">
-            <span id="typewriter"></span>
+        <div class="pfp-wrapper">
+            <!-- Embedded image file -->
+            <img class="pfp" src="https://postimg.co" alt="glitterglue profile">
         </div>
-       
-        <span class="location">Studying at Leeds Conservatory</span>
-        <span class="location">TopZVR and Soulox are cool</span>
-        <span class="location">L Guns.lol, W Miwa.Lol</span>
-        <span class="location">if you found this via the post it note in The Base hello!</span>
         
-        <!-- New location added at the bottom -->
-        <span class="location" style="margin-top: 15px; opacity: 0.4;">Leeds and Portsmouth</span>
-       
-        <div class="social-icons">
-            <a href="https://www.roblox.com/users/685179066/profile" target="_blank" class="icon-link">
-                <svg viewBox="0 0 24 24"><path d="M5.188 0L0 18.812L18.812 24L24 5.188L5.188 0ZM14.945 14.887L9.055 13.313L10.629 7.422L16.519 8.996L14.945 14.887Z"/></svg>
-            </a>
-            <a href="https://www.youtube.com/@glittersdeath" target="_blank" class="icon-link">
-                <svg viewBox="0 0 24 24"><path d="M23.498 6.186a3.016 3.016 0 0 0-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.017 3.017 0 0 0 .502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 0 0 2.122 2.136c1.871.505 9.376.505 9.376.505s7.505 0 9.377-.505a3.015 3.015 0 0 0 2.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814zM9.545 15.568V8.432L15.818 12l-6.273 3.568z"/></svg>
-            </a>
-            <a href="https://open.spotify.com/artist/5M45ri6PzJk2DOdXEEbfnl?si=0stJbA1eShyaJzKAQj0dYg" target="_blank" class="icon-link">
-                <svg viewBox="0 0 24 24"><path d="M12 0C5.373 0 0 5.373 0 12s5.373 12 12 12 12-5.373 12-12S18.627 0 12 0zm5.508 17.302c-.216.354-.674.464-1.028.248-2.859-1.748-6.458-2.143-10.702-1.173-.406.093-.811-.162-.904-.568-.093-.406.162-.811.568-.904 4.636-1.06 8.604-.614 11.818 1.348.354.216.464.674.248 1.028zm1.472-3.256c-.272.442-.846.582-1.288.31-3.272-2.012-8.258-2.592-12.128-1.417-.496.15-1.022-.128-1.172-.624-.15-.496.128-1.022.624-1.172 4.416-1.34 9.914-.686 13.654 1.614.442.272.582.846.31 1.289zm.126-3.418c-3.926-2.332-10.392-2.548-14.153-1.406-.6.182-1.235-.158-1.417-.758-.182-.6.158-1.235.758-1.417 4.316-1.31 11.45-1.054 15.968 1.628.54.32.716 1.018.396 1.558-.32.54-1.018.716-1.552.395z"/></svg>
-            </a>
+        <div class="name">glitterglue</div>
+        
+        <div class="meta-tags">
+            <span class="tag">he/him</span>
+            <span class="tag">Portsmouth, UK</span>
+        </div>
+
+        <div class="bio-box">
+            <div class="bio-line">
+                🎵 I love <span class="highlight">drums</span> sm drums where?!
+            </div>
+            <div class="bio-line">
+                🎨 I draw sometimes
+            </div>
+            <div class="bio-line">
+                📌 If you found this via a post it note then hi hello your <span class="highlight">very local</span>
+            </div>
         </div>
     </div>
 
-    <script>
-        const bioText = "drums are my honest passion";
-        const titleText = "glitterglue";
-        let bioIndex = 0; let titleIndex = 0;
-        function typeTitle() {
-            if (titleIndex < titleText.length) {
-                document.title = titleText.substring(0, ++titleIndex);
-                setTimeout(typeTitle, 100);
-            } else { typeBio(); }
-        }
-        function typeBio() {
-            if (bioIndex < bioText.length) {
-                document.getElementById("typewriter").innerHTML += bioText.charAt(bioIndex++);
-                setTimeout(typeBio, 100);
-            }
-        }
-        window.onload = typeTitle;
-    </script>
 </body>
 </html>
