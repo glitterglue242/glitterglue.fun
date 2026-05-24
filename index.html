@@ -5,7 +5,6 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>glitterglue | bio</title>
     <style>
-        /* Base Styling */
         * {
             margin: 0;
             padding: 0;
@@ -24,7 +23,6 @@
         .card {
             background: rgba(255, 255, 255, 0.02);
             backdrop-filter: blur(12px);
-            -webkit-backdrop-filter: blur(12px);
             border: 1px solid rgba(255, 255, 255, 0.06);
             border-radius: 20px;
             padding: 35px 25px;
@@ -91,7 +89,7 @@
             font-weight: 600;
         }
 
-        /* Music Player Styling */
+        /* Music Player */
         .music-player {
             background: rgba(255, 255, 255, 0.03);
             border: 1px solid rgba(168, 85, 247, 0.2);
@@ -118,12 +116,7 @@
             margin: 12px 0 8px 0;
             font-size: 15px;
         }
-        button {
-            transition: all 0.2s;
-        }
-        button:hover {
-            transform: scale(1.08);
-        }
+        button:hover { transform: scale(1.08); }
     </style>
 </head>
 <body>
@@ -140,27 +133,21 @@
         </div>
 
         <div class="bio-box">
-            <div class="bio-line">
-                🎵 I love <span class="highlight">drums</span> sm drums where?!
-            </div>
-            <div class="bio-line">
-                🎨 I draw sometimes
-            </div>
-            <div class="bio-line">
-                📌 If you found this via a post it note then hi hello your <span class="highlight">very local</span>
-            </div>
+            <div class="bio-line">🎵 I love <span class="highlight">drums</span> sm drums where?!</div>
+            <div class="bio-line">🎨 I draw sometimes</div>
+            <div class="bio-line">📌 If you found this via a post it note then hi hello your <span class="highlight">very local</span></div>
         </div>
 
-        <!-- ==================== MUSIC PLAYER ==================== -->
+        <!-- MUSIC PLAYER -->
         <div class="music-player">
             <h3>♪ NOW PLAYING</h3>
             
-            <img id="album-art" src="assets/Big POE.jpg" alt="album art">
+            <img id="album-art" src="assets/Big POe.jpg" alt="album art">
             
             <p id="song-title">Big POE</p>
             
             <audio id="audio" style="display: none;">
-                <source src="assets/Big POE.mp3" type="audio/mpeg">
+                <source src="assets/Big Poe.mp3" type="audio/mpeg">
             </audio>
 
             <div style="display: flex; justify-content: center; gap: 15px; margin: 15px 0;">
@@ -171,19 +158,18 @@
 
             <input type="range" id="progress" value="0" max="100" style="width: 100%; accent-color: #c084fc;">
 
-            <!-- Playlist -->
             <div id="playlist" style="margin-top: 20px; text-align: left; font-size: 13px; max-height: 180px; overflow-y: auto;"></div>
         </div>
     </div>
 
     <script>
         const songs = [
-            { title: "Big POE", file: "assets/Big POE.mp3", cover: "assets/Big POE.jpg" },
-            { title: "Billie Jean", file: "assets/Billie Jean.mp3", cover: "assets/Billie Jean.jpg" },
-            { title: "Earrings", file: "assets/Earrings.mp3", cover: "assets/Earrings.jpg" },
-            { title: "Im Bo Yo", file: "assets/Im Bo Yo.mp3", cover: "assets/Im Bo Yo.jpg" },
-            { title: "Last Goodbye", file: "assets/Last Goodbye.mp3", cover: "assets/grace.jpg" },
-            { title: "Lover, You Should've Come Over", file: "assets/Lover, You Should've Come Over.mp3", cover: "assets/grace.jpg" }
+            { title: "Big POE",          file: "assets/Big Poe.mp3",      cover: "assets/Big POe.jpg" },
+            { title: "Billie Jean",      file: "assets/Billie Jean.mp3",  cover: "assets/Billie Jean.jpg" },
+            { title: "Earrings",         file: "assets/Earrings.mp3",     cover: "assets/Earrings.jpg" },
+            { title: "Im Bo Yo",         file: "assets/Im Bo Yo.mp3",     cover: "assets/Im Bo Yo.jpg" },
+            { title: "Last Goodbye",     file: "assets/Last Goodbye.mp3", cover: "assets/grace.jpg" },
+            { title: "Lover, You Should've Come Over", file: "assets/Lover, You Should've come over.mp3", cover: "assets/grace.jpg" }
         ];
 
         let currentSong = 0;
@@ -234,7 +220,6 @@
 
         audio.addEventListener('ended', nextSong);
 
-        // Build clickable playlist
         const playlistDiv = document.getElementById('playlist');
         songs.forEach((song, i) => {
             const div = document.createElement('div');
@@ -249,7 +234,6 @@
             playlistDiv.appendChild(div);
         });
 
-        // Load first song
         loadSong(0);
     </script>
 </body>
