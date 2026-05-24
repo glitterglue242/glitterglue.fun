@@ -12,9 +12,7 @@
             box-sizing: border-box;
             font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
         }
-
         body {
-            /* Deep midnight purple gradient */
             background: radial-gradient(circle at center, #140724 0%, #030107 100%);
             color: #ffffff;
             display: flex;
@@ -23,8 +21,6 @@
             min-height: 100vh;
             padding: 20px;
         }
-
-        /* Glassmorphism Profile Container */
         .card {
             background: rgba(255, 255, 255, 0.02);
             backdrop-filter: blur(12px);
@@ -37,38 +33,26 @@
             text-align: center;
             box-shadow: 0 12px 40px rgba(0, 0, 0, 0.6);
         }
-
-        /* Profile Picture Styling */
-        .pfp-wrapper {
-            position: relative;
-            display: inline-block;
-            margin-bottom: 15px;
-        }
-
         .pfp {
             width: 105px;
             height: 105px;
             border-radius: 50%;
             object-fit: cover;
-            border: 2px solid #a855f7; /* Purple glow accent */
+            border: 2px solid #a855f7;
             box-shadow: 0 0 15px rgba(168, 85, 247, 0.4);
         }
-
-        /* Profile Tags */
         .name {
             font-size: 24px;
             font-weight: 700;
             letter-spacing: -0.3px;
             margin-bottom: 6px;
         }
-
         .meta-tags {
             display: flex;
             justify-content: center;
             gap: 8px;
             margin-bottom: 25px;
         }
-
         .tag {
             background: rgba(168, 85, 247, 0.12);
             border: 1px solid rgba(168, 85, 247, 0.25);
@@ -80,15 +64,13 @@
             text-transform: uppercase;
             letter-spacing: 0.5px;
         }
-
-        /* Bio Box Items */
         .bio-box {
             display: flex;
             flex-direction: column;
             gap: 14px;
             text-align: left;
+            margin-bottom: 30px;
         }
-
         .bio-line {
             background: rgba(255, 255, 255, 0.02);
             border: 1px solid rgba(255, 255, 255, 0.04);
@@ -99,30 +81,59 @@
             color: #e4e4e7;
             transition: transform 0.2s, border-color 0.2s;
         }
-
-        /* Interactive Hover Layout */
         .bio-line:hover {
             transform: scale(1.02);
             border-color: rgba(168, 85, 247, 0.4);
             background: rgba(168, 85, 247, 0.02);
         }
-
         .highlight {
             color: #a855f7;
             font-weight: 600;
         }
+
+        /* Music Player Styling */
+        .music-player {
+            background: rgba(255, 255, 255, 0.03);
+            border: 1px solid rgba(168, 85, 247, 0.2);
+            border-radius: 16px;
+            padding: 20px;
+            margin-top: 25px;
+        }
+        .music-player h3 {
+            color: #c084fc;
+            margin-bottom: 15px;
+            font-size: 15px;
+            letter-spacing: 1px;
+        }
+        #album-art {
+            border-radius: 12px;
+            box-shadow: 0 0 20px rgba(168, 85, 247, 0.4);
+            width: 200px;
+            height: 200px;
+            object-fit: cover;
+        }
+        #song-title {
+            color: #e0e7ff;
+            font-weight: 600;
+            margin: 12px 0 8px 0;
+            font-size: 15px;
+        }
+        button {
+            transition: all 0.2s;
+        }
+        button:hover {
+            transform: scale(1.08);
+        }
     </style>
 </head>
 <body>
-
     <div class="card">
         <div class="pfp-wrapper">
-            <!-- Updated to your working Taylor Swift image URL -->
             <img class="pfp" src="https://kappa.lol/q3cOI9" alt="glitterglue profile">
         </div>
-        
+       
         <div class="name">glitterglue</div>
-        
+       
         <div class="meta-tags">
             <span class="tag">he/him</span>
             <span class="tag">Portsmouth, UK</span>
@@ -139,7 +150,107 @@
                 📌 If you found this via a post it note then hi hello your <span class="highlight">very local</span>
             </div>
         </div>
+
+        <!-- ==================== MUSIC PLAYER ==================== -->
+        <div class="music-player">
+            <h3>♪ NOW PLAYING</h3>
+            
+            <img id="album-art" src="assets/Big POE.jpg" alt="album art">
+            
+            <p id="song-title">Big POE</p>
+            
+            <audio id="audio" style="display: none;">
+                <source src="assets/Big POE.mp3" type="audio/mpeg">
+            </audio>
+
+            <div style="display: flex; justify-content: center; gap: 15px; margin: 15px 0;">
+                <button onclick="prevSong()" style="background: #2a1b3d; color: #c084fc; border: none; width: 48px; height: 48px; border-radius: 50%; font-size: 18px;">⫻</button>
+                <button id="play-btn" onclick="togglePlay()" style="background: #a855f7; color: black; border: none; width: 65px; height: 65px; border-radius: 50%; font-size: 26px;">▶</button>
+                <button onclick="nextSong()" style="background: #2a1b3d; color: #c084fc; border: none; width: 48px; height: 48px; border-radius: 50%; font-size: 18px;">⫻</button>
+            </div>
+
+            <input type="range" id="progress" value="0" max="100" style="width: 100%; accent-color: #c084fc;">
+
+            <!-- Playlist -->
+            <div id="playlist" style="margin-top: 20px; text-align: left; font-size: 13px; max-height: 180px; overflow-y: auto;"></div>
+        </div>
     </div>
 
+    <script>
+        const songs = [
+            { title: "Big POE", file: "assets/Big POE.mp3", cover: "assets/Big POE.jpg" },
+            { title: "Billie Jean", file: "assets/Billie Jean.mp3", cover: "assets/Billie Jean.jpg" },
+            { title: "Earrings", file: "assets/Earrings.mp3", cover: "assets/Earrings.jpg" },
+            { title: "Im Bo Yo", file: "assets/Im Bo Yo.mp3", cover: "assets/Im Bo Yo.jpg" },
+            { title: "Last Goodbye", file: "assets/Last Goodbye.mp3", cover: "assets/grace.jpg" },
+            { title: "Lover, You Should've Come Over", file: "assets/Lover, You Should've Come Over.mp3", cover: "assets/grace.jpg" }
+        ];
+
+        let currentSong = 0;
+        const audio = document.getElementById('audio');
+        const playBtn = document.getElementById('play-btn');
+        const albumArt = document.getElementById('album-art');
+        const songTitle = document.getElementById('song-title');
+        const progress = document.getElementById('progress');
+
+        function loadSong(index) {
+            audio.src = songs[index].file;
+            albumArt.src = songs[index].cover;
+            songTitle.textContent = songs[index].title;
+            progress.value = 0;
+        }
+
+        function togglePlay() {
+            if (audio.paused) {
+                audio.play();
+                playBtn.textContent = '❚❚';
+            } else {
+                audio.pause();
+                playBtn.textContent = '▶';
+            }
+        }
+
+        function nextSong() {
+            currentSong = (currentSong + 1) % songs.length;
+            loadSong(currentSong);
+            audio.play();
+            playBtn.textContent = '❚❚';
+        }
+
+        function prevSong() {
+            currentSong = (currentSong - 1 + songs.length) % songs.length;
+            loadSong(currentSong);
+            audio.play();
+            playBtn.textContent = '❚❚';
+        }
+
+        audio.addEventListener('timeupdate', () => {
+            if (audio.duration) progress.value = (audio.currentTime / audio.duration) * 100;
+        });
+
+        progress.addEventListener('input', () => {
+            audio.currentTime = (progress.value / 100) * audio.duration;
+        });
+
+        audio.addEventListener('ended', nextSong);
+
+        // Build clickable playlist
+        const playlistDiv = document.getElementById('playlist');
+        songs.forEach((song, i) => {
+            const div = document.createElement('div');
+            div.style = "padding: 8px 10px; cursor: pointer; border-radius: 6px;";
+            div.textContent = song.title;
+            div.onclick = () => {
+                currentSong = i;
+                loadSong(i);
+                audio.play();
+                playBtn.textContent = '❚❚';
+            };
+            playlistDiv.appendChild(div);
+        });
+
+        // Load first song
+        loadSong(0);
+    </script>
 </body>
 </html>
