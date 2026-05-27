@@ -67,7 +67,7 @@
             flex-direction: column;
             gap: 14px;
             text-align: left;
-            margin-bottom: 30px;
+            margin-bottom: 25px;
         }
         .bio-line {
             background: rgba(255, 255, 255, 0.02);
@@ -77,12 +77,6 @@
             font-size: 13.5px;
             line-height: 1.5;
             color: #e4e4e7;
-            transition: transform 0.2s, border-color 0.2s;
-        }
-        .bio-line:hover {
-            transform: scale(1.02);
-            border-color: rgba(168, 85, 247, 0.4);
-            background: rgba(168, 85, 247, 0.02);
         }
         .highlight {
             color: #a855f7;
@@ -95,7 +89,7 @@
             border: 1px solid rgba(168, 85, 247, 0.2);
             border-radius: 16px;
             padding: 20px;
-            margin-top: 25px;
+            margin-bottom: 20px;
         }
         .music-player h3 {
             color: #c084fc;
@@ -105,18 +99,26 @@
         }
         #album-art {
             border-radius: 12px;
-            box-shadow: 0 0 20px rgba(168, 85, 247, 0.4);
-            width: 200px;
-            height: 200px;
+            box-shadow: 0 0 30px rgba(168, 85, 247, 0.6);
+            width: 210px;
+            height: 210px;
             object-fit: cover;
         }
-        #song-title {
-            color: #e0e7ff;
-            font-weight: 600;
-            margin: 12px 0 8px 0;
-            font-size: 15px;
+
+        /* Five Things Rotator */
+        .rotating-things {
+            background: rgba(255, 255, 255, 0.03);
+            border: 1px solid rgba(168, 85, 247, 0.2);
+            border-radius: 16px;
+            padding: 20px;
+            min-height: 70px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            font-size: 14.5px;
+            color: #c4b5fd;
         }
-        button:hover { transform: scale(1.08); }
     </style>
 </head>
 <body>
@@ -142,27 +144,33 @@
         <div class="music-player">
             <h3>♪ NOW PLAYING</h3>
             
-            <img id="album-art" src="assets/Big POe.jpg" alt="album art">
+            <img id="album-art" src="assets/Big Poe.jpg" alt="album art">
             
-            <p id="song-title">Big POE</p>
+            <p id="song-title" style="font-size: 16px; margin: 12px 0;">Big POE</p>
             
             <audio id="audio" style="display: none;">
                 <source src="assets/Big Poe.mp3" type="audio/mpeg">
             </audio>
 
-            <div style="display: flex; justify-content: center; gap: 15px; margin: 15px 0;">
-                <button onclick="prevSong()" style="background: #2a1b3d; color: #c084fc; border: none; width: 48px; height: 48px; border-radius: 50%; font-size: 18px;">⫻</button>
-                <button id="play-btn" onclick="togglePlay()" style="background: #a855f7; color: black; border: none; width: 65px; height: 65px; border-radius: 50%; font-size: 26px;">▶</button>
-                <button onclick="nextSong()" style="background: #2a1b3d; color: #c084fc; border: none; width: 48px; height: 48px; border-radius: 50%; font-size: 18px;">⫻</button>
+            <div style="display: flex; justify-content: center; align-items: center; gap: 20px; margin: 15px 0;">
+                <button onclick="prevSong()" style="background: rgba(255,255,255,0.1); color: #c084fc; border: none; width: 45px; height: 45px; border-radius: 50%; font-size: 20px;">⫻</button>
+                <button id="play-btn" onclick="togglePlay()" style="background: #a855f7; color: white; border: none; width: 72px; height: 72px; border-radius: 50%; font-size: 32px; box-shadow: 0 0 25px rgba(168, 85, 247, 0.5);">▶</button>
+                <button onclick="nextSong()" style="background: rgba(255,255,255,0.1); color: #c084fc; border: none; width: 45px; height: 45px; border-radius: 50%; font-size: 20px;">⫻</button>
             </div>
 
             <input type="range" id="progress" value="0" max="100" style="width: 100%; accent-color: #c084fc;">
 
-            <div id="playlist" style="margin-top: 20px; text-align: left; font-size: 13px; max-height: 180px; overflow-y: auto;"></div>
+            <div id="playlist" style="margin-top: 20px; text-align: left; font-size: 13.5px; max-height: 190px; overflow-y: auto;"></div>
+        </div>
+
+        <!-- FIVE THINGS - Auto Changes Every 5 Seconds -->
+        <div class="rotating-things">
+            <div id="rotating-text"></div>
         </div>
     </div>
 
     <script>
+        // === MUSIC PLAYER CODE ===
         const songs = [
             { title: "Big POE",          file: "assets/Big Poe.mp3",      cover: "assets/Big POe.jpg" },
             { title: "Billie Jean",      file: "assets/Billie Jean.mp3",  cover: "assets/Billie Jean.jpg" },
@@ -220,11 +228,14 @@
 
         audio.addEventListener('ended', nextSong);
 
+        // Build playlist
         const playlistDiv = document.getElementById('playlist');
         songs.forEach((song, i) => {
             const div = document.createElement('div');
-            div.style = "padding: 8px 10px; cursor: pointer; border-radius: 6px;";
+            div.style = "padding: 9px 12px; cursor: pointer; border-radius: 8px; transition: 0.2s;";
             div.textContent = song.title;
+            div.onmouseover = () => div.style.background = "rgba(168, 85, 247, 0.15)";
+            div.onmouseout = () => div.style.background = "";
             div.onclick = () => {
                 currentSong = i;
                 loadSong(i);
@@ -235,6 +246,32 @@
         });
 
         loadSong(0);
+
+        // === FIVE THINGS ROTATOR ===
+        const fiveThings = [
+            "Currently obsessed with learning new drum patterns",
+            "Always down for a late night walk by the sea",
+            "Trying to get better at digital art",
+            "Love finding weird music on Bandcamp",
+            "Local to Portsmouth — say hi if you see me 👀"
+        ];
+
+        let currentThing = 0;
+        const rotator = document.getElementById('rotating-text');
+
+        function changeThing() {
+            rotator.style.opacity = 0;
+
+            setTimeout(() => {
+                currentThing = (currentThing + 1) % fiveThings.length;
+                rotator.textContent = fiveThings[currentThing];
+                rotator.style.opacity = 1;
+            }, 600);
+        }
+
+        // Start rotator
+        rotator.textContent = fiveThings[0];
+        setInterval(changeThing, 5000);   // Change every 5 seconds
     </script>
 </body>
 </html>
