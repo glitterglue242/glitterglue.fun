@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>glitterglue | bio</title>
+    <title>glitterglue</title>
     <style>
         * {
             margin: 0;
@@ -12,8 +12,8 @@
             font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
         }
         body {
-            background: radial-gradient(circle at center, #140724 0%, #030107 100%);
-            color: #ffffff;
+            background: #0a0a0a;
+            color: #e0e0e0;
             display: flex;
             justify-content: center;
             align-items: center;
@@ -21,162 +21,183 @@
             padding: 20px;
         }
         .card {
-            background: rgba(255, 255, 255, 0.02);
-            backdrop-filter: blur(12px);
-            border: 1px solid rgba(255, 255, 255, 0.06);
+            background: #111;
+            border: 1px solid #222;
             border-radius: 20px;
             padding: 35px 25px;
             width: 100%;
-            max-width: 380px;
-            text-align: center;
-            box-shadow: 0 12px 40px rgba(0, 0, 0, 0.6);
+            max-width: 400px;
+            box-shadow: 0 15px 40px rgba(0, 0, 0, 0.8);
         }
         .pfp {
-            width: 105px;
-            height: 105px;
+            width: 110px;
+            height: 110px;
             border-radius: 50%;
             object-fit: cover;
-            border: 2px solid #a855f7;
-            box-shadow: 0 0 15px rgba(168, 85, 247, 0.4);
+            border: 3px solid #a855f7;
+            box-shadow: 0 0 30px rgba(168, 85, 247, 0.5);
+            margin-bottom: 12px;
         }
         .name {
-            font-size: 24px;
+            font-size: 26px;
             font-weight: 700;
-            letter-spacing: -0.3px;
-            margin-bottom: 6px;
+            margin-bottom: 4px;
+        }
+        .subtitle {
+            color: #888;
+            margin-bottom: 20px;
+            font-size: 15px;
         }
         .meta-tags {
             display: flex;
             justify-content: center;
-            gap: 8px;
+            gap: 10px;
             margin-bottom: 25px;
+            flex-wrap: wrap;
         }
         .tag {
-            background: rgba(168, 85, 247, 0.12);
-            border: 1px solid rgba(168, 85, 247, 0.25);
-            color: #d8b4fe;
-            padding: 4px 10px;
-            border-radius: 12px;
-            font-size: 11px;
-            font-weight: 600;
-            text-transform: uppercase;
-            letter-spacing: 0.5px;
-        }
-        .bio-box {
-            display: flex;
-            flex-direction: column;
-            gap: 14px;
-            text-align: left;
-            margin-bottom: 25px;
-        }
-        .bio-line {
-            background: rgba(255, 255, 255, 0.02);
-            border: 1px solid rgba(255, 255, 255, 0.04);
-            border-radius: 10px;
-            padding: 14px;
-            font-size: 13.5px;
-            line-height: 1.5;
-            color: #e4e4e7;
-        }
-        .highlight {
-            color: #a855f7;
-            font-weight: 600;
+            background: rgba(168, 85, 247, 0.15);
+            border: 1px solid rgba(168, 85, 247, 0.4);
+            color: #c4b5fd;
+            padding: 5px 14px;
+            border-radius: 20px;
+            font-size: 13px;
         }
 
         /* Music Player */
         .music-player {
-            background: rgba(255, 255, 255, 0.03);
-            border: 1px solid rgba(168, 85, 247, 0.2);
+            background: #1a1a1a;
             border-radius: 16px;
             padding: 20px;
             margin-bottom: 20px;
+            border: 1px solid #222;
         }
-        .music-player h3 {
-            color: #c084fc;
-            margin-bottom: 15px;
-            font-size: 15px;
-            letter-spacing: 1px;
+        .now-playing {
+            font-size: 13px;
+            color: #a1a1aa;
+            margin-bottom: 12px;
+            text-align: center;
         }
         #album-art {
+            width: 100%;
+            max-width: 260px;
             border-radius: 12px;
-            box-shadow: 0 0 30px rgba(168, 85, 247, 0.6);
-            width: 210px;
-            height: 210px;
-            object-fit: cover;
+            margin: 0 auto 15px;
+            display: block;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.7);
         }
-
-        /* Five Things Rotator */
-        .rotating-things {
-            background: rgba(255, 255, 255, 0.03);
-            border: 1px solid rgba(168, 85, 247, 0.2);
-            border-radius: 16px;
-            padding: 20px;
-            min-height: 70px;
+        #song-title {
+            font-size: 17px;
+            font-weight: 600;
+            text-align: center;
+            margin-bottom: 4px;
+        }
+        .controls {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 25px;
+            margin: 18px 0;
+        }
+        button {
+            background: none;
+            border: none;
+            color: #c4b5fd;
+            font-size: 26px;
+            cursor: pointer;
+        }
+        #play-btn {
+            background: #a855f7;
+            color: white;
+            width: 62px;
+            height: 62px;
+            border-radius: 50%;
+            font-size: 30px;
             display: flex;
             align-items: center;
             justify-content: center;
-            text-align: center;
-            font-size: 14.5px;
+            box-shadow: 0 0 25px rgba(168, 85, 247, 0.6);
+        }
+        input[type="range"] {
+            width: 100%;
+            accent-color: #a855f7;
+        }
+
+        /* Playlist */
+        #playlist div {
+            padding: 9px 0;
+            cursor: pointer;
+            border-bottom: 1px solid #222;
+        }
+        #playlist div:hover {
             color: #c4b5fd;
+        }
+
+        /* Rotating Facts */
+        .rotating-things {
+            background: #1a1a1a;
+            border-radius: 16px;
+            padding: 20px;
+            min-height: 75px;
+            border: 1px solid #222;
+            color: #c4b5fd;
+            font-size: 15px;
+            text-align: center;
+            display: flex;
+            align-items: center;
+            justify-content: center;
         }
     </style>
 </head>
 <body>
     <div class="card">
-        <div class="pfp-wrapper">
-            <img class="pfp" src="https://kappa.lol/q3cOI9" alt="glitterglue profile">
-        </div>
-       
+        <img class="pfp" src="https://kappa.lol/q3cOI9" alt="glitterglue">
+
         <div class="name">glitterglue</div>
-       
+        <div class="subtitle">@glitterglue.fun</div>
+
         <div class="meta-tags">
             <span class="tag">he/him</span>
             <span class="tag">Portsmouth, UK</span>
         </div>
 
-        <div class="bio-box">
-            <div class="bio-line">🎵 I love <span class="highlight">drums</span> sm drums where?!</div>
-            <div class="bio-line">🎨 I draw sometimes</div>
-            <div class="bio-line">📌 If you found this via a post it note then hi hello your <span class="highlight">very local</span></div>
-        </div>
-
         <!-- MUSIC PLAYER -->
         <div class="music-player">
-            <h3>♪ NOW PLAYING</h3>
+            <div class="now-playing">♪ NOW PLAYING</div>
             
             <img id="album-art" src="assets/Big Poe.jpg" alt="album art">
             
-            <p id="song-title" style="font-size: 16px; margin: 12px 0;">Big POE</p>
+            <p id="song-title">Big POE</p>
             
             <audio id="audio" style="display: none;">
                 <source src="assets/Big Poe.mp3" type="audio/mpeg">
             </audio>
 
-            <div style="display: flex; justify-content: center; align-items: center; gap: 20px; margin: 15px 0;">
-                <button onclick="prevSong()" style="background: rgba(255,255,255,0.1); color: #c084fc; border: none; width: 45px; height: 45px; border-radius: 50%; font-size: 20px;">⫻</button>
-                <button id="play-btn" onclick="togglePlay()" style="background: #a855f7; color: white; border: none; width: 72px; height: 72px; border-radius: 50%; font-size: 32px; box-shadow: 0 0 25px rgba(168, 85, 247, 0.5);">▶</button>
-                <button onclick="nextSong()" style="background: rgba(255,255,255,0.1); color: #c084fc; border: none; width: 45px; height: 45px; border-radius: 50%; font-size: 20px;">⫻</button>
+            <div class="controls">
+                <button onclick="prevSong()">⫻</button>
+                <button id="play-btn" onclick="togglePlay()">▶</button>
+                <button onclick="nextSong()">⫻</button>
             </div>
 
-            <input type="range" id="progress" value="0" max="100" style="width: 100%; accent-color: #c084fc;">
+            <input type="range" id="progress" value="0" max="100">
 
-            <div id="playlist" style="margin-top: 20px; text-align: left; font-size: 13.5px; max-height: 190px; overflow-y: auto;"></div>
+            <div id="playlist" style="margin-top: 20px; text-align: left; font-size: 14px;"></div>
         </div>
 
-        <!-- FIVE THINGS - Auto Changes Every 5 Seconds -->
+        <!-- FIVE THINGS ROTATOR -->
         <div class="rotating-things">
             <div id="rotating-text"></div>
         </div>
     </div>
 
     <script>
-        // === MUSIC PLAYER CODE ===
+        // Music Player
         const songs = [
-            { title: "Big POE",          file: "assets/Big Poe.mp3",      cover: "assets/Big POe.jpg" },
-            { title: "Billie Jean",      file: "assets/Billie Jean.mp3",  cover: "assets/Billie Jean.jpg" },
-            { title: "Earrings",         file: "assets/Earrings.mp3",     cover: "assets/Earrings.jpg" },
-            { title: "Im Bo Yo",         file: "assets/Im Bo Yo.mp3",     cover: "assets/Im Bo Yo.jpg" },
-            { title: "Last Goodbye",     file: "assets/Last Goodbye.mp3", cover: "assets/grace.jpg" },
+            { title: "Big POE", file: "assets/Big Poe.mp3", cover: "assets/Big POe.jpg" },
+            { title: "Billie Jean", file: "assets/Billie Jean.mp3", cover: "assets/Billie Jean.jpg" },
+            { title: "Earrings", file: "assets/Earrings.mp3", cover: "assets/Earrings.jpg" },
+            { title: "Im Bo Yo", file: "assets/Im Bo Yo.mp3", cover: "assets/Im Bo Yo.jpg" },
+            { title: "Last Goodbye", file: "assets/Last Goodbye.mp3", cover: "assets/grace.jpg" },
             { title: "Lover, You Should've Come Over", file: "assets/Lover, You Should've come over.mp3", cover: "assets/grace.jpg" }
         ];
 
@@ -228,14 +249,11 @@
 
         audio.addEventListener('ended', nextSong);
 
-        // Build playlist
+        // Playlist
         const playlistDiv = document.getElementById('playlist');
         songs.forEach((song, i) => {
             const div = document.createElement('div');
-            div.style = "padding: 9px 12px; cursor: pointer; border-radius: 8px; transition: 0.2s;";
             div.textContent = song.title;
-            div.onmouseover = () => div.style.background = "rgba(168, 85, 247, 0.15)";
-            div.onmouseout = () => div.style.background = "";
             div.onclick = () => {
                 currentSong = i;
                 loadSong(i);
@@ -247,7 +265,7 @@
 
         loadSong(0);
 
-        // === FIVE THINGS ROTATOR ===
+        // Rotating Facts
         const fiveThings = [
             "I love posters and money",
             "I want to be one of the greats - Andrew Nieman",
@@ -261,7 +279,6 @@
 
         function changeThing() {
             rotator.style.opacity = 0;
-
             setTimeout(() => {
                 currentThing = (currentThing + 1) % fiveThings.length;
                 rotator.textContent = fiveThings[currentThing];
@@ -269,9 +286,8 @@
             }, 600);
         }
 
-        // Start rotator
         rotator.textContent = fiveThings[0];
-        setInterval(changeThing, 5000);   // Change every 5 seconds
+        setInterval(changeThing, 5000);
     </script>
 </body>
 </html>
