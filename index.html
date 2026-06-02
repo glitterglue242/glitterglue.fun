@@ -47,7 +47,7 @@
             line-height: 1.5;
             margin-bottom: 24px;
         }
-
+        /* Mini Music Player */
         .now-playing {
             background: #161320;
             border-radius: 14px;
@@ -90,7 +90,7 @@
             border-radius: 50%;
             font-size: 18px;
         }
-
+        /* Song List */
         .song-list {
             background: #161320;
             border-radius: 14px;
@@ -105,7 +105,7 @@
         .song-list div:hover {
             background: #2a2540;
         }
-
+        /* Rotating Fact */
         .fact {
             background: #161320;
             border-radius: 14px;
@@ -123,14 +123,12 @@
 <body>
     <div class="card">
         <img class="pfp" src="https://kappa.lol/q3cOI9" alt="pfp">
-
         <div class="name">glitterglue</div>
         <div class="handle">@glitterglue.fun</div>
-        
+       
         <div class="bio">
             I love drums sm • I draw sometimes • Portsmouth local
         </div>
-
         <!-- Mini Player -->
         <div class="now-playing">
             <img id="album-art" class="album-art" src="assets/Big Poe.jpg">
@@ -144,16 +142,12 @@
                 <button onclick="nextSong()">⫻</button>
             </div>
         </div>
-
         <!-- Playlist -->
         <div class="song-list" id="playlist"></div>
-
         <!-- Rotating Fact -->
         <div class="fact" id="rotating-text"></div>
     </div>
-
     <audio id="audio" style="display:none"></audio>
-
     <script>
         const songs = [
             { title: "Big POE", file: "assets/Big Poe.mp3", cover: "assets/Big POe.jpg" },
@@ -162,21 +156,18 @@
             { title: "Im Bo Yo", file: "assets/Im Bo Yo.mp3", cover: "assets/Im Bo Yo.jpg" },
             { title: "Last Goodbye", file: "assets/Last Goodbye.mp3", cover: "assets/grace.jpg" },
             { title: "Lover, You Should've Come Over", file: "assets/Lover, You Should've come over.mp3", cover: "assets/grace.jpg" },
-            { title: "Demo 1", file: "assets/demo1.mp3", cover: "assets/freaky.png" }   // ← New song added
+            { title: "Demo 1", file: "assets/demo1.mp3", cover: "assets/freaky.png" }   <!-- New Song -->
         ];
-
         let currentSong = 0;
         const audio = document.getElementById('audio');
         const playBtn = document.getElementById('play-main');
         const currentSongEl = document.getElementById('current-song');
         const albumArt = document.getElementById('album-art');
-
         function loadSong(index) {
             audio.src = songs[index].file;
             albumArt.src = songs[index].cover;
             currentSongEl.textContent = songs[index].title;
         }
-
         function togglePlay() {
             if (audio.paused) {
                 audio.play();
@@ -186,23 +177,19 @@
                 playBtn.textContent = '▶';
             }
         }
-
         function nextSong() {
             currentSong = (currentSong + 1) % songs.length;
             loadSong(currentSong);
             audio.play();
             playBtn.textContent = '❚❚';
         }
-
         function prevSong() {
             currentSong = (currentSong - 1 + songs.length) % songs.length;
             loadSong(currentSong);
             audio.play();
             playBtn.textContent = '❚❚';
         }
-
         audio.addEventListener('ended', nextSong);
-
         // Build Playlist
         const playlistEl = document.getElementById('playlist');
         songs.forEach((song, i) => {
@@ -216,9 +203,7 @@
             };
             playlistEl.appendChild(item);
         });
-
         loadSong(0);
-
         // Rotating Facts
         const facts = [
             "I love posters and money",
@@ -227,10 +212,8 @@
             "Jeff Buckley I love Jeff Buckley Omg Jeff Buckley Where?!",
             "i fw things"
         ];
-
         let factIndex = 0;
         const factEl = document.getElementById('rotating-text');
-
         function rotateFact() {
             factEl.style.opacity = 0;
             setTimeout(() => {
@@ -239,7 +222,6 @@
                 factEl.style.opacity = 1;
             }, 600);
         }
-
         factEl.textContent = facts[0];
         setInterval(rotateFact, 5000);
     </script>
