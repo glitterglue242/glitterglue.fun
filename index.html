@@ -1,249 +1,310 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>glitterglue</title>
-    <style>
-        * { margin: 0; padding: 0; box-sizing: border-box; }
-        body {
-            background: #0a0a0a;
-            font-family: 'Segoe UI', sans-serif;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            min-height: 100vh;
-        }
-        .card {
-            background: #1c1829;
-            width: 100%;
-            max-width: 360px;
-            border-radius: 28px;
-            padding: 32px 24px;
-            text-align: center;
-            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.8);
-        }
-        .pfp {
-            width: 130px;
-            height: 130px;
-            border-radius: 50%;
-            border: 5px solid #a855f7;
-            box-shadow: 0 0 40px rgba(168, 85, 247, 0.7);
-            margin: 0 auto 14px;
-        }
-        .name {
-            font-size: 26px;
-            font-weight: 700;
-            color: #c084fc;
-            margin-bottom: 4px;
-        }
-        .handle {
-            color: #b4a3d8;
-            margin-bottom: 20px;
-        }
-        .bio {
-            color: #d1c4ff;
-            font-size: 14.5px;
-            line-height: 1.5;
-            margin-bottom: 24px;
-        }
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>glitterglue</title>
 
-        /* Mini Music Player */
-        .now-playing {
-            background: #161320;
-            border-radius: 14px;
-            padding: 10px 12px;
-            display: flex;
-            align-items: center;
-            gap: 12px;
-            margin-bottom: 16px;
-        }
-        .album-art {
-            width: 48px;
-            height: 48px;
-            border-radius: 8px;
-            object-fit: cover;
-        }
-        .song-details {
-            flex: 1;
-            text-align: left;
-        }
-        .song-name {
-            font-weight: 600;
-            font-size: 15px;
-        }
-        .now-text {
-            font-size: 12.5px;
-            color: #a1a1aa;
-        }
-        .player-controls button {
-            background: none;
-            border: none;
-            color: #c4b5fd;
-            font-size: 24px;
-            margin-left: 8px;
-        }
-        #play-main {
-            background: #a855f7;
-            color: white;
-            width: 38px;
-            height: 38px;
-            border-radius: 50%;
-            font-size: 18px;
-        }
+<style>
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+    font-family:system-ui, sans-serif;
+}
 
-        /* Song List */
-        .song-list {
-            background: #161320;
-            border-radius: 14px;
-            padding: 8px 0;
-            margin-bottom: 16px;
-        }
-        .song-list div {
-            padding: 10px 16px;
-            text-align: left;
-            cursor: pointer;
-        }
-        .song-list div:hover {
-            background: #2a2540;
-        }
+body{
+    height:100vh;
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    background:#000;
+    overflow:hidden;
+    color:white;
+}
 
-        /* Rotating Fact */
-        .fact {
-            background: #161320;
-            border-radius: 14px;
-            padding: 16px;
-            color: #c4b5fd;
-            font-size: 14.5px;
-            min-height: 56px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            text-align: center;
-        }
-    </style>
+/* rain bg */
+body::before{
+    content:"";
+    position:absolute;
+    inset:0;
+    background:
+        repeating-linear-gradient(
+            to bottom,
+            rgba(255,255,255,0.08) 0px,
+            rgba(255,255,255,0.08) 2px,
+            transparent 2px,
+            transparent 12px
+        );
+    animation:rain 0.6s linear infinite;
+    opacity:0.25;
+}
+
+@keyframes rain{
+    from{transform:translateY(-20px);}
+    to{transform:translateY(20px);}
+}
+
+/* glow orb bg like screenshot */
+.glow{
+    position:absolute;
+    width:600px;
+    height:600px;
+    background:radial-gradient(circle, rgba(255,0,255,0.15), transparent 60%);
+    filter:blur(40px);
+}
+
+/* main card */
+.profile{
+    width:360px;
+    padding:20px;
+    border-radius:20px;
+    background:rgba(15,15,15,0.85);
+    border:1px solid #222;
+    backdrop-filter:blur(12px);
+    box-shadow:0 0 25px rgba(255,0,255,0.08);
+    position:relative;
+    z-index:2;
+    transition:0.3s;
+}
+
+.profile:hover{
+    box-shadow:0 0 35px rgba(255,0,255,0.25);
+    transform:translateY(-3px);
+}
+
+/* top profile */
+.header{
+    display:flex;
+    flex-direction:column;
+    align-items:center;
+    text-align:center;
+    gap:8px;
+}
+
+.pfp{
+    width:70px;
+    height:70px;
+    border-radius:50%;
+    border:2px solid #ff3df2;
+    box-shadow:0 0 20px #ff00ff55;
+}
+
+.name{
+    font-size:22px;
+    font-weight:800;
+    color:#ff3df2;
+}
+
+.tag{
+    font-size:12px;
+    color:#888;
+}
+
+.bio{
+    font-size:13px;
+    color:#bbb;
+    margin-top:8px;
+}
+
+/* music box */
+.music{
+    margin-top:15px;
+    display:flex;
+    align-items:center;
+    gap:10px;
+    background:#111;
+    padding:10px;
+    border-radius:14px;
+    border:1px solid #222;
+}
+
+.cover{
+    width:45px;
+    height:45px;
+    border-radius:10px;
+}
+
+.song{
+    flex:1;
+}
+
+.song-title{
+    font-size:13px;
+    font-weight:600;
+}
+
+.controls button{
+    background:none;
+    border:none;
+    color:#ff00ff;
+    cursor:pointer;
+    font-size:14px;
+}
+
+#play-btn-mini{
+    background:#ff00ff;
+    color:white;
+    width:28px;
+    height:28px;
+    border-radius:50%;
+}
+
+/* playlist */
+.playlist{
+    margin-top:10px;
+    max-height:120px;
+    overflow-y:auto;
+}
+
+.playlist div{
+    padding:6px;
+    font-size:12px;
+    border-radius:8px;
+    color:#aaa;
+    cursor:pointer;
+}
+
+.playlist div:hover{
+    background:#1a1a1a;
+    color:#ff3df2;
+}
+
+/* icons row */
+.icons{
+    display:flex;
+    justify-content:center;
+    gap:14px;
+    margin-top:12px;
+    font-size:18px;
+    color:#ff00ff;
+}
+
+.icons span{
+    cursor:pointer;
+    transition:0.2s;
+}
+
+.icons span:hover{
+    transform:scale(1.2);
+    text-shadow:0 0 10px #ff00ff;
+}
+
+/* views pill */
+.views{
+    position:absolute;
+    bottom:10px;
+    right:12px;
+    font-size:11px;
+    color:#777;
+    background:#111;
+    padding:4px 8px;
+    border-radius:20px;
+    border:1px solid #222;
+}
+</style>
 </head>
+
 <body>
-    <div class="card">
-        <img class="pfp" src="https://kappa.lol/q3cOI9" alt="pfp">
+
+<div class="glow"></div>
+
+<div class="profile">
+
+    <div class="header">
+        <img class="pfp" src="https://kappa.lol/q3cOI9">
         <div class="name">glitterglue</div>
-        <div class="handle">@glitterglue.fun</div>
-       
-        <div class="bio">
-            I love drums sm • I draw sometimes • Portsmouth local
-        </div>
-
-        <!-- Mini Player -->
-        <div class="now-playing">
-            <img id="album-art" class="album-art" src="assets/Big Poe.jpg">
-            <div class="song-details">
-                <div id="current-song" class="song-name">Big POE</div>
-                <div class="now-text">Now Playing</div>
-            </div>
-            <div class="player-controls">
-                <button onclick="prevSong()">⫻</button>
-                <button id="play-main" onclick="togglePlay()">▶</button>
-                <button onclick="nextSong()">⫻</button>
-            </div>
-        </div>
-
-        <!-- Playlist -->
-        <div class="song-list" id="playlist"></div>
-
-        <!-- Rotating Fact -->
-        <div class="fact" id="rotating-text"></div>
+        <div class="tag">@glitterglue</div>
+        <div class="bio">learning C# • official music prodigy</div>
     </div>
 
-    <audio id="audio" style="display:none"></audio>
+    <div class="music">
+        <img id="album-small" class="cover" src="assets/Big Poe.jpg">
 
-    <script>
-        const songs = [
-            { title: "Big POE", file: "assets/Big Poe.mp3", cover: "assets/Big POe.jpg" },
-            { title: "Billie Jean", file: "assets/Billie Jean.mp3", cover: "assets/Billie Jean.jpg" },
-            { title: "Earrings", file: "assets/Earrings.mp3", cover: "assets/Earrings.jpg" },
-            { title: "Im Bo Yo", file: "assets/Im Bo Yo.mp3", cover: "assets/Im Bo Yo.jpg" },
-            { title: "Last Goodbye", file: "assets/Last Goodbye.mp3", cover: "assets/grace.jpg" },
-            { title: "Lover, You Should've Come Over", file: "assets/Lover, You Should've come over.mp3", cover: "assets/grace.jpg" },
-            { title: "Demo 1", file: "assets/demo1.mp3", cover: "assets/freaky.png" }
-        ];
+        <div class="song">
+            <div id="mini-title" class="song-title">Big POE</div>
+        </div>
 
-        let currentSong = 0;
-        const audio = document.getElementById('audio');
-        const playBtn = document.getElementById('play-main');
-        const currentSongEl = document.getElementById('current-song');
-        const albumArt = document.getElementById('album-art');
+        <div class="controls">
+            <button onclick="prevSong()">⫷</button>
+            <button id="play-btn-mini" onclick="togglePlay()">▶</button>
+            <button onclick="nextSong()">⫸</button>
+        </div>
+    </div>
 
-        function loadSong(index) {
-            audio.src = songs[index].file;
-            albumArt.src = songs[index].cover;
-            currentSongEl.textContent = songs[index].title;
-        }
+    <div class="playlist" id="playlist"></div>
 
-        function togglePlay() {
-            if (audio.paused) {
-                audio.play();
-                playBtn.textContent = '❚❚';
-            } else {
-                audio.pause();
-                playBtn.textContent = '▶';
-            }
-        }
+    <div class="views">👁 135</div>
+</div>
 
-        function nextSong() {
-            currentSong = (currentSong + 1) % songs.length;
-            loadSong(currentSong);
-            audio.play();
-            playBtn.textContent = '❚❚';
-        }
+<audio id="audio" style="display:none;">
+    <source src="assets/Big Poe.mp3">
+</audio>
 
-        function prevSong() {
-            currentSong = (currentSong - 1 + songs.length) % songs.length;
-            loadSong(currentSong);
-            audio.play();
-            playBtn.textContent = '❚❚';
-        }
+<script>
+const songs=[
+    {title:"Big Poe",file:"assets/Big Poe.mp3",cover:"assets/Big POe.jpg"},
+    {title:"Billie Jean",file:"assets/Billie Jean.mp3",cover:"assets/Billie Jean.jpg"},
+    {title:"Earrings",file:"assets/Earrings.mp3",cover:"assets/Earrings.jpg"},
+    {title:"Im Bo Yo",file:"assets/Im Bo Yo.mp3",cover:"assets/Im Bo Yo.jpg"},
+    {title:"Last Goodbye",file:"assets/Last Goodbye.mp3",cover:"assets/grace.jpg"},
+    {title:"Lover You Should've Come Over",file:"assets/Lover.mp3",cover:"assets/grace.jpg"},
 
-        audio.addEventListener('ended', nextSong);
+    {title:"Demo 1",file:"assets/demo1.mp3",cover:"assets/freaky.png"}
+];
 
-        // Build Playlist
-        const playlistEl = document.getElementById('playlist');
-        songs.forEach((song, i) => {
-            const item = document.createElement('div');
-            item.textContent = song.title;
-            item.onclick = () => {
-                currentSong = i;
-                loadSong(i);
-                audio.play();
-                playBtn.textContent = '❚❚';
-            };
-            playlistEl.appendChild(item);
-        });
+let currentSong=0;
+const audio=document.getElementById("audio");
+const playBtn=document.getElementById("play-btn-mini");
+const album=document.getElementById("album-small");
+const title=document.getElementById("mini-title");
 
-        loadSong(0);
+function load(i){
+    audio.src=songs[i].file;
+    album.src=songs[i].cover;
+    title.textContent=songs[i].title;
+}
 
-        // Rotating Facts
-        const facts = [
-            "I love posters and money",
-            "I want to be one of the greats - Andrew Nieman",
-            "Trying to get better at digital art",
-            "Jeff Buckley I love Jeff Buckley Omg Jeff Buckley Where?!",
-            "i fw things"
-        ];
+function togglePlay(){
+    if(audio.paused){
+        audio.play();
+        playBtn.textContent="❚❚";
+    }else{
+        audio.pause();
+        playBtn.textContent="▶";
+    }
+}
 
-        let factIndex = 0;
-        const factEl = document.getElementById('rotating-text');
+function nextSong(){
+    currentSong=(currentSong+1)%songs.length;
+    load(currentSong);
+    audio.play();
+    playBtn.textContent="❚❚";
+}
 
-        function rotateFact() {
-            factEl.style.opacity = 0;
-            setTimeout(() => {
-                factIndex = (factIndex + 1) % facts.length;
-                factEl.textContent = facts[factIndex];
-                factEl.style.opacity = 1;
-            }, 600);
-        }
+function prevSong(){
+    currentSong=(currentSong-1+songs.length)%songs.length;
+    load(currentSong);
+    audio.play();
+    playBtn.textContent="❚❚";
+}
 
-        factEl.textContent = facts[0];
-        setInterval(rotateFact, 5000);
-    </script>
+const list=document.getElementById("playlist");
+
+songs.forEach((s,i)=>{
+    const d=document.createElement("div");
+    d.textContent=s.title;
+    d.onclick=()=>{
+        currentSong=i;
+        load(i);
+        audio.play();
+        playBtn.textContent="❚❚";
+    };
+    list.appendChild(d);
+});
+
+load(0);
+</script>
+
 </body>
 </html>
