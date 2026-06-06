@@ -190,10 +190,77 @@ body::before{
     transform:scale(1.2);
     text-shadow:0 0 10px #ff00ff;
 }
+
+/* MAINTENANCE OVERLAY SCREEN */
+.maintenance-screen {
+    position: fixed;
+    inset: 0;
+    background: #000;
+    z-index: 9999;
+    display: none; /* Controlled via JS */
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 20px;
+}
+
+.maintenance-wrapper {
+    position: relative;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 120px;
+    height: 120px;
+}
+
+.maintenance-pfp {
+    width: 80px;
+    height: 80px;
+    border-radius: 50%;
+    object-fit: cover;
+    position: absolute;
+    z-index: 2;
+}
+
+.spinner {
+    width: 110px;
+    height: 110px;
+    border: 3px solid transparent;
+    border-top: 3px solid #ff3df2;
+    border-bottom: 3px solid #ff3df2;
+    border-radius: 50%;
+    position: absolute;
+    animation: spin 1.5s linear infinite;
+    z-index: 1;
+    box-shadow: 0 0 15px rgba(255, 61, 242, 0.4);
+}
+
+.maintenance-text {
+    font-size: 18px;
+    font-weight: 700;
+    color: #ff3df2;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    text-shadow: 0 0 10px rgba(255, 61, 242, 0.5);
+}
+
+@keyframes spin {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
+}
 </style>
 </head>
 
 <body>
+
+<!-- Maintenance Screen Element -->
+<div id="maintenance-overlay" class="maintenance-screen">
+    <div class="maintenance-wrapper">
+        <img class="maintenance-pfp" src="assets/glitterglueprofilepicture.jpg">
+        <div class="spinner"></div>
+    </div>
+    <div class="maintenance-text">Under Maintenance</div>
+</div>
 
 <div class="glow"></div>
 
@@ -294,6 +361,28 @@ songs.forEach((s,i)=>{
 });
 
 load(0);
+
+// AUTOMATIC MAINTENANCE CHECK LOGIC
+function checkMaintenance() {
+    fetch('maintenance.json?t=' + new Date().getTime())
+        .then(response => response.json())
+        .then(data => {
+            const overlay = document.getElementById('maintenance-overlay');
+            if (data.underMaintenance === true) {
+                overlay.style.display = 'flex';
+            } else {
+                overlay.style.display = 'none';
+            }
+        })
+        .catch(err => {
+            // If json file doesn't exist yet, default to hiding the overlay
+            document.getElementById('maintenance-overlay').style.display = 'none';
+        });
+}
+
+// Checks status immediately on load, then updates every 5 seconds
+checkMaintenance();
+setInterval(checkMaintenance, 5000);
 </script>
 
 </body>
