@@ -3,395 +3,384 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>hyperisunknown</title>
+
+<title>Hyper | Portfolio</title>
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700;800&display=swap" rel="stylesheet">
 
 <style>
+
 *{
     margin:0;
     padding:0;
     box-sizing:border-box;
-    font-family:system-ui, sans-serif;
+    font-family:"Poppins",sans-serif;
+}
+
+html{
+    scroll-behavior:smooth;
 }
 
 body{
-    height:100vh;
-    display:flex;
-    justify-content:center;
-    align-items:center;
-    background:#000;
-    overflow:hidden;
-    color:white;
-}
-
-/* rain bg */
-body::before{
-    content:"";
-    position:absolute;
-    inset:0;
-    background:
-        repeating-linear-gradient(
-            to bottom,
-            rgba(255,255,255,0.08) 0px,
-            rgba(255,255,255,0.08) 2px,
-            transparent 2px,
-            transparent 12px
-        );
-    animation:rain 0.6s linear infinite;
-    opacity:0.25;
-}
-
-@keyframes rain{
-    from{transform:translateY(-20px);}
-    to{transform:translateY(20px);}
-}
-
-/* glow orb bg like screenshot */
-.glow{
-    position:absolute;
-    width:600px;
-    height:600px;
-    background:radial-gradient(circle, rgba(255,0,255,0.15), transparent 60%);
-    filter:blur(40px);
-}
-
-/* main card */
-.profile{
-    width:360px;
-    padding:20px;
-    border-radius:20px;
-    background:rgba(15,15,15,0.85);
-    border:1px solid #222;
-    backdrop-filter:blur(12px);
-    box-shadow:0 0 25px rgba(255,0,255,0.08);
-    position:relative;
-    z-index:2;
-    transition:0.3s;
-}
-
-.profile:hover{
-    box-shadow:0 0 35px rgba(255,0,255,0.25);
-    transform:translateY(-3px);
-}
-
-/* top profile */
-.header{
-    display:flex;
-    flex-direction:column;
-    align-items:center;
-    text-align:center;
-    gap:8px;
-}
-
-.pfp{
-    width:70px;
-    height:70px;
-    border-radius:50%;
-    border:2px solid #ff3df2;
-    box-shadow:0 0 20px #ff00ff55;
-    object-fit: cover;
-}
-
-.name{
-    font-size:22px;
-    font-weight:800;
-    color:#ff3df2;
-}
-
-.tag{
-    font-size:12px;
-    color:#888;
-}
-
-.bio{
-    font-size:13px;
-    color:#bbb;
-    margin-top:8px;
-}
-
-/* music box */
-.music{
-    margin-top:15px;
-    display:flex;
-    align-items:center;
-    gap:10px;
     background:#111;
-    padding:10px;
-    border-radius:14px;
-    border:1px solid #222;
-}
-
-.cover{
-    width:45px;
-    height:45px;
-    border-radius:10px;
-}
-
-.song{
-    flex:1;
-}
-
-.song-title{
-    font-size:13px;
-    font-weight:600;
-}
-
-.controls button{
-    background:none;
-    border:none;
-    color:#ff00ff;
-    cursor:pointer;
-    font-size:14px;
-}
-
-#play-btn-mini{
-    background:#ff00ff;
     color:white;
-    width:28px;
-    height:28px;
-    border-radius:50%;
+    overflow-x:hidden;
 }
 
-/* playlist */
-.playlist{
-    margin-top:10px;
-    max-height:120px;
-    overflow-y:auto;
+/* Moving Grid */
+
+.grid{
+    position:fixed;
+    inset:0;
+    z-index:-10;
+
+    background-image:
+        linear-gradient(rgba(255,255,255,.08) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(255,255,255,.08) 1px, transparent 1px);
+
+    background-size:30px 30px;
+
+    animation:gridMove 5s linear infinite;
 }
 
-.playlist div{
-    padding:6px;
-    font-size:12px;
-    border-radius:8px;
-    color:#aaa;
-    cursor:pointer;
+@keyframes gridMove{
+    from{
+        background-position:0 0;
+    }
+    to{
+        background-position:30px 30px;
+    }
 }
 
-.playlist div:hover{
-    background:#1a1a1a;
-    color:#ff3df2;
-}
+/* Navbar */
 
-/* icons row */
-.icons{
+nav{
+
+    position:fixed;
+    top:20px;
+    left:50%;
+    transform:translateX(-50%);
+
     display:flex;
-    justify-content:center;
-    gap:14px;
-    margin-top:12px;
+    gap:35px;
+
+    padding:18px 35px;
+
+    background:rgba(20,20,20,.75);
+
+    backdrop-filter:blur(12px);
+
+    border-radius:18px;
+
+    border:1px solid rgba(255,255,255,.08);
+
+    z-index:999;
+}
+
+nav a{
+
+    color:white;
+    text-decoration:none;
+    font-weight:600;
+    transition:.3s;
+}
+
+nav a:hover{
+
+    color:#00cfff;
+
+}
+
+/* Hero */
+
+.hero{
+
+    min-height:100vh;
+
+    display:flex;
+    justify-content:space-evenly;
+    align-items:center;
+
+    padding:120px 10%;
+
+    flex-wrap:wrap;
+
+    gap:50px;
+
+}
+
+.left{
+
+    max-width:600px;
+
+}
+
+.left h1{
+
+    font-size:80px;
+    font-weight:800;
+
+}
+
+.left h2{
+
+    margin-top:15px;
+    height:40px;
+
+    color:#00cfff;
+    font-size:30px;
+
+}
+
+.left p{
+
+    margin-top:25px;
+    color:#cfcfcf;
+
+    line-height:1.8;
     font-size:18px;
-    color:#ff00ff;
+
 }
 
-.icons span{
+button{
+
+    margin-top:35px;
+
+    background:#00cfff;
+
+    border:none;
+
+    color:white;
+
+    padding:15px 35px;
+
+    border-radius:12px;
+
+    font-size:18px;
+
     cursor:pointer;
-    transition:0.2s;
+
+    transition:.3s;
+
 }
 
-.icons span:hover{
-    transform:scale(1.2);
-    text-shadow:0 0 10px #ff00ff;
+button:hover{
+
+    transform:translateY(-5px);
+
+    box-shadow:0 0 20px rgba(0,207,255,.45);
+
 }
 
-/* MAINTENANCE OVERLAY SCREEN */
-.maintenance-screen {
-    position: fixed;
-    inset: 0;
-    background: #000;
-    z-index: 9999;
-    display: none; /* Controlled via JS */
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    gap: 20px;
+/* Avatar */
+
+.avatar{
+
+    width:350px;
+    height:350px;
+
+    border-radius:50%;
+
+    overflow:hidden;
+
+    border:4px solid #00cfff;
+
+    animation:float 5s ease-in-out infinite;
+
 }
 
-.maintenance-wrapper {
-    position: relative;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    width: 120px;
-    height: 120px;
+.avatar img{
+
+    width:100%;
+    height:100%;
+    object-fit:cover;
+
 }
 
-.maintenance-pfp {
-    width: 80px;
-    height: 80px;
-    border-radius: 50%;
-    object-fit: cover;
-    position: absolute;
-    z-index: 2;
+@keyframes float{
+
+    0%{transform:translateY(0);}
+    50%{transform:translateY(-15px);}
+    100%{transform:translateY(0);}
+
 }
 
-.spinner {
-    width: 110px;
-    height: 110px;
-    border: 3px solid transparent;
-    border-top: 3px solid #ff3df2;
-    border-bottom: 3px solid #ff3df2;
-    border-radius: 50%;
-    position: absolute;
-    animation: spin 1.5s linear infinite;
-    z-index: 1;
-    box-shadow: 0 0 15px rgba(255, 61, 242, 0.4);
+/* Sections */
+
+section{
+
+    padding:120px 10%;
+
 }
 
-.maintenance-text {
-    font-size: 18px;
-    font-weight: 700;
-    color: #ff3df2;
-    letter-spacing: 2px;
-    text-transform: uppercase;
-    text-shadow: 0 0 10px rgba(255, 61, 242, 0.5);
+.title{
+
+    font-size:50px;
+
+    margin-bottom:30px;
+
 }
 
-/* LAST UPDATED TEXT AT BOTTOM RIGHT (Direct HTML Injection) */
-.timestamp-indicator {
-    position: fixed;
-    bottom: 12px;
-    right: 16px;
-    font-size: 11px;
-    font-weight: 500;
-    color: #444; /* Low-profile dark gray */
-    z-index: 10;
-    pointer-events: none;
-    letter-spacing: 0.5px;
+.about{
+
+    max-width:900px;
+
+    line-height:2;
+
+    color:#ddd;
+
+    font-size:20px;
+
 }
+
+@media(max-width:900px){
+
+.hero{
+
+flex-direction:column;
+text-align:center;
+
+}
+
+.left h1{
+
+font-size:55px;
+
+}
+
+.avatar{
+
+width:250px;
+height:250px;
+
+}
+
+nav{
+
+gap:15px;
+padding:15px;
+
+}
+
+}
+
 </style>
+
 </head>
 
 <body>
 
-<!-- Maintenance Screen Element -->
-<div id="maintenance-overlay" class="maintenance-screen">
-    <div class="maintenance-wrapper">
-        <img class="maintenance-pfp" src="assets/glitterglueprofilepicture.jpg">
-        <div class="spinner"></div>
-    </div>
-    <div class="maintenance-text">Under Maintenance</div>
+<div class="grid"></div>
+
+<nav>
+
+<a href="#">Home</a>
+<a href="#about">About</a>
+<a href="#">Projects</a>
+<a href="#">Music</a>
+<a href="#">Contact</a>
+
+</nav>
+
+<section class="hero">
+
+<div class="left">
+
+<h1>Hyper</h1>
+
+<h2 id="typing"></h2>
+
+<p>
+
+Welcome to my personal portfolio.
+
+I build games, websites, software and create music.
+Everything from HyperIsUnknown, HyperIsDrummer and ImHyper can be found here.
+
+</p>
+
+<button>View Projects</button>
+
 </div>
 
-<div class="glow"></div>
+<div class="avatar">
 
-<div class="profile">
+<img src="profile.png" alt="Profile">
 
-    <div class="header">
-        <img class="pfp" src="assets/glitterglueprofilepictureeee.png">
-        <div class="name">ImHyper</div>
-        <div class="tag">@hyperisunknown</div>
-        <div class="bio">drummer • official music prodigy • I make music for Threshold: First Contact • https://discord.gg/zgme4XsUvU</div>
-    </div>
-
-    <div class="music">
-        <img id="album-small" class="cover" src="assets/Big Poe.jpg">
-
-        <div class="song">
-            <div id="mini-title" class="song-title">Big POE</div>
-        </div>
-
-        <div class="controls">
-            <button onclick="prevSong()">⫷</button>
-            <button id="play-btn-mini" onclick="togglePlay()">▶</button>
-            <button onclick="nextSong()">⫸</button>
-        </div>
-    </div>
-
-    <div class="playlist" id="playlist"></div>
 </div>
 
-<!-- HARDCODED HTML TIMESTAMP NODE -->
-<div class="timestamp-indicator">Last updated: 3rd July 2026, 18:30</div>
+</section>
 
-<audio id="audio" style="display:none;">
-    <source src="assets/Big Poe.mp3">
-</audio>
+<section id="about">
+
+<h1 class="title">About Me</h1>
+
+<p class="about">
+
+Hi! I'm Hyper.
+
+I'm a programmer, game developer and drummer who enjoys building cool things.
+
+This website showcases all of my work including programming projects, games, websites, music and experiments.
+
+Hopefully you'll enjoy looking around!
+
+</p>
+
+</section>
 
 <script>
-const songs=[
-    {title:"Big Poe",file:"assets/Big Poe.mp3",cover:"assets/Big POe.jpg"},
-    {title:"Billie Jean",file:"assets/Billie Jean.mp3",cover:"assets/Billie Jean.jpg"},
-    {title:"Earrings",file:"assets/Earrings.mp3",cover:"assets/Earrings.jpg"},
-    {title:"Im Bo Yo",file:"assets/Im Bo Yo.mp3",cover:"assets/Im Bo Yo.jpg"},
-    {title:"Last Goodbye",file:"assets/Last Goodbye.mp3",cover:"assets/grace.jpg"},
-    {title:"Lover You Should've Come Over",file:"assets/Lover, You Should've come over.mp3",cover:"assets/grace.jpg"},
-    {title:"Demo 1",file:"assets/demo1.mp3",cover:"assets/freaky.png"},
-    {title:"SPEEDRUN GUYS!11!! (Running In Halls Simulator Original Soundtrack) (feat. TopZVR Tunes)",file:"assets/fucking hell this is a fire beat.mp3",cover:"assets/goon goon goon saqueef.png"},
-    {title:"Anime Thighs",file:"assets/Anime Thighs.mp3",cover:"assets/anime thighs.jpg"},
-    {title:"Where'd All The Time Go",file:"assets/Where'd All The Time Go.mp3",cover:"assets/where'd all the time go.jpg"},
-    {title:"Cheat Codes For Hoes",file:"assets/Cheat Codes For Hoes.mp3",cover:"assets/cheat codes for hoes.jpg"},
-    {title:"Charlies Inferno (Excuse Me Sir)",file:"assets/charlies inferno.mp3",cover:"assets/charlies inferno.png"}
+
+const words=[
+"Game Developer",
+"Web Developer",
+"Drummer",
+"Content Creator",
+"Open Source Developer"
 ];
 
-let currentSong=0;
-const audio=document.getElementById("audio");
-const playBtn=document.getElementById("play-btn-mini");
-const album=document.getElementById("album-small");
-const title=document.getElementById("mini-title");
+const typing=document.getElementById("typing");
 
-function load(i){
-    audio.src=songs[i].file;
-    album.src=songs[i].cover;
-    title.textContent=songs[i].title;
+let word=0;
+let letter=0;
+let deleting=false;
+
+function animate(){
+
+const current=words[word];
+
+if(!deleting){
+
+typing.textContent=current.substring(0,letter++);
+
+if(letter>current.length){
+
+deleting=true;
+setTimeout(animate,1200);
+return;
+
 }
 
-function togglePlay(){
-    if(audio.paused){
-        audio.play();
-        playBtn.textContent="❚❚";
-    }else{
-        audio.pause();
-        playBtn.textContent="▶";
-    }
+}else{
+
+typing.textContent=current.substring(0,letter--);
+
+if(letter<0){
+
+deleting=false;
+word=(word+1)%words.length;
+
 }
 
-function nextSong(){
-    currentSong=(currentSong+1)%songs.length;
-    load(currentSong);
-    audio.play();
-    playBtn.textContent="❚❚";
 }
 
-function prevSong(){
-    currentSong=(currentSong-1+songs.length)%songs.length;
-    load(currentSong);
-    audio.play();
-    playBtn.textContent="❚❚";
+setTimeout(animate,deleting?40:80);
+
 }
 
-const list=document.getElementById("playlist");
+animate();
 
-songs.forEach((s,i)=>{
-    const d=document.createElement("div");
-    d.textContent=s.title;
-    d.onclick=()=>{
-        currentSong=i;
-        load(i);
-        audio.play();
-        playBtn.textContent="❚❚";
-    };
-    list.appendChild(d);
-});
-
-load(0);
-
-// SIMPLIFIED LOCAL MAINTENANCE FILE MONITORING
-function checkMaintenance() {
-    fetch('maintenance.json?t=' + new Date().getTime())
-        .then(response => response.json())
-        .then(data => {
-            const overlay = document.getElementById('maintenance-overlay');
-            if (data.underMaintenance === true) {
-                overlay.style.display = 'flex';
-            } else {
-                overlay.style.display = 'none';
-            }
-        })
-        .catch(err => {
-            document.getElementById('maintenance-overlay').style.display = 'none';
-        });
-}
-
-checkMaintenance();
-setInterval(checkMaintenance, 5000);
 </script>
 
 </body>
