@@ -1,46 +1,58 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
 <title>Hyper</title>
 
-<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700;800&display=swap" rel="stylesheet">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
 
 <style>
 
 *{
-    margin:0;
-    padding:0;
-    box-sizing:border-box;
-    font-family:Poppins,sans-serif;
+margin:0;
+padding:0;
+box-sizing:border-box;
+font-family:"Poppins",sans-serif;
 }
 
 html{
-    scroll-behavior:smooth;
+scroll-behavior:smooth;
 }
 
 body{
-    background:#0d0d0d;
-    color:white;
-    overflow-x:hidden;
+
+background:#0d0d0d;
+color:white;
+overflow-x:hidden;
+
 }
 
-/* Moving Grid */
+/*======================
+MOVING GRID
+======================*/
 
 .grid{
-    position:fixed;
-    inset:0;
-    z-index:-2;
 
-    background-image:
-    linear-gradient(rgba(255,255,255,.08) 1px, transparent 1px),
-    linear-gradient(90deg, rgba(255,255,255,.08) 1px, transparent 1px);
+position:fixed;
+inset:0;
 
-    background-size:45px 45px;
+z-index:-20;
 
-    animation:gridMove 8s linear infinite;
+background-image:
+
+linear-gradient(rgba(255,255,255,.05) 1px,transparent 1px),
+linear-gradient(90deg,rgba(255,255,255,.05) 1px,transparent 1px);
+
+background-size:30px 30px;
+
+animation:gridMove 5s linear infinite;
+
 }
 
 @keyframes gridMove{
@@ -50,56 +62,108 @@ background-position:0 0;
 }
 
 to{
-background-position:45px 45px;
+background-position:30px 30px;
 }
 
 }
 
-/* Glow */
+/*======================
+CURSOR GLOW
+======================*/
 
-.glow{
+.cursor{
 
 position:fixed;
-inset:0;
-z-index:-1;
 
-background:
-radial-gradient(circle at center,
-rgba(0,255,255,.15),
-transparent 65%);
+width:350px;
+height:350px;
+
+border-radius:50%;
+
+background:radial-gradient(circle,
+rgba(0,200,255,.18),
+transparent 70%);
+
+pointer-events:none;
+
+transform:translate(-50%,-50%);
+
+filter:blur(50px);
+
+z-index:-10;
+
+transition:.08s;
 
 }
 
-/* Navbar */
+/*======================
+NAVBAR
+======================*/
 
 nav{
 
 position:fixed;
+
 top:20px;
 left:50%;
+
 transform:translateX(-50%);
 
+width:90%;
+max-width:1000px;
+
 display:flex;
-gap:30px;
+
+justify-content:space-between;
+align-items:center;
 
 padding:18px 30px;
 
-background:rgba(25,25,25,.65);
-
-backdrop-filter:blur(14px);
+background:rgba(15,15,15,.75);
 
 border:1px solid rgba(255,255,255,.08);
 
+backdrop-filter:blur(16px);
+
 border-radius:18px;
 
-z-index:1000;
+z-index:999;
+
+}
+
+.logo{
+
+font-size:28px;
+font-weight:800;
+
+letter-spacing:1px;
+
+color:white;
+
+}
+
+.logo span{
+
+color:#00d9ff;
+
+}
+
+nav ul{
+
+display:flex;
+
+gap:35px;
+
+list-style:none;
 
 }
 
 nav a{
 
-color:white;
 text-decoration:none;
+
+color:white;
+
 font-weight:600;
 
 transition:.3s;
@@ -108,96 +172,156 @@ transition:.3s;
 
 nav a:hover{
 
-color:#00d4ff;
+color:#00d9ff;
 
 }
 
-/* Hero */
+/*======================
+HERO
+======================*/
 
 .hero{
 
-height:100vh;
+min-height:100vh;
 
 display:flex;
-justify-content:space-around;
+
+justify-content:space-between;
 align-items:center;
 
-padding:100px;
+padding:150px 10%;
+
+gap:80px;
 
 }
 
-.hero-text{
+.left{
 
-max-width:550px;
+flex:1;
 
 }
 
-.hero h1{
+.left h3{
 
-font-size:70px;
+font-size:22px;
+font-weight:500;
+
+color:#00d9ff;
+
+margin-bottom:15px;
+
+}
+
+.left h1{
+
+font-size:82px;
+
 font-weight:800;
-line-height:1.1;
+
+line-height:1.05;
+
+margin-bottom:15px;
 
 }
 
-.hero h2{
+.left h2{
 
-margin-top:20px;
+font-size:34px;
 
-font-size:30px;
+height:42px;
 
-color:#00d4ff;
-
-height:40px;
+margin-bottom:25px;
 
 }
 
-.hero p{
-
-margin-top:30px;
+.left p{
 
 font-size:18px;
-color:#bbb;
 
 line-height:1.8;
 
+color:#bfbfbf;
+
+max-width:620px;
+
 }
 
-/* Button */
+/*======================
+BUTTONS
+======================*/
 
-button{
+.buttons{
 
-margin-top:35px;
+display:flex;
 
-padding:16px 32px;
+gap:20px;
 
-background:#00d4ff;
+margin-top:45px;
 
-border:none;
+}
+
+.btn{
+
+padding:16px 34px;
+
+border-radius:14px;
+
+text-decoration:none;
+
+font-weight:600;
+
+transition:.35s;
+
+}
+
+.primary{
+
+background:#00d9ff;
+
+color:#111;
+
+}
+
+.primary:hover{
+
+transform:translateY(-5px);
+
+box-shadow:0 0 25px rgba(0,217,255,.45);
+
+}
+
+.secondary{
+
+border:1px solid rgba(255,255,255,.12);
+
+background:rgba(255,255,255,.04);
 
 color:white;
 
-font-size:18px;
+}
 
-border-radius:12px;
+.secondary:hover{
 
-cursor:pointer;
+border-color:#00d9ff;
 
-transition:.3s;
+transform:translateY(-5px);
 
 }
 
-button:hover{
+/*======================
+PROFILE
+======================*/
 
-transform:translateY(-4px);
+.right{
 
-box-shadow:0 0 25px #00d4ff55;
+display:flex;
+justify-content:center;
+
+flex:1;
 
 }
 
-/* Avatar */
-
-.avatar{
+.profile{
 
 width:370px;
 height:370px;
@@ -206,31 +330,40 @@ border-radius:50%;
 
 overflow:hidden;
 
-border:5px solid #00d4ff;
+border:4px solid #00d9ff;
+
+box-shadow:
+
+0 0 60px rgba(0,217,255,.25);
 
 animation:float 5s ease-in-out infinite;
 
-box-shadow:0 0 60px rgba(0,212,255,.3);
-
 }
 
-.avatar img{
+.profile img{
 
 width:100%;
 height:100%;
+
 object-fit:cover;
 
 }
 
 @keyframes float{
 
-0%{transform:translateY(0);}
-50%{transform:translateY(-20px);}
-100%{transform:translateY(0);}
-
+0%{
+transform:translateY(0px);
 }
 
-/* About */
+50%{
+transform:translateY(-18px);
+}
+
+100%{
+transform:translateY(0px);
+}
+
+}
 
 section{
 
@@ -240,45 +373,167 @@ padding:120px 10%;
 
 .title{
 
-font-size:50px;
+font-size:52px;
 
-margin-bottom:40px;
+margin-bottom:35px;
 
 }
 
 .about{
 
-font-size:20px;
+max-width:850px;
 
 line-height:2;
 
-color:#ddd;
+font-size:19px;
 
-max-width:900px;
+color:#d0d0d0;
+
+}
+
+.cards{
+
+margin-top:70px;
+
+display:grid;
+
+grid-template-columns:repeat(auto-fit,minmax(250px,1fr));
+
+gap:30px;
+
+}
+
+.card{
+
+padding:30px;
+
+border-radius:18px;
+
+background:rgba(255,255,255,.03);
+
+border:1px solid rgba(255,255,255,.08);
+
+transition:.35s;
+
+}
+
+.card:hover{
+
+transform:translateY(-8px);
+
+border-color:#00d9ff;
+
+box-shadow:0 0 25px rgba(0,217,255,.15);
+
+}
+
+.card h3{
+
+margin-bottom:15px;
+
+color:#00d9ff;
+
+}
+
+.card p{
+
+color:#c5c5c5;
+
+line-height:1.8;
+
+}
+
+footer{
+
+padding:40px;
+
+text-align:center;
+
+color:#888;
+
+border-top:1px solid rgba(255,255,255,.08);
+
+margin-top:80px;
+
+}
+
+@media(max-width:900px){
+
+.hero{
+
+flex-direction:column;
+
+text-align:center;
+
+}
+
+.left h1{
+
+font-size:56px;
+
+}
+
+.left p{
+
+margin:auto;
+
+}
+
+.buttons{
+
+justify-content:center;
+
+}
+
+nav ul{
+
+gap:15px;
+
+font-size:14px;
+
+}
+
+.profile{
+
+width:260px;
+height:260px;
+
+}
 
 }
 
 </style>
 
 </head>
+
 <body>
 
 <div class="grid"></div>
-<div class="glow"></div>
+
+<div class="cursor" id="cursor"></div>
 
 <nav>
 
-<a href="#">Home</a>
-<a href="#about">About</a>
-<a href="#">Projects</a>
-<a href="#">Music</a>
-<a href="#">Contact</a>
+<div class="logo">
+Hyper<span>.</span>
+</div>
+
+<ul>
+
+<li><a href="#">Home</a></li>
+<li><a href="#about">About</a></li>
+<li><a href="projects.html">Projects</a></li>
+<li><a href="#contact">Contact</a></li>
+
+</ul>
 
 </nav>
 
 <section class="hero">
 
-<div class="hero-text">
+<div class="left">
+
+<h3>Hello, I'm</h3>
 
 <h1>Hyper</h1>
 
@@ -286,25 +541,35 @@ max-width:900px;
 
 <p>
 
-Builder, drummer, programmer, and creator.
+Welcome to my portfolio.
 
-Welcome to my personal portfolio where I share
-projects, music, experiments and everything
-I'm working on.
+I build websites, games, software and create drumming content.
+Everything from HyperIsUnknown, HyperIsUnknown Drums and ImHyper lives here.
 
 </p>
 
-<button>View Projects</button>
+<div class="buttons">
+
+<a href="projects.html" class="btn primary">Projects</a>
+
+<a href="#about" class="btn secondary">About Me</a>
 
 </div>
 
-<div class="avatar">
+</div>
+
+<div class="right">
+
+<div class="profile">
 
 <img src="profile.png">
 
 </div>
 
+</div>
+
 </section>
+<!-- ABOUT -->
 
 <section id="about">
 
@@ -312,38 +577,105 @@ I'm working on.
 
 <p class="about">
 
-Hi! I'm Hyper.
+Hey! I'm <strong>Hyper</strong>.
 
-I'm passionate about creating games, websites,
-apps and cool software. Alongside programming,
-I'm also a drummer and enjoy experimenting with
-new technologies.
+I'm a developer, creator and drummer who enjoys building websites,
+games and software.
 
-This site showcases everything I build under:
+This portfolio showcases everything I make under:
 
-<b>HyperIsUnknown</b><br>
-<b>HyperIsDrummer</b><br>
-<b>ImHyper</b>
+<br><br>
+
+💻 HyperIsUnknown<br>
+🥁 HyperIsUnknown Drums<br>
+⚡ ImHyper
+
+<br><br>
+
+Whether it's coding, designing, creating videos or experimenting with
+new ideas, I'm always working on something.
 
 </p>
 
+<div class="cards">
+
+<div class="card">
+<h3>💻 Development</h3>
+<p>
+Websites, applications, Discord bots, game development and open-source
+projects.
+</p>
+</div>
+
+<div class="card">
+<h3>🥁 Music</h3>
+<p>
+Drum covers, performances and music-related content uploaded to my
+drumming channel.
+</p>
+</div>
+
+<div class="card">
+<h3>🚀 Projects</h3>
+<p>
+Every project I'm currently building, updating or experimenting with can
+be found here.
+</p>
+</div>
+
+</div>
+
 </section>
+
+<!-- CONTACT -->
+
+<section id="contact">
+
+<h1 class="title">Get In Touch</h1>
+
+<div class="cards">
+
+<div class="card">
+<h3>🌐 Website</h3>
+<p>Explore all of my latest work and updates.</p>
+<a class="btn primary" href="projects.html">View Projects</a>
+</div>
+
+<div class="card">
+<h3>💬 Discord</h3>
+<p>Join my community and chat with me.</p>
+<a class="btn primary" href="https://discord.gg/SreaYjy9HE" target="_blank">Join</a>
+</div>
+
+</div>
+
+</section>
+
+<footer>
+
+© 2025 Hyper • Built with HTML, CSS & JavaScript
+
+</footer>
 
 <script>
 
+/* ==========================
+   Typing Animation
+========================== */
+
 const words=[
-"Game Developer",
-"Web Developer",
+"Developer",
 "Drummer",
 "Creator",
+"Web Designer",
 "Open Source Builder"
 ];
+
+const typing=document.getElementById("typing");
 
 let word=0;
 let letter=0;
 let deleting=false;
-
-const typing=document.getElementById("typing");
 
 function type(){
 
@@ -352,7 +684,6 @@ const current=words[word];
 if(!deleting){
 
 typing.textContent=current.substring(0,letter++);
-
 if(letter>current.length){
 
 deleting=true;
@@ -370,18 +701,62 @@ typing.textContent=current.substring(0,letter--);
 if(letter<0){
 
 deleting=false;
-
 word=(word+1)%words.length;
 
 }
 
 }
 
-setTimeout(type,deleting?45:90);
+setTimeout(type,deleting?45:85);
 
 }
 
 type();
+
+/* ==========================
+   Mouse Glow
+========================== */
+
+const cursor=document.getElementById("cursor");
+
+document.addEventListener("mousemove",e=>{
+
+cursor.style.left=e.clientX+"px";
+cursor.style.top=e.clientY+"px";
+
+});
+
+/* ==========================
+   Fade In Cards
+========================== */
+
+const observer=new IntersectionObserver(entries=>{
+
+entries.forEach(entry=>{
+
+if(entry.isIntersecting){
+
+entry.target.animate([
+{opacity:0,transform:"translateY(30px)"},
+{opacity:1,transform:"translateY(0)"}
+],{
+duration:700,
+fill:"forwards"
+});
+
+}
+
+});
+
+});
+
+document.querySelectorAll(".card").forEach(card=>{
+
+card.style.opacity=0;
+
+observer.observe(card);
+
+});
 
 </script>
 
