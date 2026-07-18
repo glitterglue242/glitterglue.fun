@@ -1,0 +1,407 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Hyper</title>
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+
+<style>
+
+*{
+margin:0;
+padding:0;
+box-sizing:border-box;
+font-family:"Poppins",sans-serif;
+}
+
+body{
+background:#0d0d0d;
+color:white;
+overflow-x:hidden;
+}
+
+.grid{
+position:fixed;
+inset:0;
+z-index:-20;
+
+background-image:
+linear-gradient(rgba(255,255,255,.05) 1px,transparent 1px),
+linear-gradient(90deg,rgba(255,255,255,.05) 1px,transparent 1px);
+
+background-size:30px 30px;
+animation:gridMove 5s linear infinite;
+}
+
+@keyframes gridMove{
+from{background-position:0 0;}
+to{background-position:30px 30px;}
+}
+
+.cursor{
+position:fixed;
+width:350px;
+height:350px;
+border-radius:50%;
+background:radial-gradient(circle,
+rgba(0,217,255,.15),
+transparent 70%);
+pointer-events:none;
+transform:translate(-50%,-50%);
+filter:blur(60px);
+z-index:-10;
+transition:.08s;
+}
+
+nav{
+
+position:fixed;
+
+top:20px;
+left:50%;
+
+transform:translateX(-50%);
+
+width:90%;
+max-width:1000px;
+
+display:flex;
+
+justify-content:space-between;
+align-items:center;
+
+padding:18px 30px;
+
+background:rgba(15,15,15,.75);
+
+border:1px solid rgba(255,255,255,.08);
+
+backdrop-filter:blur(16px);
+
+border-radius:18px;
+
+z-index:999;
+
+}
+
+.logo{
+font-size:28px;
+font-weight:800;
+}
+
+.logo span{
+color:#00d9ff;
+}
+
+nav ul{
+display:flex;
+gap:35px;
+list-style:none;
+}
+
+nav a{
+text-decoration:none;
+color:white;
+font-weight:600;
+transition:.3s;
+}
+
+nav a:hover{
+color:#00d9ff;
+}
+
+.container{
+
+padding:150px 10% 80px;
+
+}
+
+.container h1{
+
+font-size:65px;
+margin-bottom:10px;
+
+}
+
+.container p{
+
+color:#bfbfbf;
+font-size:18px;
+margin-bottom:50px;
+
+}
+
+.projects{
+
+display:grid;
+
+grid-template-columns:repeat(auto-fit,minmax(300px,1fr));
+
+gap:30px;
+
+}
+
+.card{
+
+background:rgba(255,255,255,.04);
+
+border:1px solid rgba(255,255,255,.08);
+
+padding:30px;
+
+border-radius:20px;
+
+transition:.35s;
+
+}
+
+.card:hover{
+
+transform:translateY(-10px);
+
+border-color:#00d9ff;
+
+box-shadow:0 0 25px rgba(0,217,255,.2);
+
+}
+
+.card h2{
+
+margin-bottom:15px;
+
+color:#00d9ff;
+
+}
+
+.card p{
+
+line-height:1.8;
+
+margin-bottom:25px;
+
+}
+
+.button{
+
+display:inline-block;
+
+padding:14px 28px;
+
+background:#00d9ff;
+
+color:#111;
+
+font-weight:600;
+
+text-decoration:none;
+
+border-radius:12px;
+
+transition:.3s;
+
+}
+
+.button:hover{
+
+transform:translateY(-3px);
+
+box-shadow:0 0 20px rgba(0,217,255,.4);
+
+}
+
+footer{
+
+margin-top:80px;
+
+text-align:center;
+
+padding:30px;
+
+color:#888;
+
+border-top:1px solid rgba(255,255,255,.08);
+
+}
+
+@media(max-width:900px){
+
+.container h1{
+
+font-size:45px;
+
+}
+
+nav ul{
+
+gap:15px;
+
+font-size:14px;
+
+}
+
+}
+
+</style>
+
+</head>
+
+<body>
+
+<div class="grid"></div>
+<div class="cursor" id="cursor"></div>
+
+<nav>
+
+<div class="logo">
+Hyper<span>.</span>
+</div>
+
+<ul>
+
+<li><a href="index.html">Home</a></li>
+<li><a href="projects.html">Projects</a></li>
+
+</ul>
+
+</nav>
+
+<div class="container">
+
+<h1>Projects</h1>
+
+<p>
+Everything I'm building, creating and sharing across the internet.
+</p>
+
+<div class="projects">
+
+<div class="card">
+
+<h2>💻 HyperIsUnknown</h2>
+
+<p>
+My main YouTube channel focused on programming, projects, tutorials and development.
+</p>
+
+<a class="button" target="_blank" href="https://www.youtube.com/@hyperisunknown">
+Visit Channel
+</a>
+
+</div>
+
+<div class="card">
+
+<h2>🥁 HyperIsUnknown Drums</h2>
+
+<p>
+My drumming channel featuring drum covers, performances and music content.
+</p>
+
+<a class="button" target="_blank" href="https://www.youtube.com/@hyperisunknowndrums">
+Visit Channel
+</a>
+
+</div>
+
+<div class="card">
+
+<h2>🌐 Personal Website</h2>
+
+<p>
+One of my web projects where I experiment with layouts and web development.
+</p>
+
+<a class="button" target="_blank" href="https://souloxfr.github.io/website/">
+Open Website
+</a>
+
+</div>
+
+<div class="card">
+
+<h2>💬 Discord Community</h2>
+
+<p>
+Join my Discord server to hang out, get updates and chat about future projects.
+</p>
+
+<a class="button" target="_blank" href="https://discord.gg/SreaYjy9HE">
+Join Server
+</a>
+
+</div>
+
+<div class="card">
+
+<h2>🚀 More Coming Soon...</h2>
+
+<p>
+I'm constantly building new websites, software and creative projects. This section will continue to grow.
+</p>
+
+<a class="button" href="index.html">
+Back Home
+</a>
+
+</div>
+
+</div>
+
+</div>
+
+<footer>
+
+© 2025 Hyper • Thanks for visiting!
+
+</footer>
+
+<script>
+
+const cursor=document.getElementById("cursor");
+
+document.addEventListener("mousemove",e=>{
+
+cursor.style.left=e.clientX+"px";
+cursor.style.top=e.clientY+"px";
+
+});
+
+const observer=new IntersectionObserver(entries=>{
+
+entries.forEach(entry=>{
+
+if(entry.isIntersecting){
+
+entry.target.animate([
+{opacity:0,transform:"translateY(30px)"},
+{opacity:1,transform:"translateY(0px)"}
+],{
+duration:700,
+fill:"forwards"
+});
+
+}
+
+});
+
+});
+
+document.querySelectorAll(".card").forEach(card=>{
+
+card.style.opacity=0;
+
+observer.observe(card);
+
+});
+
+</script>
+
+</body>
+</html>
