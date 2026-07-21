@@ -23,7 +23,7 @@ color:white;
 overflow-x:hidden;
 }
 
-/* Grid Background - Updated Animation */
+/* Grid Background */
 .grid{
 position:fixed;
 inset:0;
@@ -35,12 +35,8 @@ background-size:30px 30px;
 animation:gridMove 10s linear infinite;
 }
 @keyframes gridMove{
-from{
-background-position: -1000px -1000px;
-}
-to{
-background-position: 1000px 1000px;
-}
+from{background-position: -1000px -1000px;}
+to{background-position: 1000px 1000px;}
 }
 
 /* Navbar */
@@ -68,24 +64,63 @@ letter-spacing:1px;
 color:white;
 }
 .logo span{
-color:#00d9ff;
-}
-nav ul{
-display:flex;
-gap:35px;
-list-style:none;
-}
-nav a{
-text-decoration:none;
-color:white;
-font-weight:600;
-transition:.3s;
-}
-nav a:hover{
-color:#00d9ff;
+color:#1E40AF;
 }
 
-/* Rest of your original styles */
+/* Navy Blue Accent */
+nav a:hover,
+.left h3,
+.card h3,
+.primary {
+color:#1E40AF;
+}
+
+/* Programming Languages Banner */
+.programming-languages-banner {
+    background: linear-gradient(145deg, #1E3A8A, #3B5BA8);
+    color: white;
+    padding: 3rem 3rem;
+    border-radius: 20px;
+    text-align: center;
+    box-shadow: 0 10px 30px rgba(30, 64, 175, 0.3);
+    margin: 80px 0;
+    max-width: 1100px;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.programming-languages-banner h2 {
+    margin: 0 0 2rem 0;
+    font-size: 2.4rem;
+    font-weight: 700;
+    letter-spacing: 1px;
+    color: #ffffff;   /* Pure White */
+}
+
+.languages-grid {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 2.8rem;
+    flex-wrap: wrap;
+}
+
+.lang-item {
+    transition: all 0.4s ease;
+}
+
+.lang-item:hover {
+    transform: translateY(-12px) scale(1.1);
+}
+
+.lang-item img {
+    width: 72px;
+    height: 72px;
+    object-fit: contain;
+    filter: drop-shadow(0 6px 10px rgba(0, 0, 0, 0.5));
+}
+
+/* Rest of styles */
 .hero{
 min-height:100vh;
 display:flex;
@@ -100,7 +135,7 @@ flex:1;
 .left h3{
 font-size:22px;
 font-weight:500;
-color:#00d9ff;
+color:#1E40AF;
 margin-bottom:15px;
 }
 .left h1{
@@ -133,12 +168,12 @@ font-weight:600;
 transition:.35s;
 }
 .primary{
-background:#00d9ff;
-color:#111;
+background:#1E40AF;
+color:white;
 }
 .primary:hover{
 transform:translateY(-5px);
-box-shadow:0 0 25px rgba(0,217,255,.45);
+box-shadow:0 0 25px rgba(30, 64, 175, 0.5);
 }
 .secondary{
 border:1px solid rgba(255,255,255,.12);
@@ -146,7 +181,7 @@ background:rgba(255,255,255,.04);
 color:white;
 }
 .secondary:hover{
-border-color:#00d9ff;
+border-color:#1E40AF;
 transform:translateY(-5px);
 }
 .right{
@@ -159,8 +194,8 @@ width:370px;
 height:370px;
 border-radius:50%;
 overflow:hidden;
-border:4px solid #00d9ff;
-box-shadow:0 0 60px rgba(0,217,255,.25);
+border:4px solid #1E40AF;
+box-shadow:0 0 60px rgba(30, 64, 175, 0.3);
 animation:float 5s ease-in-out infinite;
 }
 .profile img{
@@ -201,12 +236,12 @@ transition:.35s;
 }
 .card:hover{
 transform:translateY(-8px);
-border-color:#00d9ff;
-box-shadow:0 0 25px rgba(0,217,255,.15);
+border-color:#1E40AF;
+box-shadow:0 0 25px rgba(30, 64, 175, 0.2);
 }
 .card h3{
 margin-bottom:15px;
-color:#00d9ff;
+color:#1E40AF;
 }
 .card p{
 color:#c5c5c5;
@@ -310,23 +345,49 @@ Whether it's coding, designing, creating videos or experimenting with new ideas,
 <p>Every project I'm currently building, updating or experimenting with can be found here.</p>
 </div>
 </div>
+
+<!-- Programming Languages Banner -->
+<div class="programming-languages-banner">
+    <h2>Programming Languages</h2>
+    <div class="languages-grid">
+        <div class="lang-item">
+            <img src="assets/csharp.png" alt="C#" title="C#">
+        </div>
+        <div class="lang-item">
+            <img src="assets/cpp.png" alt="C++" title="C++">
+        </div>
+        <div class="lang-item">
+            <img src="assets/python.png" alt="Python" title="Python">
+        </div>
+        <div class="lang-item">
+            <img src="assets/html5.png" alt="HTML5" title="HTML">
+        </div>
+        <div class="lang-item">
+            <img src="assets/javascript.png" alt="JavaScript" title="JavaScript">
+        </div>
+        <div class="lang-item">
+            <img src="assets/css3.png" alt="CSS3" title="CSS">
+        </div>
+    </div>
+</div>
+
 </section>
 
 <section id="contact">
 <h1 class="title">3 Sources</h1>
 <div style="display:flex; justify-content:center; flex-wrap:wrap; gap:30px; margin-top:60px;">
 <div style="width:340px; background:rgba(255,255,255,.03); border:1px solid rgba(255,255,255,.08); border-radius:18px; padding:30px; backdrop-filter:blur(12px); transition:.35s;">
-<h3 style="color:#00d9ff;margin-bottom:15px;">𝜗𝜚⋆ Website</h3>
+<h3 style="color:#1E40AF;margin-bottom:15px;">𝜗𝜚⋆ Website</h3>
 <p style="color:#c5c5c5;line-height:1.8;margin-bottom:25px;">Browse all of my programming projects, websites and creations.</p>
 <a href="projects.html" class="btn primary">View Projects</a>
 </div>
 <div style="width:340px; background:rgba(255,255,255,.03); border:1px solid rgba(255,255,255,.08); border-radius:18px; padding:30px; backdrop-filter:blur(12px); transition:.35s;">
-<h3 style="color:#00d9ff;margin-bottom:15px;">𖤝 Discord</h3>
+<h3 style="color:#1E40AF;margin-bottom:15px;">𖤝 Discord</h3>
 <p style="color:#c5c5c5;line-height:1.8;margin-bottom:25px;">Join my Discord community and keep up with everything I'm working on.</p>
 <a href="https://discord.gg/SreaYjy9HE" target="_blank" class="btn primary">Join Server</a>
 </div>
 <div style="width:340px; background:rgba(255,255,255,.03); border:1px solid rgba(255,255,255,.08); border-radius:18px; padding:30px; backdrop-filter:blur(12px); transition:.35s;">
-<h3 style="color:#00d9ff;margin-bottom:15px;">⁠♡ YouTube</h3>
+<h3 style="color:#1E40AF;margin-bottom:15px;">⁠♡ YouTube</h3>
 <p style="color:#c5c5c5;line-height:1.8;margin-bottom:25px;">Watch coding projects, tutorials and drumming content on my channels.</p>
 <a href="https://www.youtube.com/@hyperisunknown" target="_blank" class="btn primary">Watch Now</a>
 </div>
@@ -341,7 +402,6 @@ Whether it's coding, designing, creating videos or experimenting with new ideas,
 const words = ["Developer", "Drummer", "Creator", "Web Designer", "Open Source Builder"];
 const typing = document.getElementById("typing");
 let word = 0, letter = 0, deleting = false;
-
 function type() {
     const current = words[word];
     if (!deleting) {
@@ -361,26 +421,6 @@ function type() {
     setTimeout(type, deleting ? 45 : 85);
 }
 type();
-
-// Cursor
-document.addEventListener("mousemove", e => {
-    const cursor = document.getElementById("cursor") || document.createElement("div");
-    if (!document.getElementById("cursor")) {
-        cursor.id = "cursor";
-        cursor.style.position = "fixed";
-        cursor.style.width = "350px";
-        cursor.style.height = "350px";
-        cursor.style.borderRadius = "50%";
-        cursor.style.background = "radial-gradient(circle, rgba(0,200,255,.18), transparent 70%)";
-        cursor.style.pointerEvents = "none";
-        cursor.style.transform = "translate(-50%,-50%)";
-        cursor.style.filter = "blur(50px)";
-        cursor.style.zIndex = "-10";
-        document.body.appendChild(cursor);
-    }
-    cursor.style.left = e.clientX + "px";
-    cursor.style.top = e.clientY + "px";
-});
 </script>
 </body>
 </html>
