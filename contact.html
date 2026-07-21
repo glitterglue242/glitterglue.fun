@@ -14,15 +14,15 @@ padding:0;
 box-sizing:border-box;
 font-family:"Poppins",sans-serif;
 }
-html{
-scroll-behavior:smooth;
-}
+html{ scroll-behavior:smooth; }
 body{
 background:#0d0d0d;
 color:white;
 overflow-x:hidden;
 min-height:100vh;
 }
+
+/* Grid */
 .grid{
 position:fixed;
 inset:0;
@@ -31,11 +31,11 @@ background-image:
 linear-gradient(rgba(255,255,255,.05) 1px,transparent 1px),
 linear-gradient(90deg,rgba(255,255,255,.05) 1px,transparent 1px);
 background-size:30px 30px;
-animation:gridMove 5s linear infinite;
+animation:gridMove 12s linear infinite;
 }
 @keyframes gridMove{
-from{background-position:0 0;}
-to{background-position:30px 30px;}
+from{ background-position: -1500px -1500px; }
+to{ background-position: 1500px 1500px; }
 }
 
 /* Navbar */
@@ -56,34 +56,16 @@ backdrop-filter:blur(16px);
 border-radius:18px;
 z-index:999;
 }
-.logo{
-font-size:28px;
-font-weight:800;
-letter-spacing:1px;
-color:white;
-}
-.logo span{
-color:#00d9ff;
-}
-nav ul{
-display:flex;
-gap:35px;
-list-style:none;
-}
-nav a{
-text-decoration:none;
-color:white;
-font-weight:600;
-transition:.3s;
-}
-nav a:hover{
-color:#00d9ff;
-}
+.logo{font-size:28px; font-weight:800; letter-spacing:1px; color:white;}
+.logo span{color:#00d9ff;}
+nav ul{display:flex; gap:35px; list-style:none;}
+nav a{text-decoration:none; color:white; font-weight:600; transition:.3s;}
+nav a:hover{color:#00d9ff;}
 
-/* Main Content */
+/* Contact */
 .contact-section{
 padding:180px 10% 120px;
-max-width:800px;
+max-width:960px; /* widened */
 margin:0 auto;
 text-align:center;
 }
@@ -91,9 +73,10 @@ text-align:center;
 background:rgba(255,255,255,.03);
 border:1px solid rgba(255,255,255,.08);
 border-radius:18px;
-padding:50px 40px;
+padding:50px 60px; /* more side padding */
 backdrop-filter:blur(12px);
 transition:.35s;
+width:100%;
 }
 .contact-card:hover{
 transform:translateY(-8px);
@@ -111,7 +94,7 @@ display:block;
 }
 .contact-card h2{
 font-size:52px;
-margin-bottom:20px;
+margin-bottom:25px;
 }
 .contact-card p{
 font-size:19px;
@@ -149,17 +132,10 @@ margin-top:40px;
 font-style:italic;
 }
 
-/* Responsive */
 @media(max-width:900px){
-.contact-section{
-padding:160px 5% 100px;
-}
-.contact-card{
-padding:40px 25px;
-}
-.contact-card h2{
-font-size:42px;
-}
+.contact-section{padding:160px 5% 100px;}
+.contact-card{padding:40px 35px;}
+.contact-card h2{font-size:42px;}
 }
 </style>
 </head>
@@ -167,9 +143,7 @@ font-size:42px;
 <div class="grid"></div>
 
 <nav>
-<div class="logo">
-Hyper<span>.</span>
-</div>
+<div class="logo">Hyper<span>.</span></div>
 <ul>
 <li><a href="index.html">Home</a></li>
 <li><a href="index.html#about">About</a></li>
