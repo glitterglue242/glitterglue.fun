@@ -1,364 +1,66 @@
 <!DOCTYPE html>
-<html lang="en">
+<html>
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Hyper</title>
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
-<style>
-*{
-margin:0;
-padding:0;
-box-sizing:border-box;
-font-family:"Poppins",sans-serif;
-}
-html{
-scroll-behavior:smooth;
-}
-body{
-background:#0d0d0d;
-color:white;
-overflow-x:hidden;
-}
-
-/* Grid Background */
-.grid{
-position:fixed;
-inset:0;
-z-index:-20;
-background-image:
-linear-gradient(rgba(255,255,255,.05) 1px,transparent 1px),
-linear-gradient(90deg,rgba(255,255,255,.05) 1px,transparent 1px);
-background-size:30px 30px;
-animation:gridMove 10s linear infinite;
-}
-@keyframes gridMove{
-from{background-position: -1000px -1000px;}
-to{background-position: 1000px 1000px;}
-}
-
-/* ==================== FIXED NAVBAR ==================== */
-nav{
-position:fixed;
-top:20px;
-left:50%;
-transform:translateX(-50%);
-width:90%;
-max-width:1100px;
-display:flex;
-justify-content:space-between;
-align-items:center;
-padding:18px 35px;
-background:rgba(15,15,15,0.85);
-border:1px solid rgba(255,255,255,0.1);
-backdrop-filter:blur(20px);
-border-radius:20px;
-z-index:999;
-box-shadow: 0 8px 32px rgba(0,0,0,0.4);
-}
-
-.logo{
-font-size:28px;
-font-weight:800;
-letter-spacing:1px;
-color:white;
-}
-.logo span{
-color:#1E40AF;
-}
-
-nav ul{
-display:flex;
-gap:40px;
-list-style:none;
-margin:0;
-padding:0;
-}
-
-nav a{
-text-decoration:none;
-color:white;
-font-weight:600;
-transition:.3s;
-font-size:15.5px;
-}
-
-nav a:hover{
-color:#1E40AF;
-}
-
-/* Mobile Menu */
-@media(max-width: 768px){
-    nav{
-        padding:16px 25px;
+    <title>ImHyper</title>
+    <style>
+    body {
+        background-color: #121212; /* Dark background */
+        color: #ffffff; /* White text */
+        font-family: 'Courier New', Courier, monospace; /* Clean typewriter font */
+        display: flex;
         flex-direction: column;
-        gap:15px;
-    }
-    nav ul{
-        gap:20px;
-        flex-direction: row;
-        flex-wrap: wrap;
         justify-content: center;
+        align-items: center;
+        height: 100vh;
+        margin: 0;
     }
-}
 
-/* Programming Languages Banner */
-.programming-languages-banner {
-    background: linear-gradient(145deg, #1E3A8A, #3B5BA8);
-    color: white;
-    padding: 3rem 3rem;
-    border-radius: 20px;
-    text-align: center;
-    box-shadow: 0 10px 30px rgba(30, 64, 175, 0.3);
-    margin: 80px 0;
-    max-width: 1100px;
-    margin-left: auto;
-    margin-right: auto;
-}
+    h1, h2 {
+        white-space: nowrap;
+        overflow: hidden;
+        border-right: 3px solid #ff4500; /* Neon orange cursor */
+    }
 
-.programming-languages-banner h2 {
-    margin: 0 0 2rem 0;
-    font-size: 2.4rem;
-    font-weight: 700;
-    letter-spacing: 1px;
-    color: #ffffff;
-}
+    h1 {
+        font-size: 2.5rem;
+        width: 47ch; /* Exact character count for H1 */
+        animation: 
+            typingH1 4s steps(47) forwards,
+            blink 0.5s step-end infinite alternate;
+    }
 
-.languages-grid {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    gap: 2.8rem;
-    flex-wrap: wrap;
-}
+    h2 {
+        font-size: 1.5rem;
+        width: 23ch; /* Exact character count for H2 */
+        opacity: 0; /* Hidden until H1 finishes */
+        animation: 
+            typingH2 2s steps(23) forwards,
+            blink 0.5s step-end infinite alternate;
+        animation-delay: 4.5s; /* Starts after H1 finishes typing */
+    }
 
-.lang-item {
-    transition: all 0.4s ease;
-}
+    /* H1 Typing Animation */
+    @keyframes typingH1 {
+        from { width: 0; }
+        to { border-right-color: transparent; } /* Hides cursor when done */
+    }
 
-.lang-item:hover {
-    transform: translateY(-12px) scale(1.1);
-}
+    /* H2 Typing Animation */
+    @keyframes typingH2 {
+        from { width: 0; opacity: 1; }
+        to { opacity: 1; }
+    }
 
-.lang-item img {
-    width: 72px;
-    height: 72px;
-    object-fit: contain;
-    filter: drop-shadow(0 6px 10px rgba(0, 0, 0, 0.5));
-}
-
-/* Rest of your site styles */
-.hero{
-min-height:100vh;
-display:flex;
-justify-content:space-between;
-align-items:center;
-padding:150px 10%;
-gap:80px;
-}
-.left h3, .card h3, .primary{
-color:#1E40AF;
-}
-.primary{
-background:#1E40AF;
-color:white;
-}
-.primary:hover{
-transform:translateY(-5px);
-box-shadow:0 0 25px rgba(30, 64, 175, 0.5);
-}
-.secondary:hover{
-border-color:#1E40AF;
-}
-.profile{
-border:4px solid #1E40AF;
-box-shadow:0 0 60px rgba(30, 64, 175, 0.3);
-}
-.card:hover{
-border-color:#1E40AF;
-box-shadow:0 0 25px rgba(30, 64, 175, 0.2);
-}
-section{
-padding:120px 10%;
-}
-.title{
-font-size:52px;
-margin-bottom:35px;
-}
-.about{
-max-width:850px;
-line-height:2;
-font-size:19px;
-color:#d0d0d0;
-}
-.cards{
-margin-top:70px;
-display:grid;
-grid-template-columns:repeat(auto-fit,minmax(250px,1fr));
-gap:30px;
-}
-.card{
-padding:30px;
-border-radius:18px;
-background:rgba(255,255,255,.03);
-border:1px solid rgba(255,255,255,.08);
-transition:.35s;
-}
-footer{
-padding:40px;
-text-align:center;
-color:#888;
-border-top:1px solid rgba(255,255,255,.08);
-margin-top:80px;
-}
-
-/* Responsive */
-@media(max-width:900px){
-.hero{
-flex-direction:column;
-text-align:center;
-}
-.left h1{
-font-size:56px;
-}
-}
-</style>
+    /* Blinking Cursor Animation */
+    @keyframes blink {
+        50% { border-color: transparent; }
+    }
+    </style>
 </head>
 <body>
-<div class="grid"></div>
 
-<nav>
-    <div class="logo">Hyper<span>.</span></div>
-    <ul>
-        <li><a href="#">Home</a></li>
-        <li><a href="#about">About</a></li>
-        <li><a href="projects.html">Projects</a></li>
-        <li><a href="contact.html">Contact</a></li>
-    </ul>
-</nav>
-
-<section class="hero">
-<div class="left">
-<h3>Hello</h3>
-<h1>ImHyper (Literally)</h1>
-<h2 id="typing"></h2>
-<p>
-Welcome to my portfolio.<br>
-I build websites, games, software and create drumming content.<br>
-Everything from HyperIsUnknown, HyperIsUnknownDrums and ImHyper lives here.
-</p>
-</div>
-<div class="right">
-    <div class="profile">
-        <img src="profile.png" alt="Profile Picture">
-    </div>
-</div>
-</div>
-</div>
-</section>
-
-<section id="about">
-<h1 class="title">About Me</h1>
-<p class="about">
-Hey! I'm <strong>Hyper</strong>.<br>
-I'm a developer, creator and drummer who enjoys building websites, games and software.
-This portfolio showcases everything I make under:
-<br><br>
-⋆˚࿔ HyperIsUnknown<br>
-.✦ ݁˖ HyperIsUnknown Drums<br>
-𑣲. ImHyper
-<br><br>
-Whether it's coding, designing, creating videos or experimenting with new ideas, I'm always working on something.
-</p>
-<div class="cards">
-<div class="card">
-<h3>⊹₊⟡⋆ Development</h3>
-<p>Websites, applications, Discord bots, game development and open-source projects.</p>
-</div>
-<div class="card">
-<h3>۶ৎ Music</h3>
-<p>Drum covers, performances and music-related content uploaded to my drumming channel.</p>
-</div>
-<div class="card">
-<h3>°❀⋆ Projects</h3>
-<p>Every project I'm currently building, updating or experimenting with can be found here.</p>
-</div>
-</div>
-
-<!-- Programming Languages Banner -->
-<div class="programming-languages-banner">
-    <h2>Programming Languages</h2>
-    <div class="languages-grid">
-        <div class="lang-item">
-            <img src="assets/csharp.png" alt="C#" title="C#">
-        </div>
-        <div class="lang-item">
-            <img src="assets/python.png" alt="Python" title="Python">
-        </div>
-        <div class="lang-item">
-            <img src="assets/html5.png" alt="HTML5" title="HTML">
-        </div>
-        <div class="lang-item">
-            <img src="assets/javascript.png" alt="JavaScript" title="JavaScript">
-        </div>
-        <div class="lang-item">
-            <img src="assets/css3.png" alt="CSS3" title="CSS">
-        </div>
-    </div>
-</div>
-
-</section>
-
-<section id="contact">
-<h1 class="title">3 Sources</h1>
-<div style="display:flex; justify-content:center; flex-wrap:wrap; gap:30px; margin-top:60px;">
-<div style="width:340px; background:rgba(255,255,255,.03); border:1px solid rgba(255,255,255,.08); border-radius:18px; padding:30px; backdrop-filter:blur(12px); transition:.35s;">
-<h3 style="color:#1E40AF;margin-bottom:15px;">𝜗𝜚⋆ Website</h3>
-<p style="color:#c5c5c5;line-height:1.8;margin-bottom:25px;">Browse all of my programming projects, websites and creations.</p>
-<a href="projects.html" class="btn primary">View Projects</a>
-</div>
-<div style="width:340px; background:rgba(255,255,255,.03); border:1px solid rgba(255,255,255,.08); border-radius:18px; padding:30px; backdrop-filter:blur(12px); transition:.35s;">
-<h3 style="color:#1E40AF;margin-bottom:15px;">𖤝 Discord</h3>
-<p style="color:#c5c5c5;line-height:1.8;margin-bottom:25px;">Join my Discord community and keep up with everything I'm working on.</p>
-<a href="https://discord.gg/SreaYjy9HE" target="_blank" class="btn primary">Join Server</a>
-</div>
-<div style="width:340px; background:rgba(255,255,255,.03); border:1px solid rgba(255,255,255,.08); border-radius:18px; padding:30px; backdrop-filter:blur(12px); transition:.35s;">
-<h3 style="color:#1E40AF;margin-bottom:15px;">⁠♡ YouTube</h3>
-<p style="color:#c5c5c5;line-height:1.8;margin-bottom:25px;">Watch coding projects, tutorials and drumming content on my channels.</p>
-<a href="https://www.youtube.com/@hyperisunknown" target="_blank" class="btn primary">Watch Now</a>
-</div>
-</div>
-</section>
-
-<footer>
-© 2026 HyperIsUnknown LLC • Built with HTML, CSS & JavaScript
-</footer>
-
-<script>
-const words = ["Developer", "Drummer", "Creator", "Web Designer", "Open Source Builder"];
-const typing = document.getElementById("typing");
-let word = 0, letter = 0, deleting = false;
-function type() {
-    const current = words[word];
-    if (!deleting) {
-        typing.textContent = current.substring(0, letter++);
-        if (letter > current.length) {
-            deleting = true;
-            setTimeout(type, 1200);
-            return;
-        }
-    } else {
-        typing.textContent = current.substring(0, letter--);
-        if (letter < 0) {
-            deleting = false;
-            word = (word + 1) % words.length;
-        }
-    }
-    setTimeout(type, deleting ? 45 : 85);
-}
-type();
-</script>
+    <h1>This Website Is Currently undergoing Changes</h1>
+    <h2>please check back later</h2>
+    
 </body>
 </html>
