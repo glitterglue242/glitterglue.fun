@@ -1,0 +1,297 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Glitterglue.fun</title>
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      background: #0a0a0a;
+      color: #ff7a00;
+      font-family: 'Montserrat', sans-serif;
+      height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      overflow: hidden;
+    }
+
+    .terminal {
+      width: min(680px, 92vw);
+      background: #111;
+      border: 1px solid #ff7a00;
+      border-radius: 8px;
+      box-shadow: 0 0 30px rgba(255, 122, 0, 0.25);
+      overflow: hidden;
+    }
+
+    .terminal-header {
+      background: #1a1a1a;
+      padding: 10px 16px;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      border-bottom: 1px solid #333;
+    }
+
+    .dot {
+      width: 12px;
+      height: 12px;
+      border-radius: 50%;
+    }
+    .dot.red { background: #ff5f56; }
+    .dot.yellow { background: #ffbd2e; }
+    .dot.green { background: #27c93f; }
+
+    .terminal-title {
+      margin-left: 12px;
+      font-size: 13px;
+      color: #aaa;
+      font-weight: 500;
+    }
+
+    .terminal-body {
+      padding: 24px 28px 32px;
+      min-height: 280px;
+      font-size: 15px;
+      line-height: 1.7;
+    }
+
+    .line {
+      margin-bottom: 6px;
+      white-space: pre-wrap;
+    }
+
+    .prompt {
+      color: #ff7a00;
+      margin-right: 8px;
+    }
+
+    .progress-container {
+      margin: 14px 0 18px;
+    }
+
+    .progress-label {
+      font-size: 13px;
+      margin-bottom: 6px;
+      color: #ff7a00;
+    }
+
+    .progress-bar {
+      height: 14px;
+      background: #222;
+      border: 1px solid #ff7a00;
+      border-radius: 3px;
+      overflow: hidden;
+    }
+
+    .progress-fill {
+      height: 100%;
+      width: 0%;
+      background: #ffffff;
+      transition: width 0.07s linear;
+    }
+
+    .cursor {
+      display: inline-block;
+      width: 8px;
+      height: 15px;
+      background: #ff7a00;
+      margin-left: 2px;
+      animation: blink 1s step-end infinite;
+      vertical-align: middle;
+    }
+
+    @keyframes blink {
+      50% { opacity: 0; }
+    }
+
+    .final {
+      margin-top: 20px;
+      font-size: 18px;
+      font-weight: 600;
+      letter-spacing: 0.4px;
+    }
+
+    .glitter {
+      color: #ff9a3c;
+    }
+  </style>
+</head>
+<body>
+  <div class="terminal">
+    <div class="terminal-header">
+      <div class="dot red"></div>
+      <div class="dot yellow"></div>
+      <div class="dot green"></div>
+      <div class="terminal-title">glitterglue.fun — terminal</div>
+    </div>
+
+    <div class="terminal-body" id="output"></div>
+  </div>
+
+  <script>
+    const output = document.getElementById('output');
+
+    const TYPE_SPEED = 48;
+    const TYPE_VARIATION = 18;
+
+    const sequence = [
+      { type: 'type', text: 'loading website' },
+      { type: 'progress', duration: 2100 },
+      { type: 'type', text: 'Initiating asset load' },
+      { type: 'type', text: 'Asset load complete' },
+      { type: 'type', text: 'Welcome To Glitterglue.fun', final: true }
+    ];
+
+    let step = 0;
+    let audioCtx;
+
+    function initAudio() {
+      if (!audioCtx) {
+        audioCtx = new (window.AudioContext || window.webkitAudioContext)();
+      }
+      if (audioCtx.state === 'suspended') {
+        audioCtx.resume();
+      }
+    }
+
+    function playTypeSound() {
+      if (!audioCtx) return;
+      const osc = audioCtx.createOscillator();
+      const gain = audioCtx.createGain();
+
+      osc.type = 'square';
+      osc.frequency.setValueAtTime(780 + Math.random() * 120, audioCtx.currentTime);
+
+      gain.gain.setValueAtTime(0.04, audioCtx.currentTime);
+      gain.gain.exponentialRampToValueAtTime(0.001, audioCtx.currentTime + 0.04);
+
+      osc.connect(gain);
+      gain.connect(audioCtx.destination);
+
+      osc.start();
+      osc.stop(audioCtx.currentTime + 0.05);
+    }
+
+    function playDoneSound() {
+      if (!audioCtx) return;
+      const osc = audioCtx.createOscillator();
+      const gain = audioCtx.createGain();
+
+      osc.type = 'sine';
+      osc.frequency.setValueAtTime(520, audioCtx.currentTime);
+      osc.frequency.exponentialRampToValueAtTime(780, audioCtx.currentTime + 0.12);
+
+      gain.gain.setValueAtTime(0.08, audioCtx.currentTime);
+      gain.gain.exponentialRampToValueAtTime(0.001, audioCtx.currentTime + 0.25);
+
+      osc.connect(gain);
+      gain.connect(audioCtx.destination);
+
+      osc.start();
+      osc.stop(audioCtx.currentTime + 0.28);
+    }
+
+    function wait(ms) {
+      return new Promise(r => setTimeout(r, ms));
+    }
+
+    function createLine(isFinal = false) {
+      const div = document.createElement('div');
+      div.className = 'line' + (isFinal ? ' final' : '');
+      output.appendChild(div);
+      return div;
+    }
+
+    async function typeText(text, isFinal = false) {
+      const line = createLine(isFinal);
+      const prompt = document.createElement('span');
+      prompt.className = 'prompt';
+      prompt.textContent = '$ ';
+      line.appendChild(prompt);
+
+      const textSpan = document.createElement('span');
+      if (isFinal) textSpan.className = 'glitter';
+      line.appendChild(textSpan);
+
+      const cursor = document.createElement('span');
+      cursor.className = 'cursor';
+      line.appendChild(cursor);
+
+      for (let i = 0; i < text.length; i++) {
+        textSpan.textContent += text[i];
+        playTypeSound();
+        const delay = TYPE_SPEED + (Math.random() * TYPE_VARIATION - TYPE_VARIATION / 2);
+        await wait(delay);
+      }
+
+      await wait(280);
+      cursor.remove();
+      if (isFinal) playDoneSound();
+    }
+
+    function runProgress() {
+      return new Promise(resolve => {
+        const container = document.createElement('div');
+        container.className = 'progress-container';
+
+        container.innerHTML = `
+          <div class="progress-label">loading website</div>
+          <div class="progress-bar">
+            <div class="progress-fill" id="fill"></div>
+          </div>
+        `;
+        output.appendChild(container);
+
+        const fill = document.getElementById('fill');
+        let progress = 0;
+
+        const interval = setInterval(() => {
+          progress += Math.random() * 3.8 + 1.4;
+          if (progress >= 100) {
+            progress = 100;
+            clearInterval(interval);
+            playDoneSound();
+            setTimeout(resolve, 350);
+          }
+          fill.style.width = progress + '%';
+        }, 38);
+      });
+    }
+
+    async function next() {
+      if (step >= sequence.length) return;
+
+      const item = sequence[step];
+      step++;
+
+      if (item.type === 'type') {
+        await typeText(item.text, item.final);
+        await wait(item.final ? 0 : 420);
+        next();
+      }
+      else if (item.type === 'progress') {
+        await runProgress();
+        next();
+      }
+    }
+
+    document.body.addEventListener('click', () => {
+      initAudio();
+    }, { once: true });
+
+    setTimeout(() => {
+      initAudio();
+      next();
+    }, 500);
+  </script>
+</body>
+</html>
