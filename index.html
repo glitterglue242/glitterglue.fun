@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>imhyper</title>
+  <title>Glitterglue.fun</title>
   <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700&display=swap" rel="stylesheet">
   <style>
     * {
@@ -235,7 +235,13 @@
 
       await wait(280);
       cursor.remove();
-      if (isFinal) playDoneSound();
+
+      if (isFinal) {
+        playDoneSound();
+        setTimeout(() => {
+          window.location.href = 'menu.html';
+        }, 1300);
+      }
     }
 
     function runProgress() {
