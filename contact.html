@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Contact — Glitterglue.fun</title>
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      background: #0a0a0a;
+      color: #ff7a00;
+      font-family: 'Montserrat', sans-serif;
+      height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      overflow: hidden;
+    }
+
+    .terminal {
+      width: min(820px, 94vw);
+      background: #111;
+      border: 2px solid #ff7a00;
+      border-radius: 12px;
+      box-shadow: 0 0 40px rgba(255, 122, 0, 0.3);
+      overflow: hidden;
+    }
+
+    .terminal-header {
+      background: #1a1a1a;
+      padding: 14px 20px;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      border-bottom: 1px solid #333;
+    }
+
+    .dot {
+      width: 14px;
+      height: 14px;
+      border-radius: 50%;
+    }
+    .dot.red { background: #ff5f56; }
+    .dot.yellow { background: #ffbd2e; }
+    .dot.green { background: #27c93f; }
+
+    .terminal-title {
+      margin-left: 14px;
+      font-size: 15px;
+      color: #aaa;
+      font-weight: 500;
+    }
+
+    .terminal-body {
+      padding: 48px 50px 56px;
+      min-height: 420px;
+    }
+
+    .menu-item {
+      font-size: 24px;
+      font-weight: 500;
+      color: #ff7a00;
+      margin-bottom: 36px;
+      cursor: pointer;
+      transition: color 0.2s ease, transform 0.15s ease;
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      user-select: none;
+      text-decoration: none;
+    }
+
+    .menu-item:hover {
+      color: #ffb066;
+      transform: translateX(6px);
+    }
+
+    .menu-item:last-child {
+      margin-bottom: 0;
+    }
+
+    .prompt {
+      color: #ff7a00;
+    }
+
+    .back {
+      margin-top: 50px;
+      font-size: 18px;
+      opacity: 0.7;
+    }
+
+    .back:hover {
+      opacity: 1;
+    }
+  </style>
+</head>
+<body>
+  <div class="terminal">
+    <div class="terminal-header">
+      <div class="dot red"></div>
+      <div class="dot yellow"></div>
+      <div class="dot green"></div>
+      <div class="terminal-title">glitterglue.fun — contact</div>
+    </div>
+
+    <div class="terminal-body">
+      <div class="menu-item">
+        <span class="prompt">$</span> Discord - HyperIsUnknown
+      </div>
+
+      <a class="menu-item" href="mailto:frazeroakley@gmail.com">
+        <span class="prompt">$</span> Email - frazeroakley@gmail.com
+      </a>
+
+      <a class="menu-item back" href="menu.html">
+        <span class="prompt">$</span> Back
+      </a>
+    </div>
+  </div>
+</body>
+</html>
