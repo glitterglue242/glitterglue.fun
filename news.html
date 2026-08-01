@@ -11,13 +11,41 @@
       box-sizing: border-box;
     }
     body {
-      background-color: #000;
-      color: #fff;
+      background-color: #fff;
+      color: #000;
       font-family: "Courier New", Courier, monospace;
       min-height: 100vh;
+      position: relative;
+      overflow-x: hidden;
       line-height: 1.5;
     }
+    /* Animated grid – black version */
+    .grid-bg {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      z-index: 0;
+      background-image:
+        linear-gradient(to right, rgba(0, 0, 0, 0.08) 1px, transparent 1px),
+        linear-gradient(to bottom, rgba(0, 0, 0, 0.08) 1px, transparent 1px);
+      background-size: 50px 50px;
+      background-position: -1000px -1000px;
+      animation: gridMove 10s linear infinite;
+      pointer-events: none;
+    }
+    @keyframes gridMove {
+      0% {
+        background-position: -1000px -1000px;
+      }
+      100% {
+        background-position: 1000px 1000px;
+      }
+    }
     .header {
+      position: relative;
+      z-index: 1;
       text-align: center;
       padding: 40px 20px 30px;
     }
@@ -37,8 +65,11 @@
       font-size: 14px;
       margin-top: 14px;
       letter-spacing: 0.5px;
+      color: #000;
     }
     .content {
+      position: relative;
+      z-index: 1;
       max-width: 1100px;
       margin: 0 auto;
       padding: 20px 40px 80px;
@@ -54,7 +85,7 @@
       width: 100%;
       height: auto;
       display: block;
-      background: #111;
+      background: #f0f0f0;
     }
     .pagination {
       text-align: center;
@@ -63,16 +94,18 @@
       letter-spacing: 0.5px;
     }
     .pagination a {
-      color: #fff;
+      color: #000;
       text-decoration: none;
       padding: 0 6px;
     }
     .pagination a:hover {
       background-color: #ee1c25;
+      color: #fff;
     }
     .text-col {
       font-size: 14px;
       letter-spacing: 0.3px;
+      color: #000;
     }
     .text-col .post-date {
       margin-bottom: 6px;
@@ -87,14 +120,14 @@
     .text-col .archive {
       margin-top: 30px;
       display: inline-block;
-      color: #fff;
+      color: #000;
       text-decoration: underline;
     }
     .text-col .archive:hover {
       background-color: #ee1c25;
+      color: #fff;
       text-decoration: none;
     }
-    /* Mobile */
     @media (max-width: 800px) {
       .content {
         grid-template-columns: 1fr;
@@ -105,21 +138,17 @@
   </style>
 </head>
 <body>
+  <div class="grid-bg"></div>
 
-  <!-- ========== HEADER (same logo + live time) ========== -->
   <header class="header">
     <a href="index.html" class="logo">ImHyper</a>
     <div class="date-time" id="local-time">loading...</div>
   </header>
 
-  <!-- ========== NEWS POST – easy to edit ========== -->
   <main class="content">
-
     <!-- LEFT: Image + pagination -->
     <div class="image-col">
-      <!-- Change the src and alt when update the news -->
-      <img src="https://kappa.lol/qVeDf1" alt="souloxfr.dev">
-      
+    <img src="https://kappa.lol/qVeDf1" alt="souloxfr.dev">
       <div class="pagination">
         <a href="#">&larr;</a>
         <span>1 of 1</span>
@@ -129,28 +158,22 @@
 
     <!-- RIGHT: Text content -->
     <div class="text-col">
-      <!-- Date of the post -->
       <div class="post-date">08/01/2026</div>
-
-      <!-- Title -->
       <div class="title">ImHyper / souloxfr.dev</div>
       <p>
-        Updates made to https://souloxfr.dev.
+        Souloxfr.dev.
       </p>
       <p>
-        Join the Hyper's Coding Gaff for more Updates.
+        This interesting collab with mod creator, content creator and game dev, souloxfr/369.
       </p>
       <p>
-        Available Now!.
+        Available now.
       </p>
       <p>
-        Available Now!.
+        souloxfr.dev.
       </p>
-
-      <!-- Archive link -->
       <a href="#" class="archive">archive</a>
     </div>
-
   </main>
 
   <script>
