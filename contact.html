@@ -1,0 +1,207 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>ImHyper – Contact</title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+    body {
+      background-color: #fff;
+      color: #000;
+      font-family: "Courier New", Courier, monospace;
+      min-height: 100vh;
+      position: relative;
+      overflow-x: hidden;
+      line-height: 1.5;
+    }
+    .grid-bg {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      z-index: 0;
+      background-image:
+        linear-gradient(to right, rgba(0, 0, 0, 0.08) 1px, transparent 1px),
+        linear-gradient(to bottom, rgba(0, 0, 0, 0.08) 1px, transparent 1px);
+      background-size: 50px 50px;
+      background-position: -1000px -1000px;
+      animation: gridMove 10s linear infinite;
+      pointer-events: none;
+    }
+    @keyframes gridMove {
+      0% { background-position: -1000px -1000px; }
+      100% { background-position: 1000px 1000px; }
+    }
+    .header {
+      position: relative;
+      z-index: 1;
+      text-align: center;
+      padding: 40px 20px 30px;
+    }
+    .logo {
+      background-color: #ee1c25;
+      color: #fff;
+      font-family: "Futura", "Futura PT", "Trebuchet MS", Arial, sans-serif;
+      font-weight: 800;
+      font-style: oblique;
+      font-size: 28px;
+      letter-spacing: 1px;
+      padding: 6px 14px;
+      display: inline-block;
+      text-decoration: none;
+    }
+    .date-time {
+      font-size: 14px;
+      margin-top: 14px;
+      letter-spacing: 0.5px;
+    }
+    .content {
+      position: relative;
+      z-index: 1;
+      max-width: 520px;
+      margin: 0 auto;
+      padding: 20px 40px 80px;
+    }
+    .content h1 {
+      font-size: 18px;
+      margin-bottom: 24px;
+      letter-spacing: 0.5px;
+    }
+    label {
+      display: block;
+      font-size: 13px;
+      margin-bottom: 6px;
+      letter-spacing: 0.3px;
+    }
+    input, textarea {
+      width: 100%;
+      background: transparent;
+      border: 1px solid #000;
+      color: #000;
+      font-family: "Courier New", Courier, monospace;
+      font-size: 14px;
+      padding: 10px 12px;
+      margin-bottom: 18px;
+      outline: none;
+      resize: vertical;
+    }
+    input:focus, textarea:focus {
+      border-color: #ee1c25;
+    }
+    textarea {
+      min-height: 140px;
+    }
+    button {
+      background: #000;
+      color: #fff;
+      border: none;
+      font-family: "Courier New", Courier, monospace;
+      font-size: 14px;
+      padding: 10px 22px;
+      cursor: pointer;
+      letter-spacing: 0.5px;
+      transition: background 0.15s;
+    }
+    button:hover {
+      background: #ee1c25;
+    }
+    .status {
+      margin-top: 18px;
+      font-size: 13px;
+      min-height: 20px;
+    }
+    .status.success { color: #ee1c25; }
+    .status.error { color: #c00; }
+  </style>
+</head>
+<body>
+  <div class="grid-bg"></div>
+
+  <header class="header">
+    <a href="index.html" class="logo">ImHyper</a>
+    <div class="date-time" id="local-time">loading...</div>
+  </header>
+
+  <main class="content">
+    <h1>contact</h1>
+
+    <form id="contact-form">
+      <label for="name">name</label>
+      <input type="text" id="name" name="name" required placeholder="your name">
+
+      <label for="message">message</label>
+      <textarea id="message" name="message" required placeholder="write something..."></textarea>
+
+      <button type="submit">send</button>
+    </form>
+
+    <div class="status" id="status"></div>
+  </main>
+
+  <script>
+    const WEBHOOK_URL = "https://discord.com/api/webhooks/1533180382197977190/XO5yeQqUXz_mJKiouhKOuJlh7DcJsVWUkNvpZG_ab7g1vWE90ulzWYQs0Mgc4-NqzmiT";
+
+    function updateLocalTime() {
+      const now = new Date();
+      const month = String(now.getMonth() + 1).padStart(2, '0');
+      const day = String(now.getDate()).padStart(2, '0');
+      const year = now.getFullYear();
+      let hours = now.getHours();
+      const minutes = String(now.getMinutes()).padStart(2, '0');
+      const ampm = hours >= 12 ? 'pm' : 'am';
+      hours = hours % 12 || 12;
+      const hourStr = String(hours).padStart(2, '0');
+      const tz = now.toLocaleTimeString('en-US', { timeZoneName: 'short' }).split(' ').pop();
+      document.getElementById('local-time').textContent = `${month}/${day}/${year} ${hourStr}:${minutes}${ampm} ${tz}`;
+    }
+    updateLocalTime();
+    setInterval(updateLocalTime, 30000);
+
+    document.getElementById('contact-form').addEventListener('submit', async (e) => {
+      e.preventDefault();
+      const status = document.getElementById('status');
+      const name = document.getElementById('name').value.trim();
+      const message = document.getElementById('message').value.trim();
+
+      status.textContent = 'sending...';
+      status.className = 'status';
+
+      try {
+        const res = await fetch(WEBHOOK_URL, {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({
+            content: null,
+            embeds: [{
+              title: 'New message from the site',
+              color: 0xee1c25,
+              fields: [
+                { name: 'From', value: name, inline: true },
+                { name: 'Message', value: message }
+              ],
+              timestamp: new Date().toISOString()
+            }]
+          })
+        });
+
+        if (res.ok) {
+          status.textContent = 'sent — i’ll see it on discord';
+          status.className = 'status success';
+          document.getElementById('contact-form').reset();
+        } else {
+          throw new Error('failed');
+        }
+      } catch (err) {
+        status.textContent = 'something went wrong, try again later';
+        status.className = 'status error';
+      }
+    });
+  </script>
+</body>
+</html>
