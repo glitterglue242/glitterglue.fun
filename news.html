@@ -1,0 +1,175 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>ImHyper – News</title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+    body {
+      background-color: #000;
+      color: #fff;
+      font-family: "Courier New", Courier, monospace;
+      min-height: 100vh;
+      line-height: 1.5;
+    }
+    .header {
+      text-align: center;
+      padding: 40px 20px 30px;
+    }
+    .logo {
+      background-color: #ee1c25;
+      color: #fff;
+      font-family: "Futura", "Futura PT", "Trebuchet MS", Arial, sans-serif;
+      font-weight: 800;
+      font-style: oblique;
+      font-size: 28px;
+      letter-spacing: 1px;
+      padding: 6px 14px;
+      display: inline-block;
+      text-decoration: none;
+    }
+    .date-time {
+      font-size: 14px;
+      margin-top: 14px;
+      letter-spacing: 0.5px;
+    }
+    .content {
+      max-width: 1100px;
+      margin: 0 auto;
+      padding: 20px 40px 80px;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 50px;
+      align-items: start;
+    }
+    .image-col {
+      position: relative;
+    }
+    .image-col img {
+      width: 100%;
+      height: auto;
+      display: block;
+      background: #111;
+    }
+    .pagination {
+      text-align: center;
+      margin-top: 16px;
+      font-size: 13px;
+      letter-spacing: 0.5px;
+    }
+    .pagination a {
+      color: #fff;
+      text-decoration: none;
+      padding: 0 6px;
+    }
+    .pagination a:hover {
+      background-color: #ee1c25;
+    }
+    .text-col {
+      font-size: 14px;
+      letter-spacing: 0.3px;
+    }
+    .text-col .post-date {
+      margin-bottom: 6px;
+    }
+    .text-col .title {
+      font-weight: bold;
+      margin-bottom: 18px;
+    }
+    .text-col p {
+      margin-bottom: 16px;
+    }
+    .text-col .archive {
+      margin-top: 30px;
+      display: inline-block;
+      color: #fff;
+      text-decoration: underline;
+    }
+    .text-col .archive:hover {
+      background-color: #ee1c25;
+      text-decoration: none;
+    }
+    /* Mobile */
+    @media (max-width: 800px) {
+      .content {
+        grid-template-columns: 1fr;
+        gap: 30px;
+        padding: 20px;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- ========== HEADER (same logo + live time) ========== -->
+  <header class="header">
+    <a href="index.html" class="logo">ImHyper</a>
+    <div class="date-time" id="local-time">loading...</div>
+  </header>
+
+  <!-- ========== NEWS POST – easy to edit ========== -->
+  <main class="content">
+
+    <!-- LEFT: Image + pagination -->
+    <div class="image-col">
+      <!-- Change the src and alt when update the news -->
+      <img src="https://kappa.lol/qVeDf1" alt="souloxfr.dev">
+      
+      <div class="pagination">
+        <a href="#">&larr;</a>
+        <span>1 of 1</span>
+        <a href="#">&rarr;</a>
+      </div>
+    </div>
+
+    <!-- RIGHT: Text content -->
+    <div class="text-col">
+      <!-- Date of the post -->
+      <div class="post-date">08/01/2026</div>
+
+      <!-- Title -->
+      <div class="title">ImHyper / souloxfr.dev</div>
+      <p>
+        Updates made to https://souloxfr.dev.
+      </p>
+      <p>
+        Join the Hyper's Coding Gaff for more Updates.
+      </p>
+      <p>
+        Available Now!.
+      </p>
+      <p>
+        Available Now!.
+      </p>
+
+      <!-- Archive link -->
+      <a href="#" class="archive">archive</a>
+    </div>
+
+  </main>
+
+  <script>
+    function updateLocalTime() {
+      const now = new Date();
+      const month = String(now.getMonth() + 1).padStart(2, '0');
+      const day = String(now.getDate()).padStart(2, '0');
+      const year = now.getFullYear();
+      let hours = now.getHours();
+      const minutes = String(now.getMinutes()).padStart(2, '0');
+      const ampm = hours >= 12 ? 'pm' : 'am';
+      hours = hours % 12;
+      hours = hours ? hours : 12;
+      const hourStr = String(hours).padStart(2, '0');
+      const tz = now.toLocaleTimeString('en-US', { timeZoneName: 'short' }).split(' ').pop();
+      document.getElementById('local-time').textContent = `${month}/${day}/${year} ${hourStr}:${minutes}${ampm} ${tz}`;
+    }
+    updateLocalTime();
+    setInterval(updateLocalTime, 30000);
+  </script>
+</body>
+</html>
