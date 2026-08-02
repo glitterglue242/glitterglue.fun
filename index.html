@@ -66,15 +66,15 @@
     .date {
       font-size: 14px;
       color: #fff;
-      margin-bottom: 80px;
+      margin-bottom: 50px;
       letter-spacing: 0.5px;
     }
     .menu {
-      align-self: flex-start;
-      margin-left: 40px;
       display: flex;
       flex-direction: column;
+      align-items: center;
       gap: 12px;
+      margin-bottom: 40px;
     }
     .menu a {
       color: #fff;
@@ -84,6 +84,18 @@
       padding: 2px 6px;
       transition: background-color 0.15s, color 0.15s;
       display: inline-block;
+      position: relative;
+    }
+    .menu a::before {
+      content: "";
+      position: absolute;
+      left: -18px;
+      opacity: 0;
+      transition: opacity 0.15s;
+    }
+    .menu a:hover::before {
+      content: ">";
+      opacity: 1;
     }
     .menu a:hover {
       background-color: #ee1c25;
@@ -91,21 +103,22 @@
     }
     /* About / bio section */
     .about {
-      align-self: flex-start;
-      margin-left: 40px;
-      margin-top: 50px;
       max-width: 520px;
       display: flex;
       gap: 24px;
       align-items: flex-start;
+      text-align: left;
     }
     .profile-pic {
       width: 110px;
       height: 110px;
       border-radius: 50%;
       object-fit: cover;
+      object-position: center;
       border: 2px solid #ee1c25;
       flex-shrink: 0;
+      display: block;
+      background: #111;
     }
     .bio {
       font-size: 14px;
@@ -118,7 +131,8 @@
     .socials {
       position: absolute;
       bottom: 30px;
-      left: 40px;
+      left: 50%;
+      transform: translateX(-50%);
       display: flex;
       gap: 20px;
       align-items: center;
@@ -151,7 +165,7 @@
   <div class="container">
     <div class="logo">ImHyper</div>
     <div class="date" id="local-time">loading...</div>
-    
+   
     <nav class="menu">
       <a href="news.html">news</a>
       <a href="#">websites</a>
@@ -165,9 +179,10 @@
           Hi, ImHyper, I'm a music producer for my game i'm making with my friends soulox, tagging and topzvr, I do coding in my spare time. I coded my friend soulox's site (souloxfr.dev)
         </p>
         <p>
-         I like to listen to music, I love diet coke and I drum too
+          I like to listen to music, I love diet coke and I drum too
+        </p>
         <p>
-      - ImHyper
+          – ImHyper
         </p>
       </div>
     </div>
