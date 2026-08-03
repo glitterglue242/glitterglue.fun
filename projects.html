@@ -280,7 +280,7 @@
         }
 
         // 2. Repos contributed to (via commit search)
-        // Note: search is rate-limited; we take first page only
+     
         const searchRes = await fetch(
           `https://api.github.com/search/commits?q=author:${USERNAME}&per_page=100`,
           { headers: { Accept: 'application/vnd.github.cloak-preview+json' } }
@@ -306,7 +306,7 @@
           }
         }
 
-        // 3. Also check recent public events (catches some collab activity)
+        // 3. checks recent public events (catches some collab activity)
         try {
           const eventsRes = await fetch(
             `https://api.github.com/users/${USERNAME}/events/public?per_page=50`
@@ -328,7 +328,7 @@
               });
             }
           }
-        } catch (_) { /* optional */ }
+        } catch (_) {  }
 
         renderRepos(Array.from(map.values()));
       } catch (err) {
