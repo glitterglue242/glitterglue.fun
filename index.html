@@ -165,7 +165,7 @@
   <div class="container">
     <div class="logo">ImHyper</div>
     <div class="date" id="local-time">loading...</div>
-  
+
     <nav class="menu">
       <a href="news.html">news</a>
       <a href="contact.html">contact</a>
@@ -204,6 +204,12 @@
       </a>
     </div>
   </div>
+
+  
+  <audio id="hover-sfx" preload="auto">
+    <source src="button-hover.mp3" type="audio/mpeg">
+  </audio>
+
   <script>
     function updateLocalTime() {
       const now = new Date();
@@ -222,6 +228,20 @@
     }
     updateLocalTime();
     setInterval(updateLocalTime, 30000);
+
+    
+    const hoverSound = document.getElementById('hover-sfx');
+    const hoverTargets = document.querySelectorAll('.menu a, .socials a');
+
+    hoverTargets.forEach(el => {
+      el.addEventListener('mouseenter', () => {
+        
+        hoverSound.currentTime = 0;
+        hoverSound.play().catch(() => {
+
+        });
+      });
+    });
   </script>
 </body>
 </html>
